@@ -11,7 +11,8 @@ const convertUint8ArrayToUint16Array = (u8) => {
   return out16;
 }
 
-module.exports = (argv, memory) => 
+module.exports = (argv, memory) =>
+  () => 
   new Promise((resolve, reject) => {
     fs
       .readFileAsync(argv.p)
