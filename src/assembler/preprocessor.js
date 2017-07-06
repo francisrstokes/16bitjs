@@ -5,15 +5,15 @@ const extractLabels = (line, i) => {
   if (line[0] === ':') {
     labels[line.toLowerCase()] = i - labelOffset++;
     return false;
-  } 
+  }
   return true;
 };
 
-const replaceLabels = (line) => 
+const replaceLabels = (line) =>
   Object.keys(labels)
   .reduce((outLine, label) => outLine.replace(label, labels[label]), line);
 
-module.exports = (file) => 
+module.exports = (file) =>
   file
     .split('\n')
     .map(line => line.trim())

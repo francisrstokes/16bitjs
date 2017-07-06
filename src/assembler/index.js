@@ -18,5 +18,5 @@ fs
       .then(success => {
         console.log(`Sucessfully assembled to binary file ${argv.o}`);
       })
-  })
-  // .then(processed => console.log(processed.length));
+  });
+  
