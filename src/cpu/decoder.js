@@ -1,12 +1,12 @@
-const { INSTRUCTION_MAP, REGISTERS, STACK_SIZE } = require('../constants');
-const { bin } = require('../utils');
-
-const splitInstruction = (instruction) => [
-  (instruction & 0xF),
-  (instruction & 0b0000000000110000) >> 4,
-  (instruction & 0b0000000011000000) >> 6,
-  (instruction & 0b1111111100000000) >> 8
-];
+const {
+  bin,
+  splitInstruction
+} = require('../utils');
+const {
+  INSTRUCTION_MAP,
+  REGISTERS,
+  STACK_SIZE
+} = require('../constants');
 
 const pushStack = (stack, registers, val) => {
   if (registers.SP === STACK_SIZE-1) {
@@ -26,7 +26,7 @@ const popStack = (stack, registers) => {
 
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, rest] = splitInstruction(instruction);
-  const namedOpcode = INSTRUCTION_MAP[bin(opcode)];
+  const namedOpcode = INSTRUCTION_MAP[opcode];
   let result = 0;
 
   switch (namedOpcode) {
@@ -43,10 +43,10 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'MOV':
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
       break;
-    case 'LDV': 
+    case 'LDV':
       registers[REGISTERS[rd]] = rest;
       break;
-    case 'LDR': 
+    case 'LDR':
       registers[REGISTERS[rd]] = memory[rest];
       break;
     case 'LDM':

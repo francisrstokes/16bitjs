@@ -1,6 +1,9 @@
 const validateInstruction = require('./validate-instruction');
 const instructionEncoder = require('./instruction-encoder');
-const { getInstructionType, getInstructionArguments } = require('./assembler-utils');
+const {
+  getInstructionType,
+  getInstructionArguments
+} = require('./assembler-utils');
 
 module.exports = (instructions) => {
   const out = new Uint16Array(instructions.length);

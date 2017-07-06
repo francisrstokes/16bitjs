@@ -1,7 +1,7 @@
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
 
-module.exports = (argv) => 
+module.exports = (argv) =>
   new Promise((resolve, reject) => {
     if (!argv.p) {
       console.log('Usage: node src -p {binary executable} [--step]\n');

@@ -11,5 +11,8 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "yargs": "^8.0.2"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
   }
 }

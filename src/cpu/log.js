@@ -1,14 +1,7 @@
-const {padHex} = require('../utils');
-
-const arrayAsHex = (arr) => {
-  let s = '';
-  for (let i = 0; i < arr.length; i++) {
-    const doubleAsHex = padHex(arr[i].toString(16));
-    s += doubleAsHex + ' ';
-    if (((i+1) % 15 === 0)) s += '\n';
-  }
-  return s;
-};
+const {
+  padHex,
+  arrayAsHex
+} = require('../utils');
 
 module.exports = {
   printMemory: (memory) => {

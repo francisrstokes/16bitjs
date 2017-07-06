@@ -1,6 +1,10 @@
 const registers = require('./registers');
 const decodeAndExecute = require('./decoder');
-const {printMemory, printRegisters, printStack} = require('./log');
+const {
+  printMemory,
+  printRegisters,
+  printStack
+} = require('./log');
 
 module.exports = (memory, stack) => {
   const fetchInstruction = () => {

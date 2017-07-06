@@ -1,10 +1,21 @@
-module.exports = (argv) => {
-  // Correct arguments
-  if (!argv.i || !argv.o) {
-    console.log('Usage: node src/assembler -i {infile} -o {outfile}');
-    process.exit(1);
-  }
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
 
-  // Input file exists
-  
-}
+module.exports = (argv) =>
+  new Promise((resolve, reject) => {
+    if (!argv.i || !argv.o) {
+      console.log('Usage: node src/assembler -i {infile} -o {outfile}');
+      process.exit(1);
+    }
+
+    fs
+      .statAsync(argv.i)
+      .then(stats => {
+        if (stats.isFile()) {
+          resolve();
+        } else {
+          console.log(`ASM file ${argv.i} is not valid. Exiting...`);
+          process.exit(1);
+        }
+      })
+  });
