@@ -4,11 +4,11 @@ const fs = Promise.promisifyAll(require('fs'));
 module.exports = (argv) => 
   new Promise((resolve, reject) => {
     if (!argv.p) {
-      console.log('Usage: node src -p {binary executable} [-m {execution mode}]');
-      console.log('Valid execution modes: run (default), step');
+      console.log('Usage: node src -p {binary executable} [--step]\n');
+      console.log('step:\t[Optional] Enables debug mode');
       process.exit(0);
     }
-    
+
     fs
       .statAsync(argv.p)
       .then(stats => {
