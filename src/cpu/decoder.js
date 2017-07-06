@@ -1,7 +1,4 @@
-const {
-  bin,
-  splitInstruction
-} = require('../utils');
+const {splitInstruction} = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,

@@ -34,6 +34,7 @@
 Running with the step option (`node src -p {program.bin} --step`), enables the step through debugger, giving a overview of memory, stack and registers as the program executes.
 
 ```
+Instruction: (JMP) 0001100000001110
 Registers:
 A: 0000	B: 0000	C: 0000	D: 0000	IP: 0000	SP: 0000
 

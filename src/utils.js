@@ -1,14 +1,13 @@
-const bin = (n) => n.toString(2);
-const padHex = (hex) => {
-  if (hex.length < 4) {
-    return Array.apply(null, {length: 4-hex.length}).reduce((padding) => padding + '0', '') + hex;
+const leftPad = (str, pad = 4, padWith = '0') => {
+  if (str.length < pad) {
+    return Array.apply(null, {length: pad - str.length}).reduce((padding) => padding + padWith, '') + str;
   }
-  return hex;
+  return str;
 };
 const arrayAsHex = (arr) => {
   let s = '';
   for (let i = 0; i < arr.length; i++) {
-    const doubleAsHex = padHex(arr[i].toString(16));
+    const doubleAsHex = leftPad(arr[i].toString(16));
     s += doubleAsHex + ' ';
     if (((i+1) % 15 === 0)) s += '\n';
   }
@@ -31,8 +30,7 @@ const splitInstruction = (instruction) => [
 ];
 
 module.exports = {
-  bin,
-  padHex,
+  leftPad,
   arrayAsHex,
   convertUint8ArrayToUint16Array,
   splitInstruction

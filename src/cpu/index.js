@@ -3,7 +3,8 @@ const decodeAndExecute = require('./decoder');
 const {
   printMemory,
   printRegisters,
-  printStack
+  printStack,
+  printInstruction
 } = require('./log');
 
 module.exports = (memory, stack) => {
@@ -22,6 +23,7 @@ module.exports = (memory, stack) => {
   };
 
   const log = () => {
+    printInstruction(memory[registers.IP]);
     printRegisters(registers);
     printMemory(memory);
     printStack(stack);
