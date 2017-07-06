@@ -1,5 +1,6 @@
 const registers = require('./registers');
 const decodeAndExecute = require('./decoder');
+const {printMemory, printRegisters, printStack} = require('./log');
 
 module.exports = (memory, stack) => {
   const fetchInstruction = () => {
@@ -17,14 +18,9 @@ module.exports = (memory, stack) => {
   };
 
   const log = () => {
-    let s = '';
-    for (let i = 0; i < memory.length; i++) {
-      s += memory[i].toString(16) + ' ';
-      if (i > 0 && i % 16 === 0) s += '\n';
-    }
-
-    console.log('Memory:');
-    console.log(s += '\n');
+    printRegisters(registers);
+    printMemory(memory);
+    printStack(stack);
   };
 
   return {

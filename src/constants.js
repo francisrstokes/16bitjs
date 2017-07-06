@@ -26,5 +26,9 @@ module.exports = {
     '1111': 'HLT',
     '1000': 'PSH',
     '1100': 'POP'
+  },
+  EXECUTION_MODES: {
+    RUN: 0,
+    STEP: 1
   }
 };
