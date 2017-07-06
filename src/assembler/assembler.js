@@ -15,6 +15,6 @@ module.exports = (instructions) => {
 
       out[index] = encoded;
     });
-  
+
   return new Buffer(out.buffer);
 }
