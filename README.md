@@ -1,14 +1,28 @@
 # 16-bit Javascript VM
 
-## Using the assembler
+The project consists of:
+
+- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 16 distinct opcodes
+- An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
+- A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
+
+The virtual machine can run in two modes: run (default) and step. Run mode simply runs the entire program in sucession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the entire state of the machine.
+
+## Running the VM
+### Running the assembler
 
 `node src/assembler -i {infile.asm} -o {outfile.bin}`
 
-## Running a program
+### Running a program
 
 `node src -p {program.bin}`
 
-## Instruction table
+## Assembly language
+
+The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, Conditional jumps, Functions, and Output to stdout.
+
+Comments are supported only on their own line, and begin with a `#`.
+Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `JMP :some_label_name`.
 
 |Instruction|Arguments|16 bit representation    |Description|
 |-----------|---------|-------------------------|-------------|
