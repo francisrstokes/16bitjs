@@ -24,6 +24,12 @@ The assembly language consists of 16 distinct instructions which support all the
 Comments are supported only on their own line, and begin with a `#`.
 Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `JMP :some_label_name`.
 
+### Examples
+
+A couple of examples illustrating the language can be found in the `asm/` folder.
+
+### Instruction set
+
 |Instruction|Arguments|16 bit representation    |Description|
 |-----------|---------|-------------------------|-------------|
 |MOV        | d, s    | `00 00 00 00 ss dd 00 01` |Move value at source register to destination register|
