@@ -1,6 +1,5 @@
 let labelOffset = 0;
 const labels = {};
-
 const extractLabels = (line, i) => {
   if (line[0] === ':') {
     labels[line.toLowerCase()] = i - labelOffset++;
@@ -11,7 +10,7 @@ const extractLabels = (line, i) => {
 
 const replaceLabels = (line) =>
   Object.keys(labels)
-  .reduce((outLine, label) => outLine.replace(label, labels[label]), line);
+    .reduce((outLine, label) => outLine.replace(label, labels[label]), line);
 
 module.exports = (file) =>
   file

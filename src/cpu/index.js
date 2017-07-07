@@ -1,11 +1,5 @@
 const registers = require('./registers');
 const decodeAndExecute = require('./decoder');
-const {
-  printMemory,
-  printRegisters,
-  printStack,
-  printInstruction
-} = require('./log');
 
 module.exports = (memory, stack) => {
   const fetchInstruction = () => {
@@ -22,16 +16,8 @@ module.exports = (memory, stack) => {
     if (!halt) run();
   };
 
-  const log = () => {
-    printInstruction(memory[registers.IP]);
-    printRegisters(registers);
-    printMemory(memory);
-    printStack(stack);
-  };
-
   return {
     run,
-    step,
-    log
+    step
   };
 };

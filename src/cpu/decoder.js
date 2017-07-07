@@ -1,4 +1,4 @@
-const {splitInstruction} = require('../utils');
+const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
@@ -6,7 +6,7 @@ const {
 } = require('../constants');
 
 const pushStack = (stack, registers, val) => {
-  if (registers.SP === STACK_SIZE-1) {
+  if (registers.SP === STACK_SIZE - 1) {
     console.log('[Error] Stack overflow. Exiting...');
     process.exit(1);
   }
@@ -27,69 +27,69 @@ module.exports = (instruction, registers, memory, stack) => {
   let result = 0;
 
   switch (namedOpcode) {
-    case 'HLT': return true;
-
     case 'CAL':
       pushStack(stack, registers, registers.IP);
       registers.IP = rest;
-      break;
+      return false;
     case 'RET':
       registers.IP = popStack(stack, registers);
-      break;
+      return false;
 
     case 'MOV':
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
-      break;
+      return false;
     case 'LDV':
       registers[REGISTERS[rd]] = rest;
-      break;
+      return false;
     case 'LDR':
       registers[REGISTERS[rd]] = memory[rest];
-      break;
+      return false;
     case 'LDM':
       memory[rest] = registers[REGISTERS[rs]];
-      break;
+      return false;
 
     case 'ADD':
       result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
       registers[REGISTERS[rd]] = result;
-      break;
+      return false;
     case 'SUB':
       result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
       registers[REGISTERS[rd]] = result;
-      break;
+      return false;
     case 'MUL':
       result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
       registers[REGISTERS[rd]] = result;
-      break;
+      return false;
     case 'DIV':
       result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
       registers[REGISTERS[rd]] = result;
-      break;
+      return false;
 
     case 'PSH':
       pushStack(stack, registers, registers[REGISTERS[rs]]);
-      break;
+      return false;
     case 'POP':
       registers[REGISTERS[rd]] = popStack(stack, registers);
-      break;
+      return false;
 
     case 'JMP':
       registers.IP = rest;
-      break;
+      return false;
     case 'JLT':
       if (registers[REGISTERS[rs]] < registers[REGISTERS[rd]]) {
         registers.IP = rest;
       }
-      break;
+      return false;
 
     case 'OUT':
       console.log(registers[REGISTERS[rs]]);
-      break;
+      return false;
+
+    case 'HLT': return true;
 
     default:
       console.log(`Unknown opcode ${opcode}. Exiting...`);
       process.exit(1);
+      return false;
   }
-  return false;
 }

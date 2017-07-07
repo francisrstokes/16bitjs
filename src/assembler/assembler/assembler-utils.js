@@ -1,4 +1,4 @@
-const {REGISTERS} = require('../constants');
+const { REGISTERS, INSTRUCTION_MAP } = require('../../constants');
 
 const parseValues = (arg) => {
   if (REGISTERS.indexOf(arg) !== -1) return arg;
@@ -14,8 +14,17 @@ const getInstructionArguments = (instruction) =>
     .filter(arg => arg !== '')
     .map(arg => arg.trim())
     .map(parseValues);
+const validateInstruction = (instruction) => {
+  const iType = getInstructionType(instruction);
+  const isValid = INSTRUCTION_MAP.indexOf(iType) !== -1;
+  if (!isValid) {
+    console.log(`[Error] Unknown instruction type ${iType}.\nFull instruction: ${instruction}`);
+    process.exit(1);
+  }
+};
 
 module.exports = {
   getInstructionArguments,
-  getInstructionType
+  getInstructionType,
+  validateInstruction
 };

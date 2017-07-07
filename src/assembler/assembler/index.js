@@ -1,13 +1,12 @@
-const validateInstruction = require('./validate-instruction');
 const instructionEncoder = require('./instruction-encoder');
 const {
   getInstructionType,
-  getInstructionArguments
+  getInstructionArguments,
+  validateInstruction
 } = require('./assembler-utils');
 
 module.exports = (instructions) => {
   const out = new Uint16Array(instructions.length);
-
   instructions
     .map(instruction => instruction.toUpperCase())
     .forEach((instruction, index) => {

@@ -1,5 +1,4 @@
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('../../utils').fs;
 
 module.exports = (argv) =>
   new Promise((resolve, reject) => {
@@ -8,8 +7,7 @@ module.exports = (argv) =>
       process.exit(1);
     }
 
-    fs
-      .statAsync(argv.i)
+    fs.statAsync(argv.i)
       .then(stats => {
         if (stats.isFile()) {
           resolve();
@@ -17,5 +15,5 @@ module.exports = (argv) =>
           console.log(`ASM file ${argv.i} is not valid. Exiting...`);
           process.exit(1);
         }
-      })
+      });
   });
