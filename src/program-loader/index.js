@@ -1,4 +1,3 @@
-const argv = require('yargs').argv;
 const { fs, convertUint8ArrayToUint16Array } = require('../utils');
 const sanityCheck = require('./sanity-check');
 

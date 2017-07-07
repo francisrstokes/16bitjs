@@ -3,7 +3,7 @@ const {
   arrayAsHex,
   splitInstruction
 } = require('../utils');
-const { INSTRUCTION_MAP, REGISTERS } = require('../constants');
+const { INSTRUCTION_MAP } = require('../constants');
 
 const memory = require('../memory/memory');
 const stack = require('../memory/memory');

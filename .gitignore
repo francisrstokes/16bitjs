@@ -9,3 +9,4 @@ dist/
 semantic
 .vscode
 bin/
+.eslintrc.js

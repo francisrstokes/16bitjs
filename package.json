@@ -4,7 +4,7 @@
   "description": "## Features",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
+    "eslint": "^4.1.1",
     "pre-commit": "^1.2.2"
   }
 }

@@ -1,7 +1,7 @@
 const fs = require('../utils').fs;
 
 module.exports = (argv) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     if (!argv.p) {
       console.log('Usage: node src -p {binary executable} [--step]\n');
       console.log('step:\t[Optional] Enables debug mode');

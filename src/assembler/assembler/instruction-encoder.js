@@ -20,7 +20,7 @@ const reg = REGISTERS
 
 module.exports = {
   CAL: (args) => opcodes.CAL | (args[0] << ADDRESS_SHIFT),
-  RET: (args) => opcodes.RET,
+  RET: () => opcodes.RET,
   PSH: (args) => opcodes.PSH | (reg[args[0]] << SOURCE_SHIFT),
   POP: (args) => opcodes.POP | (reg[args[0]] << DESTINATION_SHIFT),
   JMP: (args) => opcodes.JMP | (args[0] << ADDRESS_SHIFT),
@@ -34,5 +34,5 @@ module.exports = {
   MUL: (args) => opcodes.MUL | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   DIV: (args) => opcodes.DIV | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   OUT: (args) => opcodes.OUT | (reg[args[0]] << SOURCE_SHIFT),
-  HLT: (args) => opcodes.HLT
+  HLT: () => opcodes.HLT
 };
