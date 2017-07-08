@@ -1,4 +1,7 @@
-JMP :start
+# Jump to the start label
+LDV A, :start
+PSH A
+RET
 
 :factorial
   # First store the state of B, C, and D registers in the stack

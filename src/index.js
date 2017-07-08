@@ -1,9 +1,9 @@
+const argv = require('yargs').argv;
 const debug = require('./debugger');
 const memory = require('./memory/memory');
 const stack = require('./memory/stack');
 const cpu = require('./cpu')(memory, stack);
 const loadProgram = require('./program-loader');
-const argv = require('yargs').argv;
 const debugMode = !!argv.step;
 
 loadProgram(argv, memory)

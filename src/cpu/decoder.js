@@ -64,6 +64,11 @@ module.exports = (instruction, registers, memory, stack) => {
       result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
       registers[REGISTERS[rd]] = result;
       return false;
+    case 'SFT':
+      registers[REGISTERS[rs]] = (registers[REGISTERS[rd]] === 0)
+        ? registers[REGISTERS[rs]] << rest
+        : registers[REGISTERS[rs]] >> rest;
+      return false;
 
     case 'PSH':
       pushStack(stack, registers, registers[REGISTERS[rs]]);
@@ -72,9 +77,6 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = popStack(stack, registers);
       return false;
 
-    case 'JMP':
-      registers.IP = rest;
-      return false;
     case 'JLT':
       if (registers[REGISTERS[rs]] < registers[REGISTERS[rd]]) {
         registers.IP = rest;

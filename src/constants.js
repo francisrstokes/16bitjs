@@ -7,7 +7,7 @@ module.exports = {
     'CAL', 'MOV', 'LDV', 'LDR',
     'RET', 'LDM', 'MUL', 'JLT',
     'PSH', 'ADD', 'DIV', 'OUT',
-    'POP', 'SUB', 'JMP', 'HLT'
+    'POP', 'SUB', 'SFT', 'HLT'
   ],
   DESTINATION_SHIFT: 4,
   SOURCE_SHIFT: 6,

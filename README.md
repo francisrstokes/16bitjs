@@ -40,7 +40,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |SUB        | d, s    | `00 00 00 00 ss dd 11 01` |Subtract x from y  and store the value in x|
 |DIV        | d, s    | `00 00 00 00 ss dd 10 10` |Divide x by y and store the value in x|
 |MUL        | d, s    | `00 00 00 00 ss dd 01 10` |Multiply x and y and store the value in x|
-|JMP        | m       | `mm mm mm mm 00 00 11 10` |Jump to memory address|
+|SFT        | s, a, v | `vv vv vv vv ss aa 11 10` |Binary shift by the value of v. Shift direction is determined by a (00 = left)|
 |JLT        | a, b, m | `mm mm mm mm aa bb 01 11` |Jump to memory address if value in source register is less than value in destination register|
 |CAL        | m       | `mm mm mm mm 00 00 00 00` |Call a function in memory|
 |RET        | -       | `00 00 00 00 00 00 01 00` |Return from function|
@@ -54,7 +54,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 Running with the step option (`node src -p {program.bin} --step`), enables the step through debugger, giving a overview of memory, stack and registers as the program executes.
 
 ```
-Instruction: (JMP) 0001100000001110
+Instruction: (PSH) 0000000000001000
 Registers:
 A: 0000	B: 0000	C: 0000	D: 0000	IP: 0000	SP: 0000
 
