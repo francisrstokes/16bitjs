@@ -39,7 +39,9 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
       return false;
     case 'LDV':
-      registers[REGISTERS[rd]] = rest;
+      if (rs === 0) registers[REGISTERS[rd]] = rest;
+      else if (rs === 1) registers[REGISTERS[rd]] |= rest;
+      else registers[REGISTERS[rd]] |= rest << 8;
       return false;
     case 'LDR':
       registers[REGISTERS[rd]] = memory[rest];

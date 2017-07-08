@@ -30,24 +30,25 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 ### Instruction set
 
-|Instruction|Arguments|16 bit representation    |Description|
+|Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
-|MOV        | d, s    | `00 00 00 00 ss dd 00 01` |Move value at source register to destination register|
-|LDV        | d, v    | `vv vv vv vv 00 dd 00 10` |Load a value into destination register|
-|LDR        | d, m    | `mm mm mm mm 00 dd 00 11` |Load a value from memory into destination register|
-|LDM        | s, m    | `mm mm mm mm ss 00 01 01` |Load the value in source register into memory|
-|ADD        | d, s    | `00 00 00 00 ss dd 10 01` |Add x and y and store the value in x|
-|SUB        | d, s    | `00 00 00 00 ss dd 11 01` |Subtract x from y  and store the value in x|
-|DIV        | d, s    | `00 00 00 00 ss dd 10 10` |Divide x by y and store the value in x|
-|MUL        | d, s    | `00 00 00 00 ss dd 01 10` |Multiply x and y and store the value in x|
-|SFT        | s, a, v | `vv vv vv vv ss aa 11 10` |Binary shift by the value of v. Shift direction is determined by a (00 = left)|
-|JLT        | a, b, m | `mm mm mm mm aa bb 01 11` |Jump to memory address if value in source register is less than value in destination register|
-|CAL        | m       | `mm mm mm mm 00 00 00 00` |Call a function in memory|
-|RET        | -       | `00 00 00 00 00 00 01 00` |Return from function|
-|PSH        | s       | `00 00 00 00 ss 00 10 00` |Push the value in source register onto the stack|
-|POP        | d       | `00 00 00 00 00 dd 11 00` |Pop the stack into the destination register|
-|OUT        | s       | `00 00 00 00 ss 00 10 11` |Output the value in source register|
-|HLT        | -       | `00 00 00 00 00 00 11 11` |Program halt|
+|`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0001` | Move value at source register to destination register|
+|`​LDV`| `D, S, V` | `VVVVVVVVSSDD0010` | Load a value into destination register. If S is 0 set the value. If S is 1 then load into the low 8 bit, and if S = 2 then load into the high 8 bits. |
+|`LDR`| `D, M` | `MMMMMMMMXXDD0011` | Load a value from memory into destination register|
+|`LDM`| `S, M` | `MMMMMMMMSSXX0101` | Load the value in source register into memory|
+|`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add x and y and store the value in x|
+|`SUB`| `D, S` | `XXXXXXXXSSDD1101` | Subtract x from y and store the value in x|
+|`DIV`| `D, S` | `XXXXXXXXSSDD1010` | Divide x by y and store the value in x|
+|`MUL`| `D, S`​ | `XXXXXXXXSSDD0110` | Multiply x and y and store the value in x|
+|`SFT`| `S, D, V` | `VVVVVVVVSSXD1110` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
+|`JLT`| `S, D, M` | `MMMMMMMMSSDD0111` | Jump to memory address if value in source register is less than value in destination register|
+|`CAL`| `M` | `MMMMMMMMXXXX0000` | Call a function in memory|
+|`RET`| | `XXXXXXXXXXXX0100` | Return from function|
+|`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
+|`​POP`| `D` | `XXXXXXXXXXDD1100` | Pop the stack into the destination register|
+|`OUT`| `S` | `XXXXXXXXSSXX1011` | Output the value in source register|
+|`HLT`| | `XXXXXXXXXXXX1111` | Program halt|
+
 
 ## Debugger
 
@@ -56,7 +57,7 @@ Running with the step option (`node src -p {program.bin} --step`), enables the s
 ```
 Instruction: (PSH) 0000000000001000
 Registers:
-A: 0000	B: 0000	C: 0000	D: 0000	IP: 0000	SP: 0000
+A: 0000 B: 0000 C: 0000 D: 0000 IP: 0000 SP: 0000
 
 Memory:
 180e 0048 0088 00c8 0008 0122 0031 0112 001d 0041 001c 0008 0046 0011 000c

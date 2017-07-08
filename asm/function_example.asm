@@ -1,5 +1,5 @@
 # Jump to the start label
-LDV A, :start
+LDV A, 0, :start
 PSH A
 RET
 
@@ -10,12 +10,12 @@ RET
   PSH D
 
   PSH A
-  LDV C, 1
+  LDV C, 0, 1
   MOV D, A
 
   :f_loop
     # Set B up so we can subtract 1
-    LDV B, 1
+    LDV B, 0, 1
     # Sub 1, store in B
     SUB B, A
     # Copy B into A. A contains (i-1).
@@ -38,7 +38,7 @@ RET
     PSH B
 
     # Set B for addition
-    LDV B, 1
+    LDV B, 0, 1
     ADD C, B
 
     # Loop if not done
@@ -52,7 +52,7 @@ RET
 
 :start
   # The factorial function expects it's argument in the A register
-  LDV A, 5
+  LDV A, 0, 5
   CAL :factorial
   OUT A
 
