@@ -34,15 +34,15 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |-----------|---------|-------------------------|-------------|
 |`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0001` | Move value at source register to destination register|
 |`​LDV`| `D, S, V` | `VVVVVVVVSSDD0010` | Load a value into destination register. If S is 0 set the value. If S is 1 then load into the low 8 bit, and if S = 2 then load into the high 8 bits. |
-|`LDR`| `D, M` | `MMMMMMMMXXDD0011` | Load a value from memory into destination register|
-|`LDM`| `S, M` | `MMMMMMMMSSXX0101` | Load the value in source register into memory|
+|`LDR`| `D, M` | `MMMMMMMMMMDD0011` | Load a value from memory into destination register|
+|`LDM`| `D, M` | `MMMMMMMMMMDD0101` | Load the value in destination register into memory|
 |`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add x and y and store the value in x|
 |`SUB`| `D, S` | `XXXXXXXXSSDD1101` | Subtract x from y and store the value in x|
 |`DIV`| `D, S` | `XXXXXXXXSSDD1010` | Divide x by y and store the value in x|
 |`MUL`| `D, S`​ | `XXXXXXXXSSDD0110` | Multiply x and y and store the value in x|
 |`SFT`| `S, D, V` | `VVVVVVVVSSXD1110` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
-|`JLT`| `S, D, M` | `MMMMMMMMSSDD0111` | Jump to memory address if value in source register is less than value in destination register|
-|`CAL`| `M` | `MMMMMMMMXXXX0000` | Call a function in memory|
+|`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
+|`CAL`| `M` | `MMMMMMMMMMXX0000` | Call a function in memory|
 |`RET`| | `XXXXXXXXXXXX0100` | Return from function|
 |`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
 |`​POP`| `D` | `XXXXXXXXXXDD1100` | Pop the stack into the destination register|

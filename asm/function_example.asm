@@ -10,10 +10,15 @@ RET
   PSH D
 
   PSH A
+  MOV B, A
   LDV C, 0, 1
   MOV D, A
 
+  CAL :swap_a_and_c
+
   :f_loop
+    CAL :swap_a_and_c
+
     # Set B up so we can subtract 1
     LDV B, 0, 1
     # Sub 1, store in B
@@ -41,13 +46,22 @@ RET
     LDV B, 0, 1
     ADD C, B
 
+    CAL :swap_a_and_c
+
     # Loop if not done
-    JLT C, D, :f_loop
+    JLT D, :f_loop
 
   POP A
   POP D
   POP C
   POP B
+  RET
+
+:swap_a_and_c
+  PSH A
+  PSH C
+  POP A
+  POP C
   RET
 
 :start

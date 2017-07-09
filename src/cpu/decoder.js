@@ -2,7 +2,8 @@ const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
-  STACK_SIZE
+  STACK_SIZE,
+  MAX_INT
 } = require('../constants');
 
 const pushStack = (stack, registers, val) => {
@@ -44,32 +45,32 @@ module.exports = (instruction, registers, memory, stack) => {
       else registers[REGISTERS[rd]] |= rest << 8;
       return false;
     case 'LDR':
-      registers[REGISTERS[rd]] = memory[rest];
+      registers[REGISTERS[rd]] = memory[(rest << 2) | rs];
       return false;
     case 'LDM':
-      memory[rest] = registers[REGISTERS[rs]];
+      memory[(rest << 2) | rs] = registers[REGISTERS[rs]];
       return false;
 
     case 'ADD':
       result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
-      registers[REGISTERS[rd]] = result;
+      registers[REGISTERS[rd]] = result % MAX_INT;
       return false;
     case 'SUB':
       result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = result;
+      registers[REGISTERS[rd]] = result % MAX_INT;
       return false;
     case 'MUL':
       result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = result;
+      registers[REGISTERS[rd]] = result % MAX_INT;
       return false;
     case 'DIV':
       result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
-      registers[REGISTERS[rd]] = result;
+      registers[REGISTERS[rd]] = result % MAX_INT;
       return false;
     case 'SFT':
       registers[REGISTERS[rs]] = (registers[REGISTERS[rd]] === 0)
-        ? registers[REGISTERS[rs]] << rest
-        : registers[REGISTERS[rs]] >> rest;
+        ? registers[REGISTERS[rs]] | rest
+        : registers[REGISTERS[rs]] | (rest << 8);
       return false;
 
     case 'PSH':
@@ -80,8 +81,8 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
     case 'JLT':
-      if (registers[REGISTERS[rs]] < registers[REGISTERS[rd]]) {
-        registers.IP = rest;
+      if (registers.A < registers[REGISTERS[rd]]) {
+        registers.IP = instruction >> 6;
       }
       return false;
 
