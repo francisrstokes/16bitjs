@@ -30,7 +30,7 @@ module.exports = (instruction, registers, memory, stack) => {
   switch (namedOpcode) {
     case 'CAL':
       pushStack(stack, registers, registers.IP);
-      registers.IP = rest;
+      registers.IP = (rest << 2) | rs;
       return false;
     case 'RET':
       registers.IP = popStack(stack, registers);
@@ -40,9 +40,7 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
       return false;
     case 'LDV':
-      if (rs === 0) registers[REGISTERS[rd]] = rest;
-      else if (rs === 1) registers[REGISTERS[rd]] |= rest;
-      else registers[REGISTERS[rd]] |= rest << 8;
+      registers[REGISTERS[rd]] = (rest << 2) | rs;
       return false;
     case 'LDR':
       registers[REGISTERS[rd]] = memory[(rest << 2) | rs];

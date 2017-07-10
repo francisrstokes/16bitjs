@@ -33,7 +33,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
 |`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0001` | Move value at source register to destination register|
-|`​LDV`| `D, S, V` | `VVVVVVVVSSDD0010` | Load a value into destination register. If S is 0 set the value. If S is 1 then load into the low 8 bit, and if S = 2 then load into the high 8 bits. |
+|`​LDV`| `D, V` | `VVVVVVVVVVDD0010` | Load a value into destination register. |
 |`LDR`| `D, M` | `MMMMMMMMMMDD0011` | Load a value from memory into destination register|
 |`LDM`| `D, M` | `MMMMMMMMMMDD0101` | Load the value in destination register into memory|
 |`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add x and y and store the value in x|

@@ -1,5 +1,5 @@
 # Jump to the start label
-LDV A, 0, :start
+LDV A, :start
 PSH A
 RET
 
@@ -11,7 +11,7 @@ RET
 
   PSH A
   MOV B, A
-  LDV C, 0, 1
+  LDV C, 1
   MOV D, A
 
   CAL :swap_a_and_c
@@ -20,7 +20,7 @@ RET
     CAL :swap_a_and_c
 
     # Set B up so we can subtract 1
-    LDV B, 0, 1
+    LDV B, 1
     # Sub 1, store in B
     SUB B, A
     # Copy B into A. A contains (i-1).
@@ -43,7 +43,7 @@ RET
     PSH B
 
     # Set B for addition
-    LDV B, 0, 1
+    LDV B, 1
     ADD C, B
 
     CAL :swap_a_and_c
@@ -66,7 +66,7 @@ RET
 
 :start
   # The factorial function expects it's argument in the A register
-  LDV A, 0, 5
+  LDV A, 5
   CAL :factorial
   OUT A
 
