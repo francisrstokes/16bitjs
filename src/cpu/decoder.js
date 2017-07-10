@@ -23,14 +23,14 @@ const popStack = (stack, registers) => {
 };
 
 module.exports = (instruction, registers, memory, stack) => {
-  const [opcode, rd, rs, rest] = splitInstruction(instruction);
+  const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
   let result = 0;
 
   switch (namedOpcode) {
     case 'CAL':
       pushStack(stack, registers, registers.IP);
-      registers.IP = (rest << 2) | rs;
+      registers.IP = high10;
       return false;
     case 'RET':
       registers.IP = popStack(stack, registers);
@@ -40,13 +40,13 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
       return false;
     case 'LDV':
-      registers[REGISTERS[rd]] = (rest << 2) | rs;
+      registers[REGISTERS[rd]] = high10;
       return false;
     case 'LDR':
-      registers[REGISTERS[rd]] = memory[(rest << 2) | rs];
+      registers[REGISTERS[rd]] = memory[high10];
       return false;
     case 'LDM':
-      memory[(rest << 2) | rs] = registers[REGISTERS[rs]];
+      memory[high10 | rs] = registers[REGISTERS[rs]];
       return false;
 
     case 'ADD':
@@ -67,8 +67,8 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
     case 'SFT':
       registers[REGISTERS[rs]] = (registers[REGISTERS[rd]] === 0)
-        ? registers[REGISTERS[rs]] | rest
-        : registers[REGISTERS[rs]] | (rest << 8);
+        ? registers[REGISTERS[rs]] | high8
+        : registers[REGISTERS[rs]] | (high8 << 8);
       return false;
 
     case 'PSH':

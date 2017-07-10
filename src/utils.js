@@ -1,6 +1,13 @@
 const { readFile, writeFile, stat } = require('fs');
 const fs = require('bluebird').promisifyAll({ readFile, writeFile, stat });
 
+const {
+  DESTINATION_SHIFT,
+  SOURCE_SHIFT,
+  ADDRESS_SHIFT,
+  LONG_ADDRESS_SHIFT
+} = require('./constants');
+
 const leftPad = (str, pad = 4, padWith = '0') =>
   (str.length < pad)
     ? Array.apply(null, { length: pad - str.length })
@@ -26,10 +33,11 @@ const convertUint8ArrayToUint16Array = (u8) => {
   return u16;
 };
 const splitInstruction = (instruction) => [
-  (instruction & 0xF),
-  (instruction & 0b0000000000110000) >> 4,
-  (instruction & 0b0000000011000000) >> 6,
-  (instruction & 0b1111111100000000) >> 8
+  (instruction & 0b0000000000001111),
+  (instruction & 0b0000000000110000) >> DESTINATION_SHIFT,
+  (instruction & 0b0000000011000000) >> SOURCE_SHIFT,
+  (instruction & 0b1111111100000000) >> ADDRESS_SHIFT,
+  (instruction & 0b1111111111000000) >> LONG_ADDRESS_SHIFT
 ];
 
 module.exports = {
