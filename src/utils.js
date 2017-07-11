@@ -17,8 +17,8 @@ const leftPad = (str, pad = 4, padWith = '0') =>
 const arrayAsHex = (arr) => {
   let s = '';
   for (let i = 0; i < arr.length; i++) {
-    const fourBitsPadded = leftPad(arr[i].toString(16));
-    s += fourBitsPadded + ' ';
+    const eightBitsPadded = leftPad(arr[i].toString(16), 4);
+    s += eightBitsPadded + ' ';
     if (((i + 1) % 15 === 0)) s += '\n';
   }
   return s;

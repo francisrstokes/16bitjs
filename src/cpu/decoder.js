@@ -66,9 +66,9 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = result % MAX_INT;
       return false;
     case 'SFT':
-      registers[REGISTERS[rs]] = (registers[REGISTERS[rd]] === 0)
-        ? registers[REGISTERS[rs]] | high8
-        : registers[REGISTERS[rs]] | (high8 << 8);
+      registers[REGISTERS[rs]] = (rd === 0)
+        ? registers[REGISTERS[rs]] << high8
+        : registers[REGISTERS[rs]] >> high8;
       return false;
 
     case 'PSH':
@@ -80,7 +80,7 @@ module.exports = (instruction, registers, memory, stack) => {
 
     case 'JLT':
       if (registers.A < registers[REGISTERS[rd]]) {
-        registers.IP = instruction >> 6;
+        registers.IP = high8;
       }
       return false;
 

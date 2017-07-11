@@ -11,7 +11,6 @@ module.exports = (file) =>
     .map(line => line.trim())
     .filter(line => line !== '' && line[0] !== '#')
     .reduce(expandPseudoInstructions, [])
-    // .map(x => { console.log(x); return x; })
     .filter(extractLabels)
     .map(replaceLabels)
     .map(evaluateExpressions);

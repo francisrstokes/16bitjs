@@ -9,6 +9,7 @@ const memory = require('../memory/memory');
 const stack = require('../memory/stack');
 const registers = require('../cpu/registers')
 
+
 module.exports = () => {
   const instruction = memory[registers.IP];
   const opcode = splitInstruction(instruction)[0];
