@@ -4,7 +4,9 @@ const {
   DESTINATION_SHIFT,
   SOURCE_SHIFT,
   ADDRESS_SHIFT,
-  LONG_ADDRESS_SHIFT
+  LONG_ADDRESS_SHIFT,
+  ARITHMETIC_MODE_SHIFT,
+  OPERATION_SHIFT
 } = require('../../constants');
 
 const opcodes = INSTRUCTION_MAP
@@ -30,10 +32,7 @@ module.exports = {
   LDV: (args) => opcodes.LDV | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
   LDR: (args) => opcodes.LDR | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
   LDM: (args) => opcodes.LDM | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
-  ADD: (args) => opcodes.ADD | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
-  SUB: (args) => opcodes.SUB | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
-  MUL: (args) => opcodes.MUL | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
-  DIV: (args) => opcodes.DIV | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
+  ATH: (args) => opcodes.ATH | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT) | (args[2] << OPERATION_SHIFT) | (args[3] << ARITHMETIC_MODE_SHIFT),
   OUT: (args) => opcodes.OUT | (args[0] << ADDRESS_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   HLT: () => opcodes.HLT
 };

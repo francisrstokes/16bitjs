@@ -5,7 +5,8 @@ const {
 const {
   INSTRUCTION_MAP,
   REGISTERS,
-  STACK_SIZE
+  STACK_SIZE,
+  ARITHMETIC
 } = require('../constants');
 
 const output = (value, mode) => {
@@ -41,10 +42,35 @@ const popStack = (stack, registers) => {
   return stack[--registers.SP];
 };
 
+const arithmetic = (registers, rs, rd, high8) => {
+  const arithmeticOperation = high8 & 0b00000011;
+  const resultMode = high8 & 0b00000100;
+  const resultRegister = (resultMode === ARITHMETIC.DESTINATION_MODE)
+    ? rd
+    : rs;
+  let result = 0;
+
+  switch (arithmeticOperation) {
+    case ARITHMETIC.ADD:
+      result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
+      break;
+    case ARITHMETIC.SUB:
+      result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
+      break;
+    case ARITHMETIC.MUL:
+      result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
+      break;
+    case ARITHMETIC.DIV:
+      result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
+      break;
+  }
+
+  registers[REGISTERS[resultRegister]] = wrapMaxInt(result);
+}
+
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
-  let result = 0;
 
   switch (namedOpcode) {
     case 'CAL':
@@ -68,22 +94,10 @@ module.exports = (instruction, registers, memory, stack) => {
       memory[high10] = registers[REGISTERS[rd]];
       return false;
 
-    case 'ADD':
-      result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
-      registers[REGISTERS[rd]] = wrapMaxInt(result);
+    case 'ATH':
+      arithmetic(registers, rs, rd, high8);
       return false;
-    case 'SUB':
-      result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = wrapMaxInt(result);
-      return false;
-    case 'MUL':
-      result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = wrapMaxInt(result);
-      return false;
-    case 'DIV':
-      result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
-      registers[REGISTERS[rd]] = wrapMaxInt(result);
-      return false;
+
     case 'SFT':
       registers[REGISTERS[rs]] = (rd === 0)
         ? registers[REGISTERS[rs]] << high8

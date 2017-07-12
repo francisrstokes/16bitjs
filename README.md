@@ -38,10 +38,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`​LDV`| `D, V` | `VVVVVVVVVVDD0010` | Load a value into destination register. |
 |`LDR`| `D, M` | `MMMMMMMMMMDD0011` | Load a value from memory into destination register|
 |`LDM`| `D, M` | `MMMMMMMMMMDD0101` | Load the value in destination register into memory|
-|`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add source and destination registers and store the value in destination|
-|`SUB`| `D, S` | `XXXXXXXXSSDD1101` | Subtract destination from source and store the value in destination|
-|`DIV`| `D, S` | `XXXXXXXXSSDD1010` | Divide destination by source and store the value in destination|
-|`MUL`| `D, S`​ | `XXXXXXXXSSDD0110` | Multiply source and destination and store the value in destination|
+|`ATH`| `D, S, O, M` | `XXXXXMOOSSDD1001` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register|
 |`SFT`| `S, D, V` | `VVVVVVVVSSXD1110` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
 |`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
 |`CAL`| `M` | `MMMMMMMMMMXX0000` | Call a function in memory|
@@ -50,6 +47,15 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`​POP`| `D` | `XXXXXXXXXXDD1100` | Pop the stack into the destination register|
 |`OUT`| `M, S` | `MMMMMMMMSSXX1011` | Output the value in source register, using mode M (see below for modes)|
 |`HLT`| | `XXXXXXXXXXXX1111` | Program halt|
+
+##### Arithmetic Operation table
+
+|Operation |Value|
+|----------|-----|
+|`Add`     |`00` |
+|`Subtract`|`01` |
+|`Multiply`|`10` |
+|`Divide`  |`11` |
 
 #### Pseudo Instructions
 
