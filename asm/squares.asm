@@ -6,7 +6,8 @@ RET
   ADD A, B
   MOV D, A
   MUL D, D
-  OUT D
+  OUT 2, D
+  PRT ', '
   JLT C, :calculate_squares
   RET
 
@@ -26,7 +27,7 @@ RET
 
   # Call the calculate squares function
   CAL :calculate_squares
-
+  PRT '\n'
   HLT
 
 :prog_end

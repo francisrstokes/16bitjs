@@ -1,4 +1,4 @@
-const pseudoExpanders = require('./pseudo-expanders');
+const pseudoExpanders = require('./expanders');
 const pseudoInstructions = Object.keys(pseudoExpanders);
 
 module.exports = (acc, instruction) => {

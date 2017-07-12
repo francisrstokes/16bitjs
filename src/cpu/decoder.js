@@ -6,6 +6,23 @@ const {
   MAX_INT
 } = require('../constants');
 
+const output = (value, mode) => {
+  switch (mode) {
+    case 1:
+      process.stdout.write(value.toString(2));
+      break;
+    case 2:
+      process.stdout.write(value.toString(16));
+      break;
+    case 3:
+      process.stdout.write(String.fromCharCode(value));
+      break;
+    case 0:
+    default:
+      process.stdout.write(value.toString());
+  }
+}
+
 const pushStack = (stack, registers, val) => {
   if (registers.SP === STACK_SIZE - 1) {
     console.log('[Error] Stack overflow. Exiting...');
@@ -80,12 +97,12 @@ module.exports = (instruction, registers, memory, stack) => {
 
     case 'JLT':
       if (registers.A < registers[REGISTERS[rd]]) {
-        registers.IP = high8;
+        registers.IP = high10;
       }
       return false;
 
     case 'OUT':
-      console.log(registers[REGISTERS[rs]]);
+      output(registers[REGISTERS[rs]], high8);
       return false;
 
     case 'HLT': return true;

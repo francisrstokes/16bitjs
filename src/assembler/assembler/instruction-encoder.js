@@ -34,6 +34,6 @@ module.exports = {
   SUB: (args) => opcodes.SUB | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   MUL: (args) => opcodes.MUL | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   DIV: (args) => opcodes.DIV | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
-  OUT: (args) => opcodes.OUT | (reg[args[0]] << SOURCE_SHIFT),
+  OUT: (args) => opcodes.OUT | (args[0] << ADDRESS_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   HLT: () => opcodes.HLT
 };

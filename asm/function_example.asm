@@ -68,6 +68,6 @@ RET
   # The factorial function expects it's argument in the A register
   LDV A, 5
   CAL :factorial
-  OUT A
+  OUT 0, A
 
   HLT

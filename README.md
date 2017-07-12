@@ -30,25 +30,50 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 ### Instruction set
 
+#### Real instructions
+
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
 |`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0001` | Move value at source register to destination register|
 |`​LDV`| `D, V` | `VVVVVVVVVVDD0010` | Load a value into destination register. |
 |`LDR`| `D, M` | `MMMMMMMMMMDD0011` | Load a value from memory into destination register|
 |`LDM`| `D, M` | `MMMMMMMMMMDD0101` | Load the value in destination register into memory|
-|`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add x and y and store the value in x|
-|`SUB`| `D, S` | `XXXXXXXXSSDD1101` | Subtract x from y and store the value in x|
-|`DIV`| `D, S` | `XXXXXXXXSSDD1010` | Divide x by y and store the value in x|
-|`MUL`| `D, S`​ | `XXXXXXXXSSDD0110` | Multiply x and y and store the value in x|
+|`ADD`| `D, S` | `XXXXXXXXSSDD1001` | Add source and destination registers and store the value in destination|
+|`SUB`| `D, S` | `XXXXXXXXSSDD1101` | Subtract destination from source and store the value in destination|
+|`DIV`| `D, S` | `XXXXXXXXSSDD1010` | Divide destination by source and store the value in destination|
+|`MUL`| `D, S`​ | `XXXXXXXXSSDD0110` | Multiply source and destination and store the value in destination|
 |`SFT`| `S, D, V` | `VVVVVVVVSSXD1110` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
 |`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
 |`CAL`| `M` | `MMMMMMMMMMXX0000` | Call a function in memory|
 |`RET`| | `XXXXXXXXXXXX0100` | Return from function|
 |`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
 |`​POP`| `D` | `XXXXXXXXXXDD1100` | Pop the stack into the destination register|
-|`OUT`| `S` | `XXXXXXXXSSXX1011` | Output the value in source register|
+|`OUT`| `M, S` | `MMMMMMMMSSXX1011` | Output the value in source register, using mode M (see below for modes)|
 |`HLT`| | `XXXXXXXXXXXX1111` | Program halt|
 
+#### Pseudo Instructions
+
+These kind of instructions are prepocessed by the assembler and expanded into combinations of the real instructions.
+
+|Instruction|Arguments|Expanded length  |Description|
+|-----------|---------|-----------------|-----------|
+|`SUBS`      | `D, S`    |4                | Subract destination from source and store the result in source|
+|`DIVS`      | `D, S`    |4                | Divide destination by source and store the result in source|
+|`LDV16`      | `D, V`    |6                | Load a 16 bit value into destination|
+|`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
+|`PRT`      | `V`     |2 + (2 per character) | Print the string V. Should be enclosed in quotes|
+|`JGE`      | `D, A`     |4 | Jump to address A if value in destination regigster is greater than or equal to the A register. Overwrites value in destination register|
+
+
+
+#### Output Modes
+
+|Mode|Description|
+|----|-----------|
+|0   | Output register in decimal|
+|1   | Output register in binary|
+|2   | Output register in hex|
+|3   | Output register as a character|
 
 ## Debugger
 
