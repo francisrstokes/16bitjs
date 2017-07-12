@@ -65,7 +65,7 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = memory[high10];
       return false;
     case 'LDM':
-      memory[high10 | rs] = registers[REGISTERS[rs]];
+      memory[high10] = registers[REGISTERS[rd]];
       return false;
 
     case 'ADD':

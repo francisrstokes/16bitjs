@@ -24,12 +24,13 @@ const leftPad = (str, pad = 4, padWith = '0') =>
       .reduce((padding) => padding + padWith, '') + str
     : str;
 
-const arrayAsHex = (arr) => {
-  let s = '';
+const arrayAsHex = (arr, startingOffset = 0) => {
+  let s = `${leftPad(startingOffset.toString(16))}\t`;
   for (let i = 0; i < arr.length; i++) {
-    const eightBitsPadded = leftPad(arr[i].toString(16), 4);
-    s += eightBitsPadded + ' ';
-    if (((i + 1) % 15 === 0)) s += '\n';
+    const fourBitsPadded = leftPad(arr[i].toString(16), 4);
+    s += fourBitsPadded + ' ';
+
+    if (((i + 1) % 16 === 0)) s += `\n${leftPad((startingOffset + i + 1).toString(16))}\t`;
   }
   return s;
 };
