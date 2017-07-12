@@ -34,19 +34,20 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
-|`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0001` | Move value at source register to destination register|
-|`​LDV`| `D, V` | `VVVVVVVVVVDD0010` | Load a value into destination register. |
-|`LDR`| `D, M` | `MMMMMMMMMMDD0011` | Load a value from memory into destination register|
-|`LDM`| `D, M` | `MMMMMMMMMMDD0101` | Load the value in destination register into memory|
-|`ATH`| `D, S, O, M` | `XXXXXMOOSSDD1001` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register|
-|`SFT`| `S, D, V` | `VVVVVVVVSSXD1110` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
-|`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
-|`CAL`| `M` | `MMMMMMMMMMXX0000` | Call a function in memory|
-|`RET`| | `XXXXXXXXXXXX0100` | Return from function|
-|`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
-|`​POP`| `D` | `XXXXXXXXXXDD1100` | Pop the stack into the destination register|
+|`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
+|`​LDV`| `D, V` | `VVVVVVVVVVDD0001` | Load a value into destination register. |
+|`LDR`| `D, M` | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
+|`LDM`| `D, M` | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
+|`ATH`| `D, S, O, M` | `XXXXXMOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register|
+|`SFT`| `S, D, V` | `VVVVVVVVSSXD0101` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
+|`CAL`| `M` | `MMMMMMMMMMXX0110` | Call a function in memory|
+|`RET`| | `XXXXXXXXXXXX0111` | Return from function|
+|`JLT`| `D, M` | `MMMMMMMMMMDD1000` | Jump to memory address if value in the A register is less than value in destination register|
+|`PSH`| `S` | `XXXXXXXXSSXX1001` | Push the value in source register onto the stack|
+|`​POP`| `D` | `XXXXXXXXXXDD1010` | Pop the stack into the destination register|
 |`OUT`| `M, S` | `MMMMMMMMSSXX1011` | Output the value in source register, using mode M (see below for modes)|
-|`HLT`| | `XXXXXXXXXXXX1111` | Program halt|
+|`HLT`| | `XXXXXXXXXXXX1100` | Program halt|
+
 
 ##### Arithmetic Operation table
 
@@ -63,8 +64,14 @@ These kind of instructions are prepocessed by the assembler and expanded into co
 
 |Instruction|Arguments|Expanded length  |Description|
 |-----------|---------|-----------------|-----------|
-|`SUBS`      | `D, S`    |4                | Subract destination from source and store the result in source|
-|`DIVS`      | `D, S`    |4                | Divide destination by source and store the result in source|
+|`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|
+|`ADDS`     | `D, S`    |1                | Add destination to source and store the result in source|
+|`SUB`      | `D, S`    |1                | Subract destination from source and store the result in destination|
+|`SUBS`     | `D, S`    |1                | Subract destination from source and store the result in source|
+|`MUL`      | `D, S`    |1                | Multiply destination with source and store the result in destination|
+|`MULS`     | `D, S`    |1                | Multiply destination with source and store the result in source|
+|`DIV`      | `D, S`    |1                | Divide destination by source and store the result in destination|
+|`DIVS`     | `D, S`    |1                | Divide destination by source and store the result in source|
 |`LDV16`      | `D, V`    |6                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
 |`PRT`      | `V`     |2 + (2 per character) | Print the string V. Should be enclosed in quotes|
