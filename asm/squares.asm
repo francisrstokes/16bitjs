@@ -6,7 +6,7 @@ RET
   ADD A, B
   MOV D, A
   MUL D, D
-  OUT 2, D
+  OUT 0, D
   PRT ', '
   JLT C, :calculate_squares
   RET

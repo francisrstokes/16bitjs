@@ -5,8 +5,18 @@ const {
   DESTINATION_SHIFT,
   SOURCE_SHIFT,
   ADDRESS_SHIFT,
-  LONG_ADDRESS_SHIFT
+  LONG_ADDRESS_SHIFT,
+  MAX_INT
 } = require('./constants');
+
+const wrapMaxInt = (v) => {
+  if (v < 0) {
+    return MAX_INT + v;
+  } else if (v > MAX_INT) {
+    return v % MAX_INT;
+  }
+  return v;
+};
 
 const leftPad = (str, pad = 4, padWith = '0') =>
   (str.length < pad)
@@ -45,6 +55,8 @@ module.exports = {
   arrayAsHex,
   convertUint8ArrayToUint16Array,
   splitInstruction,
+
+  wrapMaxInt,
 
   fs
 };

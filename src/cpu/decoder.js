@@ -1,9 +1,11 @@
-const { splitInstruction } = require('../utils');
+const {
+  splitInstruction,
+  wrapMaxInt
+ } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
-  STACK_SIZE,
-  MAX_INT
+  STACK_SIZE
 } = require('../constants');
 
 const output = (value, mode) => {
@@ -68,19 +70,19 @@ module.exports = (instruction, registers, memory, stack) => {
 
     case 'ADD':
       result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
-      registers[REGISTERS[rd]] = result % MAX_INT;
+      registers[REGISTERS[rd]] = wrapMaxInt(result);
       return false;
     case 'SUB':
       result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = result % MAX_INT;
+      registers[REGISTERS[rd]] = wrapMaxInt(result);
       return false;
     case 'MUL':
       result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
-      registers[REGISTERS[rd]] = result % MAX_INT;
+      registers[REGISTERS[rd]] = wrapMaxInt(result);
       return false;
     case 'DIV':
       result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
-      registers[REGISTERS[rd]] = result % MAX_INT;
+      registers[REGISTERS[rd]] = wrapMaxInt(result);
       return false;
     case 'SFT':
       registers[REGISTERS[rs]] = (rd === 0)
