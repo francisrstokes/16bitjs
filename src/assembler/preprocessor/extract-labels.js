@@ -9,5 +9,7 @@ module.exports = {
     }
     return true;
   },
-  replaceLabels: (line) => Object.keys(labels).reduce((outLine, label) => outLine.replace(label, labels[label]), line)
+  replaceLabels: (line) => Object.keys(labels)
+    .sort((a, b) => b.length - a.length)
+    .reduce((outLine, label) => outLine.replace(label, labels[label]), line)
 }

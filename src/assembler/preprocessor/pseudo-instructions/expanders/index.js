@@ -9,6 +9,8 @@ const DIVS = require('./DIVS');
 
 const LDV16 = require('./LDV16');
 const JGE = require('./JGE');
+const JEQ = require('./JEQ');
+const JNE = require('./JNE');
 const SWP = require('./SWP');
 const PRT = require('./PRT');
 
@@ -24,6 +26,8 @@ module.exports = {
 
   LDV16,
   JGE,
+  JEQ,
+  JNE,
   SWP,
   PRT
 }
