@@ -1,3 +1,4 @@
+const { MEM_SIZE } = require('../../constants');
 const {
   extractLabels,
   replaceLabels
@@ -15,7 +16,7 @@ module.exports = (file) => {
   const cleanInstructions = file
     .split('\n')
     .map(line => line.trim())
-    .filter(line => line !== '' && line[0] !== '#')
+    .filter(line => line !== '' && line[0] !== '#' && line[0] !== ';')
     .map(mapIntercept((instruction, index, instructions) => console.log(`Read ${instructions.length} instructions, including labels.`)));
 
   const expandedInstructions = expandPseudoInstructions(cleanInstructions)
@@ -23,7 +24,7 @@ module.exports = (file) => {
 
   return expandedInstructions
     .filter(extractLabels)
-    .map(mapIntercept((instruction, index, instructions) => console.log(`Removed labels. Final instruction count: ${instructions.length}`)))
+    .map(mapIntercept((instruction, index, instructions) => console.log(`Removed labels. Final instruction count: ${instructions.length}/${MEM_SIZE}`)))
     .map(replaceLabels)
     .map(evaluateExpressions);
 }

@@ -1,11 +1,11 @@
 const unescapeCharacters = (str) =>
   str
-    .replace('\\n', '\n')
-    .replace('\\r', '\r')
-    .replace('\\f', '\f')
-    .replace('\\b', '\b')
-    .replace('\\t', '\t')
-    .replace('\\v', '\v');
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\r')
+    .replace(/\\f/g, '\f')
+    .replace(/\\b/g, '\b')
+    .replace(/\\t/g, '\t')
+    .replace(/\\v/g, '\v');
 
 const getInstructionArguments = (instruction) =>
   instruction
