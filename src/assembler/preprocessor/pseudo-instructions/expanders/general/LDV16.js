@@ -1,4 +1,4 @@
-const { getInstructionArguments } = require('../utils');
+const { getInstructionArguments } = require('../../utils');
 module.exports = (instruction) => {
   const [register, value] = getInstructionArguments(instruction);
   return [

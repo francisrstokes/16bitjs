@@ -1,12 +1,9 @@
-const {
-  splitInstruction,
-  wrapMaxInt
- } = require('../utils');
+const arithmetic = require('./alu');
+const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
-  STACK_SIZE,
-  ARITHMETIC
+  STACK_SIZE
 } = require('../constants');
 
 const output = (value, mode) => {
@@ -41,32 +38,6 @@ const popStack = (stack, registers) => {
   }
   return stack[--registers.SP];
 };
-
-const arithmetic = (registers, rs, rd, high8) => {
-  const arithmeticOperation = high8 & 0b00000011;
-  const resultMode = high8 & 0b00000100;
-  const resultRegister = (resultMode === ARITHMETIC.DESTINATION_MODE)
-    ? rd
-    : rs;
-  let result = 0;
-
-  switch (arithmeticOperation) {
-    case ARITHMETIC.ADD:
-      result = registers[REGISTERS[rd]] + registers[REGISTERS[rs]];
-      break;
-    case ARITHMETIC.SUB:
-      result = registers[REGISTERS[rs]] - registers[REGISTERS[rd]];
-      break;
-    case ARITHMETIC.MUL:
-      result = registers[REGISTERS[rs]] * registers[REGISTERS[rd]];
-      break;
-    case ARITHMETIC.DIV:
-      result = Math.floor(registers[REGISTERS[rs]] / registers[REGISTERS[rd]]);
-      break;
-  }
-
-  registers[REGISTERS[resultRegister]] = wrapMaxInt(result);
-}
 
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);

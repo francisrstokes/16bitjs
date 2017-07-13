@@ -2,7 +2,11 @@
 
 The project consists of:
 
+<<<<<<< Updated upstream
 - The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 16 distinct opcodes
+=======
+- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 32 instructions
+>>>>>>> Stashed changes
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
 
@@ -38,29 +42,19 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`​LDV`| `D, V` | `VVVVVVVVVVDD0001` | Load a value into destination register. |
 |`LDR`| `D, M` | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
 |`LDM`| `D, M` | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
-|`ATH`| `D, S, O, M` | `XXXXXMOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register|
-|`SFT`| `S, D, V` | `VVVVVVVVSSXD0101` | Binary shift the value in the source register by V. Direction is determined as (left D == 0, right D == 1)|
-|`CAL`| `M` | `MMMMMMMMMMXX0110` | Call a function in memory|
-|`RET`| | `XXXXXXXXXXXX0111` | Return from function|
-|`JLT`| `D, M` | `MMMMMMMMMMDD1000` | Jump to memory address if value in the A register is less than value in destination register|
-|`PSH`| `S` | `XXXXXXXXSSXX1001` | Push the value in source register onto the stack|
-|`​POP`| `D` | `XXXXXXXXXXDD1010` | Pop the stack into the destination register|
-|`OUT`| `M, S` | `MMMMMMMMSSXX1011` | Output the value in source register, using mode M (see below for modes)|
-|`HLT`| | `XXXXXXXXXXXX1100` | Program halt|
+|`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
+|`CAL`| `M` | `MMMMMMMMMMXX0101` | Call a function in memory|
+|`RET`| | `XXXXXXXXXXXX0110` | Return from function|
+|`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
+|`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
+|`​POP`| `D` | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
+|`OUT`| `M, S` | `MMMMMMMMSSXX1010` | Output the value in source register, using mode M (see below for modes)|
+|`HLT`| | `XXXXXXXXXXXX1011` | Program halt|
 
-
-##### Arithmetic Operation table
-
-|Operation |Value|
-|----------|-----|
-|`Add`     |`00` |
-|`Subtract`|`01` |
-|`Multiply`|`10` |
-|`Divide`  |`11` |
 
 #### Pseudo Instructions
 
-These kind of instructions are prepocessed by the assembler and expanded into combinations of the real instructions.
+Pseudo instructions are prepocessed by the assembler and expanded into combinations of the real instructions.
 
 |Instruction|Arguments|Expanded length  |Description|
 |-----------|---------|-----------------|-----------|
@@ -71,11 +65,19 @@ These kind of instructions are prepocessed by the assembler and expanded into co
 |`MUL`      | `D, S`    |1                | Multiply destination with source and store the result in destination|
 |`MULS`     | `D, S`    |1                | Multiply destination with source and store the result in source|
 |`DIV`      | `D, S`    |1                | Divide destination by source and store the result in destination|
+|`LSF`      | `D, A`    |1                | Binary shift left the destination register by amount A (max 7)|
+|`LSR`      | `D, A`    |1                | Binary shift right the destination register by amount A (max 7)|
+|`AND`      | `D, S`    |1                | Binary and the destination and source, and store the result in the destination|
+|`OR`       | `D, S`    |1                | Binary or the destination and source, and store the result in the destination|
+|`XOR`      | `D, S`    |1                | Binary exclusive-or the destination and source, and store the result in the destination|
+|`NOT`      | `D`       |1                | Binary not (invert) the destination|
 |`DIVS`     | `D, S`    |1                | Divide destination by source and store the result in source|
 |`LDV16`      | `D, V`    |6                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
-|`PRT`      | `V`     |2 + (2 per character) | Print the string V. Should be enclosed in quotes|
-|`JGE`      | `D, A`     |4 | Jump to address A if value in destination regigster is greater than or equal to the A register. Overwrites value in destination register|
+|`PRT`      | `V`       |2 + (2 per character) | Print the string V. Should be enclosed in quotes|
+|`JGE`      | `D, A`    |4                | Jump to address A if value in destination regigster is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
+|`JEQ`      | `D, A`    |11               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
+|`JNE`      | `D, A`    |14               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
 
 
 
@@ -87,6 +89,21 @@ These kind of instructions are prepocessed by the assembler and expanded into co
 |1   | Output register in binary|
 |2   | Output register in hex|
 |3   | Output register as a character|
+
+#### Arithmetic Operation table
+
+|Operation    |Value  |
+|-------------|-------|
+|`Add`        |`0000` |
+|`Subtract`   |`0001` |
+|`Multiply`   |`0010` |
+|`Divide`     |`0011` |
+|`Left shift` |`0100` |
+|`Right shift`|`0101` |
+|`And`        |`0111` |
+|`Or`         |`1000` |
+|`Xor`        |`1001` |
+|`Not`        |`1010` |
 
 ## Debugger
 
