@@ -19,8 +19,18 @@ const uniqueLabel = () =>
     .toString(16)
     .slice(2);
 
+const getUsableRegister = (source) => {
+  const usableRegisters = ['B', 'C', 'D'];
+  const sourceIndex = usableRegisters.indexOf(source);
+  return [
+    ...usableRegisters.slice(0, sourceIndex),
+    ...usableRegisters.slice(sourceIndex + 1)
+  ][0];
+}
+
 module.exports = {
   getInstructionArguments,
   uniqueLabel,
-  unescapeCharacters
+  unescapeCharacters,
+  getUsableRegister
 };

@@ -14,13 +14,13 @@ const expandInstructions = (acc, instruction) => {
 
 module.exports = (instructions) => {
   let programSize = instructions.length;
-  let expandedProgram = [];
+  let expandedProgram = instructions;
   let done = false;
 
   while (!done) {
-    expandedProgram = instructions.reduce(expandInstructions, []);
+    expandedProgram = expandedProgram.reduce(expandInstructions, []);
     const newSize = expandedProgram.length;
-    done = newSize === programSize;
+    done = (newSize === programSize);
     programSize = newSize;
   }
 
