@@ -9,7 +9,7 @@ module.exports = (instruction) => {
   const ins = chars.reduce((acc, chr) => {
     acc.push(
       `LDV A, ${chr.charCodeAt(0)}`,
-      'OUT 3, A'
+      'SYS 0, A, 3'
     );
     return acc;
   }, []);

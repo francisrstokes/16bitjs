@@ -9,16 +9,16 @@ module.exports = {
     'LDR',
     'LDM',
     'ATH',
-    'SFT',
     'CAL',
     'JLT',
     'RET',
     'PSH',
     'POP',
-    'OUT',
+    'SYS',
     'HLT'
   ],
   DESTINATION_SHIFT: 4,
+  SYSTEM_CALL_SHIFT: 4,
   SOURCE_SHIFT: 6,
   LONG_ADDRESS_SHIFT: 6,
   ADDRESS_SHIFT: 8,
@@ -39,6 +39,14 @@ module.exports = {
     NOT: 9,
     DESTINATION_MODE: 0,
     SOURCE_MODE: 1
+  },
+
+  OS: {
+    STDOUT: 0,
+    STDIN: 1,
+
+    REGISTER_SHIFT: 8,
+    MODE_SHIFT: 10
   },
 
   DEBUG: { NUM_PAGES: 4 }

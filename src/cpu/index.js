@@ -12,8 +12,12 @@ module.exports = (memory, stack) => {
   };
 
   const run = () => {
-    const halt = step();
-    if (!halt) run();
+    if (!step()) {
+      setImmediate(run);
+    }
+    else {
+      process.exit(0);
+    }
   };
 
   return {

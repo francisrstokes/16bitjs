@@ -1,27 +1,11 @@
 const arithmetic = require('./alu');
+const systemCall = require('../os');
 const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
   STACK_SIZE
 } = require('../constants');
-
-const output = (value, mode) => {
-  switch (mode) {
-    case 1:
-      process.stdout.write(value.toString(2));
-      break;
-    case 2:
-      process.stdout.write(value.toString(16));
-      break;
-    case 3:
-      process.stdout.write(String.fromCharCode(value));
-      break;
-    case 0:
-    default:
-      process.stdout.write(value.toString());
-  }
-}
 
 const pushStack = (stack, registers, val) => {
   if (registers.SP === STACK_SIZE - 1) {
@@ -42,7 +26,6 @@ const popStack = (stack, registers) => {
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
-
   switch (namedOpcode) {
     case 'CAL':
       pushStack(stack, registers, registers.IP);
@@ -88,8 +71,8 @@ module.exports = (instruction, registers, memory, stack) => {
       }
       return false;
 
-    case 'OUT':
-      output(registers[REGISTERS[rs]], high8);
+    case 'SYS':
+      systemCall(instruction, registers);
       return false;
 
     case 'HLT': return true;
