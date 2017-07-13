@@ -2,11 +2,7 @@
 
 The project consists of:
 
-<<<<<<< Updated upstream
-- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 16 distinct opcodes
-=======
 - The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 32 instructions
->>>>>>> Stashed changes
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
 
