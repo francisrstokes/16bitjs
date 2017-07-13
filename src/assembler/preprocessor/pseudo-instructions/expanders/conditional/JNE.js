@@ -2,7 +2,7 @@ const {
   getInstructionArguments,
   uniqueLabel,
   getUsableRegister
-} = require('../utils');
+} = require('../../utils');
 
 module.exports = (instruction) => {
   const [source, address] = getInstructionArguments(instruction);

@@ -2,19 +2,21 @@ const {
   getInstructionArguments,
   uniqueLabel,
   getUsableRegister
-} = require('../utils');
-
+} = require('../../utils');
 
 module.exports = (instruction) => {
   const [source, address] = getInstructionArguments(instruction);
-  const label = uniqueLabel();
-  const jumpRegister = getUsableRegister(source);
+  const jumpRegister = getUsableRegister();
+  const notEqual = uniqueLabel();
 
   return [
-    `JLT ${source}, ${label}`,
+    `JLT ${source}, ${notEqual}`,
+    `SWP A, ${source}`,
+    `JLT ${source}, ${notEqual}`,
+    `SWP A, ${source}`,
     `LDV ${jumpRegister}, ${address}`,
     `PSH ${jumpRegister}`,
     'RET',
-    `${label}`
+    `${notEqual}`
   ];
 }
