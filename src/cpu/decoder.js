@@ -34,6 +34,16 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'RET':
       registers.IP = popStack(stack, registers);
       return false;
+    case 'JMP':
+      registers.IP = high10;
+      return false;
+    case 'JMR':
+      registers.IP = registers[REGISTERS[rs]];
+      return false;
+
+    case 'LDA':
+      registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
+      break;
 
     case 'MOV':
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
@@ -76,6 +86,7 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
     case 'HLT': return true;
+    case 'NOP': return false;
 
     default:
       console.log(`Unknown opcode ${opcode}. Exiting...`);

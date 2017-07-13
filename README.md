@@ -46,6 +46,10 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`​POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
 |`SYS`| `C, R, V`       | `VVVVVVRRCCCC1010` | Perform a system call, where C is the type of call. This is described below in more detail.|
 |`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
+|`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory|
+|`JMR`| `S`             | `XXXXXXXXSSXX1101` | Jump to the address pointed at by the source register|
+|`LDA`| `D, S`          | `XXXXXXXXSSDD1110` | Load the value from memory pointed at by the source register into the destination register|
+|`NOP`|                 | `XXXXXXXXXXXX1111` | No operation|
 
 
 #### Pseudo Instructions
