@@ -15,7 +15,11 @@ module.exports = {
     'PSH',
     'POP',
     'SYS',
-    'HLT'
+    'HLT',
+    'JMP',
+    'JMR',
+    'LDA',
+    'NOP'
   ],
   DESTINATION_SHIFT: 4,
   SYSTEM_CALL_SHIFT: 4,

@@ -39,5 +39,9 @@ module.exports = {
   PSH: (args) => opcodes.PSH | (reg[args[0]] << SOURCE_SHIFT),
   POP: (args) => opcodes.POP | (reg[args[0]] << DESTINATION_SHIFT),
   SYS: (args) => opcodes.SYS | (args[0] << SYSTEM_CALL_SHIFT) | (reg[args[1]] << OS.REGISTER_SHIFT) | (args[2] << OS.MODE_SHIFT),
-  HLT: () => opcodes.HLT
+  HLT: () => opcodes.HLT,
+  JMP: (args) => opcodes.JMP | (args[0] << LONG_ADDRESS_SHIFT),
+  JMR: (args) => opcodes.JMR | (reg[args[0]] << SOURCE_SHIFT),
+  LDA: (args) => opcodes.LDA | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << DESTINATION_SHIFT),
+  NOP: () => opcodes.NOP
 };
