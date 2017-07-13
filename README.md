@@ -94,7 +94,12 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 
 #### System calls
 
-A system call is a communication with the 
+A system call in the VM allows the program to ask resources outside of it's context, such as communication with stdin and stdout. System calls are passed off to the os module and can return their results directly into the CPUs registers.
+
+|System call           |Call code |Arguments | 16 bit representation |
+|----------------------|----------|----------|-----------------------|
+|Write to stdout       |`0000`    |`D, M`    | `XXXXMMDD00000101`    |
+|Read from stdin buffer|`0001`    |`D`       | `XXXXXXDD00010101`    |
 
 ##### Output Modes
 
