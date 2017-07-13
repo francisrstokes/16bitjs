@@ -6,14 +6,13 @@ module.exports = (cpu) => {
   process.stdin.setEncoding('utf8');
   render(memoryPage);
 
-  process.stdin.on('readable', () => {
-    const i = process.stdin.read();
-    if (i !== null) {
-      if ((i[0] === 's' && cpu.step()) || i[0] === 'e' || i[0] === 'q' || i[0] === 'x') {
+  process.stdin.on('keypress', (str) => {
+    if (str !== null) {
+      if ((str === 's' && cpu.step()) || str === 'e' || str === 'q' || str === 'x') {
         process.exit(0);
-      } else if (i[0] === 'n' && memoryPage < DEBUG.NUM_PAGES - 1) {
+      } else if (str === 'n' && memoryPage < DEBUG.NUM_PAGES - 1) {
         memoryPage++;
-      } else if (i[0] === 'p' && memoryPage > 0) {
+      } else if (str === 'p' && memoryPage > 0) {
         memoryPage--;
       }
       render(memoryPage);

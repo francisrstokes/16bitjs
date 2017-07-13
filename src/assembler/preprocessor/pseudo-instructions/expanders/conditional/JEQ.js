@@ -7,12 +7,26 @@ const {
 module.exports = (instruction) => {
   const [source, address] = getInstructionArguments(instruction);
   const jumpRegister = getUsableRegister();
+  const firstCheck = uniqueLabel();
+  const equal = uniqueLabel();
   const notEqual = uniqueLabel();
 
   return [
-    `JLT ${source}, ${notEqual}`,
+    `JGE ${source}, ${firstCheck}`,
+    `LDV ${jumpRegister}, ${notEqual}`,
+    `PSH ${jumpRegister}`,
+    'RET',
+
+    `${firstCheck}`,
     `SWP A, ${source}`,
-    `JLT ${source}, ${notEqual}`,
+    `JGE ${source}, ${equal}`,
+
+    `SWP A, ${source}`,
+    `LDV ${jumpRegister}, ${notEqual}`,
+    `PSH ${jumpRegister}`,
+    'RET',
+
+    `${equal}`,
     `SWP A, ${source}`,
     `LDV ${jumpRegister}, ${address}`,
     `PSH ${jumpRegister}`,

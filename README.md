@@ -34,18 +34,18 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
-|`MOV`| ​​​`D, S` | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
-|`​LDV`| `D, V` | `VVVVVVVVVVDD0001` | Load a value into destination register. |
-|`LDR`| `D, M` | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
-|`LDM`| `D, M` | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
+|`MOV`| ​​​`D, S`          | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
+|`​LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
+|`LDR`| `D, M`          | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
+|`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
-|`CAL`| `M` | `MMMMMMMMMMXX0101` | Call a function in memory|
-|`RET`| | `XXXXXXXXXXXX0110` | Return from function|
-|`JLT`| `D, M` | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
-|`PSH`| `S` | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
-|`​POP`| `D` | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
-|`OUT`| `M, S` | `MMMMMMMMSSXX1010` | Output the value in source register, using mode M (see below for modes)|
-|`HLT`| | `XXXXXXXXXXXX1011` | Program halt|
+|`CAL`| `M`             | `MMMMMMMMMMXX0101` | Call a function in memory|
+|`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
+|`JLT`| `D, M`          | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
+|`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
+|`​POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
+|`SYS`| `C, R, V`       | `VVVVVVRRCCCC1010` | Perform a system call, where C is the type of call. This is described below in more detail.|
+|`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
 
 
 #### Pseudo Instructions
@@ -76,16 +76,6 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`JNE`      | `D, A`    |14               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
 
 
-
-#### Output Modes
-
-|Mode|Description|
-|----|-----------|
-|0   | Output register in decimal|
-|1   | Output register in binary|
-|2   | Output register in hex|
-|3   | Output register as a character|
-
 #### Arithmetic Operation table
 
 |Operation    |Value  |
@@ -100,6 +90,20 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`Or`         |`1000` |
 |`Xor`        |`1001` |
 |`Not`        |`1010` |
+
+
+#### System calls
+
+A system call is a communication with the 
+
+##### Output Modes
+
+|Mode|Description|
+|----|-----------|
+|0   | Output register in decimal|
+|1   | Output register in binary|
+|2   | Output register in hex|
+|3   | Output register as a character|
 
 ## Debugger
 
