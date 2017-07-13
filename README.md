@@ -2,7 +2,7 @@
 
 The project consists of:
 
-- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 32 instructions
+- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 35 instructions
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
 
@@ -34,8 +34,8 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
-|`MOV`| ​​​`D, S`          | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
-|`​LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
+|`MOV`| `D, S`          | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
+|`LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
 |`LDR`| `D, M`          | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
 |`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
@@ -43,7 +43,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
 |`JLT`| `D, M`          | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
 |`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
-|`​POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
+|`POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
 |`SYS`| `C, R, V`       | `VVVVVVRRCCCC1010` | Perform a system call, where C is the type of call. This is described below in more detail.|
 |`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
 |`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory|
