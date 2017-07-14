@@ -19,13 +19,9 @@ const uniqueLabel = () =>
     .toString(16)
     .slice(2);
 
-const getUsableRegister = (source) => {
+const getUsableRegister = (...unusableRegisters) => {
   const usableRegisters = ['B', 'C', 'D'];
-  const sourceIndex = usableRegisters.indexOf(source);
-  return [
-    ...usableRegisters.slice(0, sourceIndex),
-    ...usableRegisters.slice(sourceIndex + 1)
-  ][0];
+  return usableRegisters.filter(r => unusableRegisters.indexOf(r) < 0)[0];
 }
 
 module.exports = {

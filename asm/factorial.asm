@@ -2,6 +2,7 @@ LDV B, 7
 LDM B, :counter
 LDM B, :result
 
+LDA16 :factorial
 CAL :factorial
 
 LDR A, :result

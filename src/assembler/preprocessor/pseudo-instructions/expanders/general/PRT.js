@@ -8,7 +8,7 @@ module.exports = (instruction) => {
 
   const ins = chars.reduce((acc, chr) => {
     acc.push(
-      `LDV A, ${chr.charCodeAt(0)}`,
+      `LDV16 A, ${chr.charCodeAt(0)}`,
       'SYS 0, A, 3'
     );
     return acc;

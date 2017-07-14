@@ -16,7 +16,7 @@ module.exports = (file) => {
   const cleanInstructions = file
     .split('\n')
     .map(line => line.trim())
-    .map(line => line.split(';'))
+    .map(line => line.split(';')[0])
     .filter(line => line !== '')
     .map(mapIntercept((instruction, index, instructions) => console.log(`Read ${instructions.length} instructions, including labels.`)));
 

@@ -57,6 +57,9 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'LDM':
       memory[high10] = registers[REGISTERS[rd]];
       return false;
+    case 'LDP':
+      memory[registers[REGISTERS[rd]]] = registers[REGISTERS[rs]];
+      return false;
 
     case 'ATH':
       arithmetic(registers, rs, rd, high8);
@@ -86,7 +89,6 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
     case 'HLT': return true;
-    case 'NOP': return false;
 
     default:
       console.log(`Unknown opcode ${opcode}. Exiting...`);

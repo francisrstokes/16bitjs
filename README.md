@@ -49,7 +49,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory|
 |`JMR`| `S`             | `XXXXXXXXSSXX1101` | Jump to the address pointed at by the source register|
 |`LDA`| `D, S`          | `XXXXXXXXSSDD1110` | Load the value from memory pointed at by the source register into the destination register|
-|`NOP`|                 | `XXXXXXXXXXXX1111` | No operation|
+|`LDP`|                 | `XXXXXXXXSSDD1111` | Load the value in destination register into the memory address pointed to by source register|
 
 
 #### Pseudo Instructions
