@@ -19,7 +19,7 @@ The virtual machine can run in two modes: run (default) and step. Run mode simpl
 
 ## Assembly language
 
-The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, Conditional jumps, Functions, and Output to stdout.
+The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, conditional/non conditional jumps, functions, system calls for reading and and writing stdio etc.
 
 Comments start with a `;` character.
 Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `JMP :some_label_name`.

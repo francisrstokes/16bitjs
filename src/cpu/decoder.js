@@ -3,36 +3,19 @@ const systemCall = require('../os');
 const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
-  REGISTERS,
-  STACK_SIZE
+  REGISTERS
 } = require('../constants');
-
-const pushStack = (stack, registers, val) => {
-  if (registers.SP === STACK_SIZE - 1) {
-    console.log('[Error] Stack overflow. Exiting...');
-    process.exit(1);
-  }
-  stack[registers.SP++] = val;
-};
-
-const popStack = (stack, registers) => {
-  if (registers.SP === 0) {
-    console.log('[Error] Stack underflow. Exiting...');
-    process.exit(1);
-  }
-  return stack[--registers.SP];
-};
 
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
   switch (namedOpcode) {
     case 'CAL':
-      pushStack(stack, registers, registers.IP);
+      stack.push(registers.IP);
       registers.IP = high10;
       return false;
     case 'RET':
-      registers.IP = popStack(stack, registers);
+      registers.IP = stack.pop();
       return false;
     case 'JMP':
       registers.IP = high10;
@@ -69,10 +52,10 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
     case 'PSH':
-      pushStack(stack, registers, registers[REGISTERS[rs]]);
+      stack.push(registers[REGISTERS[rs]]);
       return false;
     case 'POP':
-      registers[REGISTERS[rd]] = popStack(stack, registers);
+      registers[REGISTERS[rd]] = stack.pop();
       return false;
 
     case 'JLT':
