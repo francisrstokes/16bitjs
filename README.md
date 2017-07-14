@@ -19,10 +19,10 @@ The virtual machine can run in two modes: run (default) and step. Run mode simpl
 
 ## Assembly language
 
-The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, Conditional jumps, Functions, and Output to stdout.
+The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, conditional/non conditional jumps, functions, system calls for reading and and writing stdio etc.
 
 Comments start with a `;` character.
-Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `JMP :some_label_name`.
+Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `LDV16 A, :some_label_name`.
 
 ### Examples
 
@@ -38,18 +38,18 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
 |`LDR`| `D, M`          | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
 |`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
+|`LDA`| `D, S`          | `XXXXXXXXSSDD1110` | Load the value from memory pointed at by the source register into the destination register|
+|`LDP`| `D, S`          | `XXXXXXXXSSDD1111` | Load the value in destination register into the memory address pointed to by source register|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
-|`CAL`| `M`             | `MMMMMMMMMMXX0101` | Call a function in memory|
+|`CAL`| `D`             | `XXXXXXXXXXDD0101` | Call a function in memory pointed at by the destination register|
 |`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
-|`JLT`| `D, M`          | `MMMMMMMMMMDD0111` | Jump to memory address if value in the A register is less than value in destination register|
+|`JLT`| `D, S`          | `XXXXXXXXSSDD0111` | Jump to memory address pointed at by the source register, if value in the A register is less than value in destination register|
 |`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
 |`POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
 |`SYS`| `C, R, V`       | `VVVVVVRRCCCC1010` | Perform a system call, where C is the type of call. This is described below in more detail.|
 |`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
-|`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory|
+|`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory. Can only reference memory up to 0x3FF.|
 |`JMR`| `S`             | `XXXXXXXXSSXX1101` | Jump to the address pointed at by the source register|
-|`LDA`| `D, S`          | `XXXXXXXXSSDD1110` | Load the value from memory pointed at by the source register into the destination register|
-|`NOP`|                 | `XXXXXXXXXXXX1111` | No operation|
 
 
 #### Pseudo Instructions

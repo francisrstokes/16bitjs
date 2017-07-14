@@ -5,15 +5,19 @@ const {
 } = require('../../utils');
 
 module.exports = (instruction) => {
-  const [source, address] = getInstructionArguments(instruction);
+  const [source, addressRegister] = getInstructionArguments(instruction);
   const equal = uniqueLabel();
-  const jumpRegister = getUsableRegister(source);
+  const mutableRegister = getUsableRegister(source, addressRegister);
 
   return [
-    `JEQ ${source}, ${equal}`,
-    `LDV ${jumpRegister}, ${address}`,
-    `PSH ${jumpRegister}`,
-    'RET',
-    `${equal}`
+    `PSH ${mutableRegister}`,
+    `LDV16 ${mutableRegister}, ${equal}`,
+
+    `JEQ ${source}, ${mutableRegister}`,
+    `POP ${mutableRegister}`,
+    `JMR ${addressRegister}`,
+
+    `${equal}`,
+    `POP ${mutableRegister}`
   ];
 }

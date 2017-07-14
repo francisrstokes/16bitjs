@@ -6,15 +6,19 @@ const {
 
 
 module.exports = (instruction) => {
-  const [source, address] = getInstructionArguments(instruction);
-  const label = uniqueLabel();
-  const jumpRegister = getUsableRegister(source);
+  const [source, addressRegister] = getInstructionArguments(instruction);
+  const lessThan = uniqueLabel();
+  const mutableRegister = getUsableRegister(source, addressRegister);
 
   return [
-    `JLT ${source}, ${label}`,
-    `LDV ${jumpRegister}, ${address}`,
-    `PSH ${jumpRegister}`,
-    'RET',
-    `${label}`
+    `PSH ${mutableRegister}`,
+    `LDV16 ${mutableRegister}, ${lessThan}`,
+
+    `JLT ${source}, ${mutableRegister}`,
+    `POP ${mutableRegister}`,
+    `JMR ${addressRegister}`,
+
+    `${lessThan}`,
+    `POP ${mutableRegister}`
   ];
 }

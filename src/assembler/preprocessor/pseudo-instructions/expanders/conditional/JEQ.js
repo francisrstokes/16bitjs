@@ -5,32 +5,39 @@ const {
 } = require('../../utils');
 
 module.exports = (instruction) => {
-  const [source, address] = getInstructionArguments(instruction);
-  const jumpRegister = getUsableRegister();
+  const [source, addressRegister] = getInstructionArguments(instruction);
+  const mutableRegister = getUsableRegister(source, addressRegister);
+
   const firstCheck = uniqueLabel();
   const equal = uniqueLabel();
   const notEqual = uniqueLabel();
 
   return [
-    `JGE ${source}, ${firstCheck}`,
-    `LDV ${jumpRegister}, ${notEqual}`,
-    `PSH ${jumpRegister}`,
-    'RET',
+    `PSH ${mutableRegister}`,                   // Push mr [mr]
+
+    `PSH ${addressRegister}`,                   // Push ar [ar, mr]
+    `LDV16 ${addressRegister}, ${firstCheck}`,
+    `LDV16 ${mutableRegister}, ${notEqual}`,
+
+    `JGE ${source}, ${addressRegister}`,
+    `JMR ${mutableRegister}`,
 
     `${firstCheck}`,
+    `LDV16 ${addressRegister}, ${equal}`,
     `SWP A, ${source}`,
-    `JGE ${source}, ${equal}`,
+    `JGE ${source}, ${addressRegister}`,
 
     `SWP A, ${source}`,
-    `LDV ${jumpRegister}, ${notEqual}`,
-    `PSH ${jumpRegister}`,
-    'RET',
+    `JMR ${mutableRegister}`,
 
     `${equal}`,
     `SWP A, ${source}`,
-    `LDV ${jumpRegister}, ${address}`,
-    `PSH ${jumpRegister}`,
-    'RET',
-    `${notEqual}`
+    `POP ${addressRegister}`,                 // Pop ar [mr]
+    `POP ${mutableRegister}`,                 // Pop mr []
+    `JMR ${addressRegister}`,
+
+    `${notEqual}`,
+    `POP ${addressRegister}`,                 // Pop ar [mr]
+    `POP ${mutableRegister}`                  // Pop mr []
   ];
 }
