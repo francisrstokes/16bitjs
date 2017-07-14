@@ -17,5 +17,6 @@ module.exports = (registers) =>
         process.exit(1);
       }
       return stack[--registers.SP];
-    }
+    },
+    raw: stack
   })

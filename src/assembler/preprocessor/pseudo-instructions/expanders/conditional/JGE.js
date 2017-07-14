@@ -16,7 +16,7 @@ module.exports = (instruction) => {
 
     `JLT ${source}, ${mutableRegister}`,
     `POP ${mutableRegister}`,
-    `JMP ${addressRegister}`,
+    `JMR ${addressRegister}`,
 
     `${lessThan}`,
     `POP ${mutableRegister}`

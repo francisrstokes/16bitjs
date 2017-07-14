@@ -2,8 +2,8 @@ LDV B, 7
 LDM B, :counter
 LDM B, :result
 
-LDA16 :factorial
-CAL :factorial
+LDV A, :factorial
+CAL A
 
 LDR A, :result
 SYS 0, A, 0
@@ -15,7 +15,8 @@ HLT
   LDR A, :counter
   SYS 0, A, 0
   LDV B, 3
-  JLT B, :done
+  LDV D, :done
+  JLT B, D
   PRT ' * '
 
   LDV B, 1

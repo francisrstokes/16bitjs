@@ -12,28 +12,35 @@ module.exports = (instruction, registers, memory, stack) => {
   switch (namedOpcode) {
     case 'CAL':
       stack.push(registers.IP);
-      registers.IP = high10;
+      registers.IP = registers[REGISTERS[rd]];
       return false;
     case 'RET':
       registers.IP = stack.pop();
+      return false;
+
+    case 'JLT':
+      if (registers.A < registers[REGISTERS[rd]]) {
+        registers.IP = registers[REGISTERS[rs]];
+      }
       return false;
     case 'JMP':
       registers.IP = high10;
       return false;
     case 'JMR':
-      registers.IP = registers[REGISTERS[rs]];
+      registers.IP = registers[REGISTERS[rd]];
       return false;
 
-    case 'LDA':
-      registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
-      break;
 
     case 'MOV':
       registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
       return false;
+
     case 'LDV':
       registers[REGISTERS[rd]] = high10;
       return false;
+    case 'LDA':
+      registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
+      break;
     case 'LDR':
       registers[REGISTERS[rd]] = memory[high10];
       return false;
@@ -48,12 +55,6 @@ module.exports = (instruction, registers, memory, stack) => {
       arithmetic(registers, rs, rd, high8);
       return false;
 
-    case 'SFT':
-      registers[REGISTERS[rs]] = (rd === 0)
-        ? registers[REGISTERS[rs]] << high8
-        : registers[REGISTERS[rs]] >> high8;
-      return false;
-
     case 'PSH':
       stack.push(registers[REGISTERS[rs]]);
       return false;
@@ -61,11 +62,6 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = stack.pop();
       return false;
 
-    case 'JLT':
-      if (registers.A < registers[REGISTERS[rd]]) {
-        registers.IP = high10;
-      }
-      return false;
 
     case 'SYS':
       systemCall(instruction, registers);

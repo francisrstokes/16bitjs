@@ -15,7 +15,7 @@ module.exports = (instruction) => {
 
     `JEQ ${source}, ${mutableRegister}`,
     `POP ${mutableRegister}`,
-    `JMP ${addressRegister}`,
+    `JMR ${addressRegister}`,
 
     `${equal}`,
     `POP ${mutableRegister}`

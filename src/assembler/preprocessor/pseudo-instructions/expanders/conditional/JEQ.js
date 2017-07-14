@@ -20,7 +20,7 @@ module.exports = (instruction) => {
     `LDV16 ${mutableRegister}, ${notEqual}`,
 
     `JGE ${source}, ${addressRegister}`,
-    `JMP ${mutableRegister}`,
+    `JMR ${mutableRegister}`,
 
     `${firstCheck}`,
     `LDV16 ${addressRegister}, ${equal}`,
@@ -28,13 +28,13 @@ module.exports = (instruction) => {
     `JGE ${source}, ${addressRegister}`,
 
     `SWP A, ${source}`,
-    `JMP ${mutableRegister}`,
+    `JMR ${mutableRegister}`,
 
     `${equal}`,
     `SWP A, ${source}`,
     `POP ${addressRegister}`,                 // Pop ar [mr]
     `POP ${mutableRegister}`,                 // Pop mr []
-    `JMP ${addressRegister}`,
+    `JMR ${addressRegister}`,
 
     `${notEqual}`,
     `POP ${addressRegister}`,                 // Pop ar [mr]

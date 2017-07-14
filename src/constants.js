@@ -1,6 +1,6 @@
 module.exports = {
   MAX_INT: 0xFFFF,
-  MEM_SIZE: 0x0400,
+  MEM_SIZE: 0xFFFF,
   STACK_SIZE: 0xFF,
   REGISTERS: ['A', 'B', 'C', 'D'],
   INSTRUCTION_MAP: [
@@ -57,5 +57,5 @@ module.exports = {
     MODE_SHIFT: 10
   },
 
-  DEBUG: { NUM_PAGES: 4 }
+  DEBUG: { NUM_PAGES: 255 }
 };
