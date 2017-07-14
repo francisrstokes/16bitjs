@@ -1,3 +1,4 @@
+PRT 'Waiting for the 'a' key to be pressed...\n'
 LDV A, 97
 LDV B, 0
 

@@ -16,7 +16,8 @@ module.exports = (file) => {
   const cleanInstructions = file
     .split('\n')
     .map(line => line.trim())
-    .filter(line => line !== '' && line[0] !== '#' && line[0] !== ';')
+    .map(line => line.split(';'))
+    .filter(line => line !== '')
     .map(mapIntercept((instruction, index, instructions) => console.log(`Read ${instructions.length} instructions, including labels.`)));
 
   const expandedInstructions = expandPseudoInstructions(cleanInstructions)
