@@ -35,12 +35,16 @@ module.exports = {
     SUB: 1,
     MUL: 2,
     DIV: 3,
-    LSF: 4,
-    RSF: 5,
-    AND: 6,
-    OR: 7,
-    XOR: 8,
-    NOT: 9,
+    INC: 4,
+    DEC: 5,
+
+    LSF: 6,
+    RSF: 7,
+    AND: 8,
+    OR: 9,
+    XOR: 10,
+    NOT: 11,
+
     DESTINATION_MODE: 0,
     SOURCE_MODE: 1
   },

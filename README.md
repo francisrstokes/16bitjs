@@ -2,7 +2,7 @@
 
 The project consists of:
 
-- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 35 instructions
+- The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 37 instructions
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
 
@@ -65,13 +65,15 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`MUL`      | `D, S`    |1                | Multiply destination with source and store the result in destination|
 |`MULS`     | `D, S`    |1                | Multiply destination with source and store the result in source|
 |`DIV`      | `D, S`    |1                | Divide destination by source and store the result in destination|
+|`DIVS`      | `D, S`    |1                | Divide destination by source and store the result in source|
+|`INC`      | `D`       |1                | Add one to the destination register|
+|`DEC`      | `D`       |1                | Subtract one from the destination register|
 |`LSF`      | `D, A`    |1                | Binary shift left the destination register by amount A (max 7)|
 |`LSR`      | `D, A`    |1                | Binary shift right the destination register by amount A (max 7)|
 |`AND`      | `D, S`    |1                | Binary and the destination and source, and store the result in the destination|
 |`OR`       | `D, S`    |1                | Binary or the destination and source, and store the result in the destination|
 |`XOR`      | `D, S`    |1                | Binary exclusive-or the destination and source, and store the result in the destination|
 |`NOT`      | `D`       |1                | Binary not (invert) the destination|
-|`DIVS`     | `D, S`    |1                | Divide destination by source and store the result in source|
 |`LDV16`    | `D, V`    |6                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
 |`PRT`      | `V`       |2 + (2 per character) | Print the string V. Should be enclosed in quotes|

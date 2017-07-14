@@ -39,6 +39,13 @@ module.exports = (registers, rs, rd, high8) => {
     case ARITHMETIC.DIV:
       result[0] = Math.floor(registers[REGISTERS[rd]] / registers[REGISTERS[rs]]);
       break;
+    case ARITHMETIC.INC:
+      registers[REGISTERS[rd]]++;
+      return;
+    case ARITHMETIC.DEC:
+      registers[REGISTERS[rd]]--;
+      return;
+
     case ARITHMETIC.LSF:
       result[0] = registers[REGISTERS[rd]] << shiftAmount;
       break;
