@@ -10,7 +10,7 @@ module.exports = (argv, memory) =>
           .then(convertUint8ArrayToUint16Array)
           .then(program => {
             program.forEach((v, i) => {
-              memory[i] = v;
+              memory.memory[i] = v;
             })
           })
           .then(resolve);

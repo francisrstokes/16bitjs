@@ -1,7 +1,10 @@
 const registers = require('./registers');
 const decodeAndExecute = require('./decoder');
 
-module.exports = (memory, stack) => {
+module.exports = (_memory) => {
+  const memory = _memory.memory;
+  const stack = _memory.stack(registers);
+
   const fetchInstruction = () => {
     return memory[registers.IP++];
   }
