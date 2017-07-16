@@ -3,10 +3,20 @@ LDV A, 97
 LDV B, 0
 
 LDV16 C, :loop
+LDV16 D, :get_input
 
 :loop
-  SYS 1, B, 0
+  CAL D
   JNE B, C
 
-SYS 0, B, 1
 HLT
+
+:get_input
+  PSH A
+  PSH C
+  LDV A, 1 ; syscall for stdin
+  LDV C, 0 ; mode for output
+  SYS      ; initiate system call
+  POP C
+  POP A
+  RET

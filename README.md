@@ -46,7 +46,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`JLT`| `D, S`          | `XXXXXXXXSSDD0111` | Jump to memory address pointed at by the source register, if value in the A register is less than value in destination register|
 |`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
 |`POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
-|`SYS`| `C, R, V`       | `VVVVVVRRCCCC1010` | Perform a system call, where C is the type of call. This is described below in more detail.|
+|`SYS`|                 | `XXXXXXXXXXXX1010` | Perform a system call. This is described below in more detail.|
 |`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
 |`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory. Can only reference memory up to 0x3FF.|
 |`JMR`| `S`             | `XXXXXXXXSSXX1101` | Jump to the address pointed at by the source register|
@@ -102,10 +102,10 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 
 A system call in the VM allows the program to ask resources outside of it's context, such as communication with stdin and stdout. System calls are passed off to the os module and can return their results directly into the CPUs registers.
 
-|System call           |Call code |Arguments | 16 bit representation |
-|----------------------|----------|----------|-----------------------|
-|Write to stdout       |`0000`    |`D, M`    | `XXXXMMDD00000101`    |
-|Read from stdin buffer|`0001`    |`D`       | `XXXXXXDD00010101`    |
+|System call           |Call code |Usage|
+|----------------------|----------|-----------|
+|Write to stdout       |`0000`    | The value to be written should be in the B register, and the mode in the C register|
+|Read from stdin buffer|`0001`    | The value is read into the B register|
 
 ##### Output Modes
 

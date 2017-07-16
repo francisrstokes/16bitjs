@@ -8,15 +8,21 @@ module.exports = (instruction) => {
 
   const ins = chars.reduce((acc, chr) => {
     acc.push(
-      `LDV A, ${chr.charCodeAt(0)}`,
-      'SYS 0, A, 3'
+      `LDV B, ${chr.charCodeAt(0)}`,
+      'SYS'
     );
     return acc;
   }, []);
 
   return [
     'PSH A',
+    'PSH B',
+    'PSH C',
+    'LDV A, 0',
+    'LDV C, 3',
     ...ins,
-    'POP A'
+    'POP A',
+    'POP B',
+    'POP C'
   ];
 }
