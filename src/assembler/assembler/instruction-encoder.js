@@ -37,11 +37,11 @@ module.exports = {
   JLT: (args) => opcodes.JLT | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   PSH: (args) => opcodes.PSH | (reg[args[0]] << SOURCE_SHIFT),
   POP: (args) => opcodes.POP | (reg[args[0]] << DESTINATION_SHIFT),
-  SYS: (args) => opcodes.SYS | (args[0] << SYSTEM_CALL_SHIFT) | (reg[args[1]] << OS.REGISTER_SHIFT) | (args[2] << OS.MODE_SHIFT),
   JMP: (args) => opcodes.JMP | (reg[args[0]] << SOURCE_SHIFT),
   JMR: (args) => opcodes.JMR | (reg[args[0]] << DESTINATION_SHIFT),
   LDA: (args) => opcodes.LDA | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   LDP: (args) => opcodes.LDP | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
+  SYS: () => opcodes.SYS,
   HLT: () => opcodes.HLT,
   RET: () => opcodes.RET
 };

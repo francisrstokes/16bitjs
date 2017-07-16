@@ -1,19 +1,14 @@
-const {
-  OS,
-  REGISTERS
-} = require('../constants');
-const getCallComponents = require('./get-call-components');
+const { OS } = require('../constants');
 const stdout = require('./stdout');
 const stdin = require('./stdin');
 
-module.exports = (instruction, registers) => {
-  const [callCode, rs, outputMode] = getCallComponents(instruction);
-  switch (callCode) {
+module.exports = (registers) => {
+  switch (registers.A) {
     case OS.STDOUT:
-      stdout(registers[REGISTERS[rs]], outputMode);
+      stdout(registers.B, registers.C);
       break;
     case OS.STDIN:
-      registers[REGISTERS[rs]] = stdin();
+      registers.B = stdin();
       break;
   }
 };
