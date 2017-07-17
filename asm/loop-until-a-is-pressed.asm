@@ -1,15 +1,6 @@
-PRT 'Waiting for A key....\n'
-LDV A, 97
-LDV B, 0
-
-LDV16 C, loop:
-LDV16 D, get_input:
-
-loop:
-  CAL D
-  JNE B, C
-
-HLT
+.data
+.text
+  .global main:
 
 get_input:
   PSH A
@@ -20,3 +11,17 @@ get_input:
   POP C
   POP A
   RET
+
+main:
+  PRT 'Waiting for A key....\n'
+  LDV A, 97
+  LDV B, 0
+
+  LDV16 C, loop:
+  LDV16 D, get_input:
+
+  loop:
+    CAL D
+    JNE B, C
+
+  HLT

@@ -53,5 +53,9 @@ module.exports = {
     STDIN: 1
   },
 
+  DIRECT_ASSIGNMENT: 0,
+  BUFFER_ASSIGNMENT: 1,
+  STRING_ASSIGNMENT: 2,
+
   DEBUG: { NUM_PAGES: 255 }
 };
