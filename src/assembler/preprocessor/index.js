@@ -6,6 +6,10 @@ const {
 const expandPseudoInstructions = require('./pseudo-instructions');
 const evaluateExpressions = require('./evaluate-expressions');
 
+const removeWhitespace = line => line.trim();
+const removeComments = line => line.split(';')[0];
+const removeEmptyLines = line => line !== '';
+
 const mapIntercept = (func) =>
   (val, index, collection) => {
     if (index === 0) func(val, index, collection);
@@ -15,9 +19,9 @@ const mapIntercept = (func) =>
 module.exports = (file) => {
   const cleanInstructions = file
     .split('\n')
-    .map(line => line.trim())
-    .map(line => line.split(';')[0])
-    .filter(line => line !== '')
+    .map(removeWhitespace)
+    .map(removeComments)
+    .filter(removeEmptyLines)
     .map(mapIntercept((instruction, index, instructions) => console.log(`Read ${instructions.length} instructions, including labels.`)));
 
   const expandedInstructions = expandPseudoInstructions(cleanInstructions)

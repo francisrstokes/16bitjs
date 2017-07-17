@@ -22,7 +22,6 @@ module.exports = {
     'LDP'
   ],
   DESTINATION_SHIFT: 4,
-  SYSTEM_CALL_SHIFT: 4,
   SOURCE_SHIFT: 6,
   LONG_ADDRESS_SHIFT: 6,
   ADDRESS_SHIFT: 8,
@@ -51,10 +50,7 @@ module.exports = {
 
   OS: {
     STDOUT: 0,
-    STDIN: 1,
-
-    REGISTER_SHIFT: 8,
-    MODE_SHIFT: 10
+    STDIN: 1
   },
 
   DEBUG: { NUM_PAGES: 255 }

@@ -2,16 +2,16 @@ PRT 'Waiting for A key....\n'
 LDV A, 97
 LDV B, 0
 
-LDV16 C, :loop
-LDV16 D, :get_input
+LDV16 C, loop:
+LDV16 D, get_input:
 
-:loop
+loop:
   CAL D
   JNE B, C
 
 HLT
 
-:get_input
+get_input:
   PSH A
   PSH C
   LDV A, 1 ; syscall for stdin
