@@ -4,6 +4,7 @@ const {
   STRING_ASSIGNMENT
 } = require('../../constants');
 const { unescapeCharacters } = require('./utils');
+const { extractDataSection } = require('./extract-sections');
 
 const validateDataLabel = (label) => {
   if (label[0] !== '.') {
@@ -19,8 +20,9 @@ const getAddress = (size, memoryOffset) => {
   return totalOffset;
 }
 
-module.exports = (dataSection, memoryOffset) =>
-  dataSection.reduce((acc, cur) => {
+module.exports = (instructions, memoryOffset) => {
+  const dataSection = extractDataSection(instructions);
+  return dataSection.reduce((acc, cur) => {
     const parts = cur.split(' ');
     const label = parts[0];
     validateDataLabel(label);
@@ -72,3 +74,4 @@ module.exports = (dataSection, memoryOffset) =>
 
     return acc;
   }, {});
+}
