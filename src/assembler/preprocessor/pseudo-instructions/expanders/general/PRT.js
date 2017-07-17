@@ -1,4 +1,4 @@
-const { unescapeCharacters } = require('../../utils');
+const { unescapeCharacters } = require('../../../utils');
 
 module.exports = (instruction) => {
   const str = unescapeCharacters(instruction.replace(/^[a-zA-Z0-9]+?\s/, ''));

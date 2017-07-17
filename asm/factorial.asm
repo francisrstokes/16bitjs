@@ -1,56 +1,54 @@
-LDV B, 7
-LDM B, counter:
-LDM B, result:
+.data
+  .counter 7
+  .result 7
+.text
+  .global main:
 
-LDV A, factorial:
-CAL A
+main:
+  LDV A, factorial:
+  CAL A
 
-; Print result
-LDV A, 0
-LDR B, result:
-LDV C, 0
-SYS
-
-; Print newline
-LDV B, 10
-LDV C, 3
-SYS
-HLT
-
-factorial:
-  LDR A, counter:
-  PSH A
-
-  ; Print counter
-  MOV B, A
+  ; Print result
   LDV A, 0
+  LDR B, .result
   LDV C, 0
   SYS
 
-  POP A
-  LDV B, 3
-  LDV D, done:
-  JLT B, D
-  PRT ' * '
+  ; Print newline
+  LDV B, 10
+  LDV C, 3
+  SYS
+  HLT
 
-  MOV B, A
-  DEC B
+factorial:
+    LDR A, .counter
+    PSH A
 
-  LDR C, result:
-  MUL C, B
+    ; Print counter
+    MOV B, A
+    LDV A, 0
+    LDV C, 0
+    SYS
 
-  LDM C, result:
-  LDM B, counter:
+    POP A
+    LDV B, 3
+    LDV D, done:
+    JLT B, D
+    PRT ' * '
 
-  LDV A, factorial:
-  JMR A
+    MOV B, A
+    DEC B
 
-  done:
-    PRT ' = '
-    RET
+    LDR C, .result
+    MUL C, B
 
-; These instructions will be overwritten, and are only there to allow named memory locations
-counter:
-  RET
-result:
-  RET
+    LDM C, .result
+    LDM B, .counter
+
+    LDV A, factorial:
+    JMR A
+
+    done:
+      PRT ' = '
+      RET
+
