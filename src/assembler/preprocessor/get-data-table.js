@@ -12,7 +12,7 @@ const validateDataLabel = (label) => {
   }
 };
 
-let dataOffset = 0;
+let dataOffset = 1;
 const getAddress = (size, memoryOffset) => {
   const totalOffset = memoryOffset + dataOffset;
   dataOffset += size;

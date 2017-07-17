@@ -1,24 +1,9 @@
 .data
-  .counter 7
-  .result 7
+  .counter 8
+  .result 8
 .text
   .global main:
 
-main:
-  LDV A, factorial:
-  CAL A
-
-  ; Print result
-  LDV A, 0
-  LDR B, .result
-  LDV C, 0
-  SYS
-
-  ; Print newline
-  LDV B, 10
-  LDV C, 3
-  SYS
-  HLT
 
 factorial:
     LDR A, .counter
@@ -49,6 +34,21 @@ factorial:
     JMR A
 
     done:
-      PRT ' = '
+      PRT ' * 1 = '
       RET
 
+main:
+  LDV A, factorial:
+  CAL A
+
+  ; Print result
+  LDV A, 0
+  LDR B, .result
+  LDV C, 0
+  SYS
+
+  ; Print newline
+  LDV B, 10
+  LDV C, 3
+  SYS
+  HLT
