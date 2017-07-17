@@ -6,6 +6,8 @@ const MUL = require('./MUL');
 const MULS = require('./MULS');
 const DIV = require('./DIV');
 const DIVS = require('./DIVS');
+const INC = require('./INC');
+const DEC = require('./DEC');
 
 module.exports = {
   ADD,
@@ -15,5 +17,7 @@ module.exports = {
   MUL,
   MULS,
   DIV,
-  DIVS
+  DIVS,
+  INC,
+  DEC
 };

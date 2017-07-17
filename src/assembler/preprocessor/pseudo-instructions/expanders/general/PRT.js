@@ -18,11 +18,13 @@ module.exports = (instruction) => {
     'PSH A',
     'PSH B',
     'PSH C',
+
     'LDV A, 0',
     'LDV C, 3',
     ...ins,
-    'POP A',
+
+    'POP C',
     'POP B',
-    'POP C'
+    'POP A'
   ];
 }

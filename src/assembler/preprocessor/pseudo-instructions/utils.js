@@ -14,10 +14,10 @@ const getInstructionArguments = (instruction) =>
     .map(x => x.trim());
 
 const uniqueLabel = () =>
-  ':' + Math
+  Math
     .random()
     .toString(16)
-    .slice(2);
+    .slice(2) + ':';
 
 const getUsableRegister = (...unusableRegisters) => {
   const usableRegisters = ['B', 'C', 'D'];

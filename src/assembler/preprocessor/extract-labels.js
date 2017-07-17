@@ -3,7 +3,8 @@ const labels = {};
 
 module.exports = {
   extractLabels: (line, i) => {
-    if (line[0] === ':') {
+    const firstPart = line.split(' ')[0];
+    if (firstPart[firstPart.length - 1] === ':') {
       labels[line.toLowerCase()] = i - labelOffset++;
       return false;
     }

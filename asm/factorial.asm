@@ -1,43 +1,56 @@
 LDV B, 7
-LDM B, :counter
-LDM B, :result
+LDM B, counter:
+LDM B, result:
 
-LDV A, :factorial
+LDV A, factorial:
 CAL A
 
-LDR A, :result
-SYS 0, A, 0
-LDV A, 10
-SYS 0, A, 3
+; Print result
+LDV A, 0
+LDR B, result:
+LDV C, 0
+SYS
+
+; Print newline
+LDV B, 10
+LDV C, 3
+SYS
 HLT
 
-:factorial
-  LDR A, :counter
-  SYS 0, A, 0
+factorial:
+  LDR A, counter:
+  PSH A
+
+  ; Print counter
+  MOV B, A
+  LDV A, 0
+  LDV C, 0
+  SYS
+
+  POP A
   LDV B, 3
-  LDV D, :done
+  LDV D, done:
   JLT B, D
   PRT ' * '
 
-  LDV B, 1
-  SUBS A, B
+  MOV B, A
+  DEC B
 
-  LDR C, :result
+  LDR C, result:
   MUL C, B
 
-  LDM C, :result
-  LDM B, :counter
+  LDM C, result:
+  LDM B, counter:
 
-  LDV A, :factorial
-  PSH A
-  RET
+  LDV A, factorial:
+  JMR A
 
-  :done
+  done:
     PRT ' = '
     RET
 
 ; These instructions will be overwritten, and are only there to allow named memory locations
-:counter
+counter:
   RET
-:result
+result:
   RET
