@@ -11,8 +11,7 @@ const {
 
 module.exports = (preprocessedObject) => {
   const { instructions, data } = preprocessedObject;
-  const dataLabels = Object.keys(data)
-    .sort((a, b) => data[a].address > data[b].address);
+  const dataLabels = Object.keys(data);
 
   const dataSize = dataLabels
     .reduce((acc, cur) => acc + data[cur].size, 0);
@@ -30,11 +29,10 @@ module.exports = (preprocessedObject) => {
     });
 
   // Place the data into the assembled buffer
-  let offset = 0;
   dataLabels
     .forEach((label) => {
       const dataDescriptor = data[label];
-      const index = offset + (instructions.length);
+      const index = dataDescriptor.address;
       if (dataDescriptor.type === DIRECT_ASSIGNMENT) {
         out[index] = dataDescriptor.data;
       } else if (dataDescriptor.type === STRING_ASSIGNMENT) {
@@ -45,7 +43,6 @@ module.exports = (preprocessedObject) => {
           });
         out[index + dataDescriptor.size] = 0;
       }
-      offset += dataDescriptor.size;
     });
 
   return new Buffer(out.buffer);
