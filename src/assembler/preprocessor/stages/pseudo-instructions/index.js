@@ -2,7 +2,7 @@ const pseudoExpanders = require('./expanders');
 const pseudoInstructions = Object.keys(pseudoExpanders);
 
 const expandInstructions = (acc, instruction) => {
-  const ins = instruction.split(' ')[0];
+  const ins = instruction.split(' ')[0].toUpperCase();
   if (pseudoInstructions.indexOf(ins) > -1) {
     const expandedInstructions = pseudoExpanders[ins](instruction);
     acc.push(...expandedInstructions);

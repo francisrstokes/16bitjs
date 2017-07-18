@@ -13,7 +13,7 @@ const validateDataLabel = (label) => {
   }
 };
 
-let dataOffset = 1;
+let dataOffset = 0;
 const getAddress = (size, memoryOffset) => {
   const totalOffset = memoryOffset + dataOffset;
   dataOffset += size;
@@ -39,7 +39,7 @@ module.exports = (instructions, memoryOffset) => {
         address: getAddress(1, memoryOffset),
         data
       };
-    } else if (parts.length === 3) {
+    } else if (parts.length >= 3) {
       // Buffer assignment
       if (parts[1] === 'size') {
         const bufSize = parseInt(parts[2]);
@@ -50,11 +50,12 @@ module.exports = (instructions, memoryOffset) => {
           data: bufSize
         };
       } else if (parts[1] === 'string') {
-        const str = parts[2]
+        const str = cur.split(/^\.[a-zA-Z0-9]+? [a-zA-Z0-9]+? /)[1];
+        const trimmed = str
           .split('')
-          .slice(1, parts[2].length - 1)
+          .slice(1, str.length - 1)
           .join('');
-        const data = unescapeCharacters(str);
+        const data = unescapeCharacters(trimmed);
         const dataSize = data.length + 1;
 
         acc[label] = {
@@ -71,7 +72,6 @@ module.exports = (instructions, memoryOffset) => {
       console.log(`Unsupported data declaraction:\n${cur}\nExiting...`);
       process.exit(1);
     }
-
     return acc;
   }, {});
 }

@@ -1,54 +1,77 @@
 .data
+  .equals string ' * 1 = '
   .counter 8
   .result 8
+  .times string ' * '
 .text
   .global main:
 
 
 factorial:
-    LDR A, .counter
-    PSH A
+    ldr A, .counter
+    psh A
 
     ; Print counter
-    MOV B, A
-    LDV A, 0
-    LDV C, 0
-    SYS
+    mov B, A
+    ldv A, 0
+    ldv C, 0
+    sys
 
-    POP A
-    LDV B, 3
-    LDV D, done:
-    JLT B, D
-    PRT ' * '
+    pop A
+    ldv B, 3
+    ldv D, done:
+    jlt B, D
 
-    MOV B, A
-    DEC B
+    psh a
+    psh b
+    psh c
 
-    LDR C, .result
-    MUL C, B
+    ldv a, 0
+    ldv b, .times
+    ldv c, 4
+    sys
 
-    LDM C, .result
-    LDM B, .counter
+    pop c
+    pop b
+    pop a
 
-    LDV A, factorial:
-    JMR A
+    mov B, A
+    dec B
+
+    ldr C, .result
+    mul C, B
+
+    ldm C, .result
+    ldm B, .counter
+
+    ldv A, factorial:
+    jmr A
 
     done:
-      PRT ' * 1 = '
-      RET
+      psh a
+      psh b
+      psh c
+      ldv a, 0
+      ldv b, .equals
+      ldv c, 4
+      sys
+      pop c
+      pop b
+      pop a
+      ret
 
 main:
-  LDV A, factorial:
-  CAL A
+  ldv A, factorial:
+  cal A
 
   ; Print result
-  LDV A, 0
-  LDR B, .result
-  LDV C, 0
-  SYS
+  ldv A, 0
+  ldr B, .result
+  ldv C, 0
+  sys
 
   ; Print newline
-  LDV B, 10
-  LDV C, 3
-  SYS
-  HLT
+  ldv B, 10
+  ldv C, 3
+  sys
+  hlt
