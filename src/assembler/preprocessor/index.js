@@ -18,7 +18,7 @@ module.exports = (file) => {
   const expandedInstructions = expandPseudoInstructions(injectedEntryPoint)
   const replacedLabels = replaceLabels(expandedInstructions);
 
-  const dataTable = getDataTable(cleanInstructions, replacedLabels.length - 1);
+  const dataTable = getDataTable(cleanInstructions, replacedLabels.length);
   const replacedDataLabels = replaceDataLabels(replacedLabels, dataTable);
 
   const finalInstructions = evaluateExpressions(replacedDataLabels);

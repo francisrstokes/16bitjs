@@ -8,12 +8,12 @@
   .global main:
 
 main:
-  LDV A, 0
-  LDV B, .test
-  LDV C, 4
-  SYS
-  LDV B, .test2
-  SYS
-  LDV B, test3
-  SYS
-  HLT
+  ldv A, 0
+  ldv B, .test
+  ldv C, 4
+  sys
+  ldv B, .test2
+  sys
+  ldv B, test3
+  sys
+  hlt

@@ -1,27 +1,32 @@
 .data
+  .waiting string "Waiting for A key...\n"
 .text
   .global main:
 
 get_input:
-  PSH A
-  PSH C
-  LDV A, 1 ; syscall for stdin
-  LDV C, 0 ; mode for output
-  SYS      ; initiate system call
-  POP C
-  POP A
-  RET
+  psh A
+  psh C
+  ldv A, 1 ; syscall for stdin
+  ldv C, 0 ; mode for output
+  sys      ; initiate system call
+  pop C
+  pop A
+  ret
 
 main:
-  PRT 'Waiting for A key....\n'
-  LDV A, 97
-  LDV B, 0
+  ldv A, 0
+  ldv b, .waiting
+  ldv c, 4
+  sys
 
-  LDV16 C, loop:
-  LDV16 D, get_input:
+  ldv A, 97
+  ldv B, 0
+
+  ldv16 C, loop:
+  ldv16 D, get_input:
 
   loop:
-    CAL D
-    JNE B, C
+    cal D
+    jne B, C
 
-  HLT
+  hlt
