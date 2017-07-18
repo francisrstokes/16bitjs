@@ -64,7 +64,7 @@ module.exports = (instruction, registers, memory, stack) => {
 
 
     case 'SYS':
-      systemCall(registers);
+      systemCall(registers, memory);
       return false;
 
     case 'HLT': return true;
