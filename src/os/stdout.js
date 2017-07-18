@@ -1,16 +1,33 @@
-module.exports = (value, mode) => {
+const readStringFromMemory = (startAddress, memory) => {
+  let address = startAddress;
+  const strBuffer = [];
+  while (memory[address] !== 0) {
+    strBuffer.push(memory[address++]);
+  }
+  return strBuffer
+    .map(x => String.fromCharCode(x))
+    .join('');
+};
+
+module.exports = (value, mode, memory) => {
+  let out = '';
   switch (mode) {
     case 1:
-      process.stdout.write(value.toString(2));
+      out = value.toString(2);
       break;
     case 2:
-      process.stdout.write(value.toString(16));
+      out = value.toString(16);
       break;
     case 3:
-      process.stdout.write(String.fromCharCode(value));
+      out = String.fromCharCode(value);
       break;
+    case 4:
+      out = readStringFromMemory(value, memory);
+      break;
+
     case 0:
     default:
-      process.stdout.write(value.toString());
+      out = value.toString();
   }
+  process.stdout.write(out);
 };

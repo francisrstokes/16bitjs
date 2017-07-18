@@ -1,17 +1,19 @@
 .data
-  .test 100
-  .test2 string "abcdef"
-  .test3 99
-  .test4 size 10
-  .test5 0x55
+  .test string "abcdef"
+  .test2 string "ghijklmnopqrstuvwxyz"
+  .test3 string "\n"
+  .test4 size 6
 
 .text
   .global main:
 
 main:
-  LDV A, .test
-  LDA B, A
   LDV A, 0
-  LDV C, 0
+  LDV B, .test
+  LDV C, 4
+  SYS
+  LDV B, .test2
+  SYS
+  LDV B, test3
   SYS
   HLT

@@ -102,19 +102,25 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 
 A system call in the VM allows the program to ask resources outside of it's context, such as communication with stdin and stdout. System calls are passed off to the os module and can return their results directly into the CPUs registers.
 
-|System call           |Call code |Usage|
-|----------------------|----------|-----------|
-|Write to stdout       |`0000`    | The value to be written should be in the B register, and the mode in the C register|
-|Read from stdin buffer|`0001`    | The value is read into the B register|
+|System call           |Call code |
+|----------------------|----------|
+|Write to stdout       |`0000`    |
+|Read from stdin buffer|`0001`    |
 
-##### Output Modes
+##### I/O Modes
+###### Output
+|Mode|Description                                            |B|C|D|
+|----|-------------------------------------------------------|-|-|-|
+|0   | Output register in decimal                            |Destination|Mode||
+|1   | Output register in binary                             |Destination|Mode||
+|2   | Output register in hex                                |Destination|Mode||
+|3   | Output register as a character                        |Destination|Mode||
+|4   | Output string in memory address pointed to by register|Start address|||
 
-|Mode|Description|
-|----|-----------|
-|0   | Output register in decimal|
-|1   | Output register in binary|
-|2   | Output register in hex|
-|3   | Output register as a character|
+####### Input
+|Mode|Description|B|C|D|
+|----|-----------|-|-|-|
+|0   | Read single character value of input into register |Destination|||
 
 ## Debugger
 

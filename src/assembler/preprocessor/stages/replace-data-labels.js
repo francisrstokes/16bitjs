@@ -3,6 +3,7 @@ module.exports = (instructions, dataTable) => {
   return instructions
     .map(instruction => {
       return dataLabels
+        .sort((a, b) => b.length - a.length)
         .reduce((acc, cur) => {
           const labelRegex = new RegExp(cur, 'g');
           return acc.replace(labelRegex, dataTable[cur].address);
