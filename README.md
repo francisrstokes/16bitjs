@@ -76,7 +76,6 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`NOT`      | `D`       |1                | Binary not (invert) the destination|
 |`LDV16`    | `D, V`    |6                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
-|`PRT`      | `V`       |2 + (2 per character) | Print the string V. Should be enclosed in quotes|
 |`JGE`      | `D, A`    |4                | Jump to address A if value in destination regigster is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
 |`JEQ`      | `D, A`    |11               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
 |`JNE`      | `D, A`    |14               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
@@ -118,9 +117,9 @@ A system call in the VM allows the program to ask resources outside of it's cont
 |4   | Output string in memory address pointed to by register|Start address|||
 
 ####### Input
-|Mode|Description|B|C|D|
-|----|-----------|-|-|-|
-|0   | Read single character value of input into register |Destination|||
+|Mode|Description                                         |B          |C|D|
+|----|----------------------------------------------------|-----------|-|-|
+|0   | Read single character value of input into register |Destination| | |
 
 ## Debugger
 
@@ -145,7 +144,7 @@ Memory:
 00e0    0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
 00f0    0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
 0100
-Page 1/4
+Page 1/255
 
 Stack:
 0000    0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
