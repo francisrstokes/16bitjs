@@ -29,15 +29,9 @@ const getUsableRegister = (...unusableRegisters) => {
     )[0];
 }
 
-const upper = (s) =>
-  (typeof s === 'string')
-  ? s.toUpperCase()
-  : s;
-
 module.exports = {
   getInstructionArguments,
   uniqueLabel,
   unescapeCharacters,
-  getUsableRegister,
-  upper
+  getUsableRegister
 };

@@ -45,5 +45,5 @@ module.exports = (preprocessedObject) => {
       }
     });
 
-  return new Buffer(out.buffer);
+  return out;
 }
