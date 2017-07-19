@@ -21,7 +21,7 @@ module.exports = (memoryPage) => {
     .reduce((outputStr, registerName) =>
       `${outputStr}${registerName}: ${leftPad(registers[registerName].toString(16))}\t`,
     '');
-  console.log(`Memory:\n${pagedMemory(memory, memoryPage)}\nPage ${memoryPage + 1}/${DEBUG.NUM_PAGES}\n`);
+  console.log(`Memory:\n${pagedMemory(memory, memoryPage, registers.IP)}\nPage ${memoryPage + 1}/${DEBUG.NUM_PAGES}\n`);
   console.log(`Stack:\n${arrayAsHex(stack)}\n`);
   console.log(`Instruction: (${namedOpcode}) ${leftPad(instruction.toString(2), 16)}`);
   console.log(`Registers:\n${regs}\n`);

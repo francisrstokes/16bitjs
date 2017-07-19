@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "colors": "^1.1.2",
     "yargs": "^8.0.2"
   },
   "devDependencies": {

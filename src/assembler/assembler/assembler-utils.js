@@ -14,6 +14,7 @@ const getInstructionArguments = (instruction) =>
     .filter(arg => arg !== '')
     .map(arg => arg.trim())
     .map(parseValues);
+
 const validateInstruction = (instruction) => {
   const iType = getInstructionType(instruction);
   const isValid = INSTRUCTION_MAP.indexOf(iType) !== -1;

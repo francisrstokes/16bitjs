@@ -21,12 +21,23 @@ const uniqueLabel = () =>
 
 const getUsableRegister = (...unusableRegisters) => {
   const usableRegisters = ['B', 'C', 'D'];
-  return usableRegisters.filter(r => unusableRegisters.indexOf(r) < 0)[0];
+  return usableRegisters
+    .filter(r =>
+      unusableRegisters
+        .map(reg => reg.toUpperCase())
+        .indexOf(r) < 0
+    )[0];
 }
+
+const upper = (s) =>
+  (typeof s === 'string')
+  ? s.toUpperCase()
+  : s;
 
 module.exports = {
   getInstructionArguments,
   uniqueLabel,
   unescapeCharacters,
-  getUsableRegister
+  getUsableRegister,
+  upper
 };

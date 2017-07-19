@@ -1,3 +1,4 @@
+const colors = require('colors/safe');
 const { readFile, writeFile, stat } = require('fs');
 const fs = require('bluebird').promisifyAll({ readFile, writeFile, stat });
 
@@ -24,11 +25,14 @@ const leftPad = (str, pad = 4, padWith = '0') =>
       .reduce((padding) => padding + padWith, '') + str
     : str;
 
-const arrayAsHex = (arr, startingOffset = 0) => {
+const arrayAsHex = (arr, startingOffset = 0, ip = -1) => {
   let s = `${leftPad(startingOffset.toString(16))}\t`;
   for (let i = 0; i < arr.length; i++) {
     const fourBitsPadded = leftPad(arr[i].toString(16), 4);
-    s += fourBitsPadded + ' ';
+
+    let cf = x => x;
+    if (i === ip) cf = colors.yellow;
+    s += cf(fourBitsPadded) + ' ';
 
     if (((i + 1) % 16 === 0)) s += `\n${leftPad((startingOffset + i + 1).toString(16))}\t`;
   }

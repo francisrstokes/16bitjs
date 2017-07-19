@@ -19,6 +19,7 @@ module.exports = (file) => {
   const replacedLabels = replaceLabels(expandedInstructions);
 
   const dataTable = getDataTable(cleanInstructions, replacedLabels.length);
+  console.log(dataTable, replacedLabels.length)
   const replacedDataLabels = replaceDataLabels(replacedLabels, dataTable);
 
   const finalInstructions = evaluateExpressions(replacedDataLabels);
