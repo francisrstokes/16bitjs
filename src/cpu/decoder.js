@@ -38,10 +38,10 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'LDV':
       registers[REGISTERS[rd]] = high10;
       return false;
-    case 'LDA':
+    case 'LDR':
       registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
       break;
-    case 'LDR':
+    case 'LDA':
       registers[REGISTERS[rd]] = memory[high10];
       return false;
     case 'LDM':

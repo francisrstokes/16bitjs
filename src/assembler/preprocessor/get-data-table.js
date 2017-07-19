@@ -50,7 +50,7 @@ module.exports = (instructions, memoryOffset) => {
           data: bufSize
         };
       } else if (parts[1] === 'string') {
-        const str = cur.split(/^\.[a-zA-Z0-9]+? [a-zA-Z0-9]+? /)[1];
+        const str = cur.split(/^\.[a-zA-Z0-9_]+? [a-zA-Z0-9_]+? /)[1];
         const trimmed = str
           .split('')
           .slice(1, str.length - 1)

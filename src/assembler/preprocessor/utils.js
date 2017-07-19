@@ -21,7 +21,12 @@ const uniqueLabel = () =>
 
 const getUsableRegister = (...unusableRegisters) => {
   const usableRegisters = ['B', 'C', 'D'];
-  return usableRegisters.filter(r => unusableRegisters.indexOf(r) < 0)[0];
+  return usableRegisters
+    .filter(r =>
+      unusableRegisters
+        .map(reg => reg.toUpperCase())
+        .indexOf(r) < 0
+    )[0];
 }
 
 module.exports = {

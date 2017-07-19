@@ -1,8 +1,8 @@
 const fs = require('../utils').fs;
 
 module.exports = (filename) =>
-  (binBuffer) => fs
-    .writeFileAsync(filename, binBuffer)
+  (unit16buffer) => fs
+    .writeFileAsync(filename, new Buffer(unit16buffer.buffer))
     .then(() => {
       console.log(`Sucessfully assembled to binary file ${filename}`);
     });

@@ -49,7 +49,7 @@ module.exports = (registers, rs, rd, high8) => {
     case ARITHMETIC.LSF:
       result[0] = registers[REGISTERS[rd]] << shiftAmount;
       break;
-    case ARITHMETIC.RDF:
+    case ARITHMETIC.RSF:
       result[0] = registers[REGISTERS[rd]] >> shiftAmount;
       break;
     case ARITHMETIC.AND:
