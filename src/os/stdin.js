@@ -10,4 +10,8 @@ process.stdin.on('keypress', (str, key) => {
   stdinBuffer[0] = key.sequence.charCodeAt(0);
 });
 
-module.exports = () => stdinBuffer[0];
+module.exports = () => {
+  const value = stdinBuffer[0];
+  stdinBuffer[0] = 0;
+  return value;
+}

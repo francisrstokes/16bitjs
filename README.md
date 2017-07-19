@@ -36,9 +36,9 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |-----------|---------|-------------------------|-------------|
 |`MOV`| `D, S`          | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
 |`LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
-|`LDR`| `D, M`          | `MMMMMMMMMMDD0010` | Load a value from memory into destination register|
+|`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register|
 |`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
-|`LDA`| `D, S`          | `XXXXXXXXSSDD1110` | Load the value from memory pointed at by the source register into the destination register|
+|`LDR`| `D, S`          | `XXXXXXXXSSDD0010` | Load the value from memory pointed at by the source register into the destination register|
 |`LDP`| `D, S`          | `XXXXXXXXSSDD1111` | Load the value in source register into the memory address pointed to by destination register|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
 |`CAL`| `D`             | `XXXXXXXXXXDD0101` | Call a function in memory pointed at by the destination register|
