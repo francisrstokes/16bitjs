@@ -8,7 +8,7 @@
 
 
 factorial:
-    ldr A, .counter
+    lda A, .counter
     psh A
 
     ; Print counter
@@ -38,7 +38,7 @@ factorial:
     mov B, A
     dec B
 
-    ldr C, .result
+    lda C, .result
     mul C, B
 
     ldm C, .result
@@ -66,7 +66,8 @@ main:
 
   ; Print result
   ldv A, 0
-  ldr B, .result
+  ldv D, .result
+  ldr B, D
   ldv C, 0
   sys
 

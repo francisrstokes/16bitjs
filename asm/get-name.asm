@@ -2,7 +2,7 @@
   .name size 6
   .name_max 4
   .name_pointer 0
-  .question string 'What is your name?\n'
+  .question string 'What is your name? (5 letters)\n'
   .hello string 'Hello, '
   .nl string '\n'
 
