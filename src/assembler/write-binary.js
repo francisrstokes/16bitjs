@@ -4,5 +4,5 @@ module.exports = (filename) =>
   (unit16buffer) => fs
     .writeFileAsync(filename, new Buffer(unit16buffer.buffer))
     .then(() => {
-      console.log(`Sucessfully assembled to binary file ${filename}`);
+      console.log(`Successfully assembled to binary file ${filename}`);
     });
