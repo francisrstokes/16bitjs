@@ -60,12 +60,12 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |-----------|---------|-----------------|-----------|
 |`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|
 |`ADDS`     | `D, S`    |1                | Add destination to source and store the result in source|
-|`SUB`      | `D, S`    |1                | Subract destination from source and store the result in destination|
-|`SUBS`     | `D, S`    |1                | Subract destination from source and store the result in source|
+|`SUB`      | `D, S`    |1                | Subtract destination from source and store the result in destination|
+|`SUBS`     | `D, S`    |1                | Subtract destination from source and store the result in source|
 |`MUL`      | `D, S`    |1                | Multiply destination with source and store the result in destination|
 |`MULS`     | `D, S`    |1                | Multiply destination with source and store the result in source|
 |`DIV`      | `D, S`    |1                | Divide destination by source and store the result in destination|
-|`DIVS`      | `D, S`    |1                | Divide destination by source and store the result in source|
+|`DIVS`     | `D, S`    |1                | Divide destination by source and store the result in source|
 |`INC`      | `D`       |1                | Add one to the destination register|
 |`DEC`      | `D`       |1                | Subtract one from the destination register|
 |`LSF`      | `D, A`    |1                | Binary shift left the destination register by amount A (max 7)|
@@ -76,9 +76,9 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`NOT`      | `D`       |1                | Binary not (invert) the destination|
 |`LDV16`    | `D, V`    |6                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
-|`JGE`      | `D, A`    |4                | Jump to address A if value in destination regigster is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
-|`JEQ`      | `D, A`    |11               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
-|`JNE`      | `D, A`    |14               | Jump to address A if value in destination regigster is equal to the A register. Can potentially mutate all registers except A and destination|
+|`JGE`      | `D, A`    |4                | Jump to address A if value in destination register is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
+|`JEQ`      | `D, A`    |11               | Jump to address A if value in destination register is equal to the A register. Can potentially mutate all registers except A and destination|
+|`JNE`      | `D, A`    |14               | Jump to address A if value in destination register is not equal to the A register. Can potentially mutate all registers except A and destination|
 
 
 #### Arithmetic Operation table
