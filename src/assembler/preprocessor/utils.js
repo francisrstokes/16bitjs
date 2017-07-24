@@ -5,7 +5,8 @@ const unescapeCharacters = (str) =>
     .replace(/\\f/g, '\f')
     .replace(/\\b/g, '\b')
     .replace(/\\t/g, '\t')
-    .replace(/\\v/g, '\v');
+    .replace(/\\v/g, '\v')
+    .replace(/\\;/, ';');
 
 const getInstructionArguments = (instruction) =>
   instruction
