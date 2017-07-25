@@ -89,13 +89,14 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`Subtract`   |`0001` |
 |`Multiply`   |`0010` |
 |`Divide`     |`0011` |
-|`Left shift` |`0100` |
-|`Right shift`|`0101` |
-|`And`        |`0111` |
-|`Or`         |`1000` |
-|`Xor`        |`1001` |
-|`Not`        |`1010` |
-
+|`Increment`  |`0100` |
+|`Decrement`  |`0101` |
+|`Left shift` |`0110` |
+|`Right shift`|`0111` |
+|`And`        |`1000` |
+|`Or`         |`1001` |
+|`Xor`        |`1010` |
+|`Not`        |`1011` |
 
 #### System calls
 
