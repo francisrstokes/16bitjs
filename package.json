@@ -8,7 +8,7 @@
     "test": "mocha tests/**/*.spec.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "bluebird": "^3.5.0",
     "chai": "^4.1.0",
