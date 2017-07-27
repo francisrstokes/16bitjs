@@ -27,7 +27,7 @@ module.exports = (preprocessedObject) => {
 
       out[index] = encoded;
     });
-
+  console.log(data)
   // Place the data into the assembled buffer
   dataLabels
     .forEach((label) => {

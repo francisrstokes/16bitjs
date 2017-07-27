@@ -4,9 +4,9 @@ const {
 } = require('../constants');
 
 const decodeAluArguments = (high8, rs, rd) => {
-  const arithmeticOperation = high8 & 0b00001111;
-  const resultMode = high8 & 0b00010000;
-  const shiftAmount = high8 & 0b11100000;
+  const arithmeticOperation = (high8 & 0b00001111);
+  const resultMode = (high8 & 0b00010000) >> 4;
+  const shiftAmount = (high8 & 0b11100000) >> 5;
   const resultRegister = (resultMode === ARITHMETIC.DESTINATION_MODE)
     ? rd
     : rs;

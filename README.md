@@ -117,10 +117,11 @@ A system call in the VM allows the program to ask resources outside of it's cont
 |3   | Output register as a character                        |Destination|Mode||
 |4   | Output string in memory address pointed to by register|Start address|||
 
-####### Input
-|Mode|Description                                         |B          |C|D|
-|----|----------------------------------------------------|-----------|-|-|
-|0   | Read single character value of input into register |Destination| | |
+###### Input
+|Mode|Description                                         |B          |C  |D  |
+|----|----------------------------------------------------|-----------|---|---|
+|0   | Read single character value of input into register |Destination| - | - |
+|    |                                                    |           |   |   |
 
 ## Debugger
 
