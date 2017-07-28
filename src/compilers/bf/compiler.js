@@ -1,11 +1,16 @@
 const loopEnd = require('./asm/loop-end');
 let generatedAsm = require('./asm/header');
 let labelPointer = 0;
+const labelStack = [];
 
 const isBranch = (element) => Object.prototype.toString.call(element) === '[object Array]';
 
-const nextLabel = () => `b${++labelPointer}:`;
-const currentLabel = () => `b${labelPointer}:`;
+const currentLabel = () => labelStack[labelStack.length - 1];
+const pushLabel = () => {
+  labelStack.push(`b${++labelPointer}:`);
+  return currentLabel();
+};
+const popLabel = () => labelStack.pop();
 const call = (functionName) => `ldv A, ${functionName}\ncal A\n`;
 
 const compileBranch = (branch, branchLevel) => {
@@ -14,7 +19,7 @@ const compileBranch = (branch, branchLevel) => {
     if (branchLevel === 0 && i === branch.length - 1) return;
 
     if (isBranch(branch[i])) {
-      generatedAsm += `${nextLabel()}\n`;
+      generatedAsm += `${pushLabel()}\n`;
       compileBranch(branch[i], branchLevel + 1);
     } else {
       // Regular statement
@@ -41,7 +46,7 @@ const compileBranch = (branch, branchLevel) => {
     }
     // End of a branch?
     if (i === branch.length - 1) {
-      generatedAsm += loopEnd(currentLabel());
+      generatedAsm += loopEnd(popLabel());
     }
   }
 }
