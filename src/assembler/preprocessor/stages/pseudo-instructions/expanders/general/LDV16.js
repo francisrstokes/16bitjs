@@ -11,7 +11,7 @@ module.exports = (instruction) => {
     `LSF ${register}, 4`,
     `LSF ${register}, 4`,
     `PSH ${mutableRegister}`,
-    `LDV ${mutableRegister}, (${value} & 0b0000000011111111)`,
+    `LDV ${mutableRegister}, (${value} & 0b11111111)`,
     `ADD ${register}, B`,
     `POP ${mutableRegister}`
   ];

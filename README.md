@@ -5,6 +5,7 @@ The project consists of:
 - The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 37 instructions
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
+- A compiler for the [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) language directly to the binary executable format
 
 The virtual machine can run in two modes: run (default) and step. Run mode simply runs the entire program in sucession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the entire state of the machine.
 
@@ -12,6 +13,10 @@ The virtual machine can run in two modes: run (default) and step. Run mode simpl
 ### Running the assembler
 
 `node src/assembler -i {infile.asm} -o {outfile.bin}`
+
+### Running the brainfuck compiler
+
+`node src/cmopilers/bf -i {infile.bf} -o {outfile.bin}`
 
 ### Running a program
 
@@ -117,10 +122,11 @@ A system call in the VM allows the program to ask resources outside of it's cont
 |3   | Output register as a character                        |Destination|Mode||
 |4   | Output string in memory address pointed to by register|Start address|||
 
-####### Input
-|Mode|Description                                         |B          |C|D|
-|----|----------------------------------------------------|-----------|-|-|
-|0   | Read single character value of input into register |Destination| | |
+###### Input
+|Mode|Description                                         |B          |C  |D  |
+|----|----------------------------------------------------|-----------|---|---|
+|0   | Read single character value of input into register |Destination| - | - |
+|    |                                                    |           |   |   |
 
 ## Debugger
 

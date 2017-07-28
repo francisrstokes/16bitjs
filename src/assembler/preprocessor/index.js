@@ -13,14 +13,12 @@ const evaluateExpressions = require('./stages/evaluate-expressions');
 module.exports = (file) => {
   const cleanInstructions = cleanup(file);
   validator(cleanInstructions);
-
   const injectedEntryPoint = injectEntryPoint(cleanInstructions);
-  const expandedInstructions = expandPseudoInstructions(injectedEntryPoint)
+  const expandedInstructions = expandPseudoInstructions(injectedEntryPoint);
   const replacedLabels = replaceLabels(expandedInstructions);
 
   const dataTable = getDataTable(cleanInstructions, replacedLabels.length);
   const replacedDataLabels = replaceDataLabels(replacedLabels, dataTable);
-
   const finalInstructions = evaluateExpressions(replacedDataLabels);
 
   console.log(`Read ${cleanInstructions.length} instructions, including labels.`);

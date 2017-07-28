@@ -1,9 +1,18 @@
+const argv = require('yargs').argv;
 const { DEBUG } = require('../constants');
 const render = require('./render');
 
 module.exports = (cpu) => {
   let memoryPage = 0;
   process.stdin.setEncoding('utf8');
+
+  if (argv.pauseAfter) {
+    const target = parseInt(argv.pauseAfter);
+    for (let i = 0; i < target; i++) {
+      cpu.step();
+    }
+  }
+
   render(memoryPage);
 
   process.stdin.on('keypress', (str) => {
