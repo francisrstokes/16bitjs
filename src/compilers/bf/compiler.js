@@ -52,7 +52,6 @@ const compileBranch = (branch, branchLevel) => {
 }
 
 module.exports = (tree) => {
-  console.log(tree)
   compileBranch(tree, 0);
   generatedAsm += 'hlt\n';
   return generatedAsm;
