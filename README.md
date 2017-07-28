@@ -16,7 +16,7 @@ The virtual machine can run in two modes: run (default) and step. Run mode simpl
 
 ### Running the brainfuck compiler
 
-`node src/cmopilers/bf -i {infile.bf} -o {outfile.bin}`
+`node src/compilers/bf -i {infile.bf} -o {outfile.bin}`
 
 ### Running a program
 
