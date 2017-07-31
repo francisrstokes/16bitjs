@@ -19,8 +19,7 @@ const validateInstruction = (instruction) => {
   const iType = getInstructionType(instruction).toUpperCase();
   const isValid = INSTRUCTION_MAP.indexOf(iType) !== -1;
   if (!isValid) {
-    console.log(`[Error] Unknown instruction type ${iType}.\nFull instruction: ${instruction}`);
-    process.exit(1);
+    throw new Error(`[Error] Unknown instruction type ${iType}.\nFull instruction: ${instruction}`);
   }
 };
 

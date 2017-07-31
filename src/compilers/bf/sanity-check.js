@@ -12,8 +12,7 @@ module.exports = (argv) =>
         if (stats.isFile()) {
           resolve();
         } else {
-          console.log(`Brainfuck file ${argv.i} is not valid. Exiting...`);
-          process.exit(1);
+          throw new Error(`Brainfuck file ${argv.i} is not valid. Exiting...`);
         }
       });
   });

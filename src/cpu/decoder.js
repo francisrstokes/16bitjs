@@ -70,8 +70,6 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'HLT': return true;
 
     default:
-      console.log(`Unknown opcode ${opcode}. Exiting...`);
-      process.exit(1);
-      return false;
+      throw new Error(`Unknown opcode ${opcode}. Exiting...`);
   }
 }

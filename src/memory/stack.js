@@ -5,16 +5,14 @@ module.exports = (registers) =>
   ({
     push: (val) => {
       if (registers.SP === STACK_SIZE - 1) {
-        console.log('[Error] Stack overflow. Exiting...');
-        process.exit(1);
+        throw new Error('[Error] Stack overflow. Exiting...');
       }
       stack[registers.SP++] = val;
     },
 
     pop: () => {
       if (registers.SP === 0) {
-        console.log('[Error] Stack underflow. Exiting...');
-        process.exit(1);
+        throw new Error('[Error] Stack underflow. Exiting...');
       }
       return stack[--registers.SP];
     },

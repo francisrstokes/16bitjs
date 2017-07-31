@@ -8,8 +8,7 @@ const { extractDataSection } = require('./extract-sections');
 
 const validateDataLabel = (label) => {
   if (label[0] !== '.') {
-    console.log(`Invalid data label name ${label}. Must start with a '.'. Exitiing...`);
-    process.exit(1);
+    throw new Error(`Invalid data label name ${label}. Must start with a '.'. Exitiing...`);
   }
 };
 
@@ -65,12 +64,10 @@ module.exports = (instructions, memoryOffset) => {
           data
         };
       } else {
-        console.log(`Unsupported data declaraction:\n${cur}\nExiting...`);
-        process.exit(1);
+        throw new Error(`Unsupported data declaraction:\n${cur}\nExiting...`);
       }
     } else {
-      console.log(`Unsupported data declaraction:\n${cur}\nExiting...`);
-      process.exit(1);
+      throw new Error`Unsupported data declaraction:\n${cur}\nExiting...`);
     }
     return acc;
   }, {});

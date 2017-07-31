@@ -12,8 +12,7 @@ module.exports = (argv) =>
         if (stats.isFile()) {
           resolve();
         } else {
-          console.log(`ASM file ${argv.i} is not valid. Exiting...`);
-          process.exit(1);
+          throw new Error(`ASM file ${argv.i} is not valid. Exiting...`);
         }
       });
   });

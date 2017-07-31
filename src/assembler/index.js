@@ -6,6 +6,10 @@ const assembler = require('./assembler');
 const writeBinary = require('./write-binary');
 
 readAsm(argv)
-  .then(preprocessor, console.error)
-  .then(assembler, console.error)
-  .then(writeBinary(argv.o), console.error);
+  .then(preprocessor)
+  .then(assembler)
+  .then(writeBinary(argv.o))
+  .catch(err => {
+    console.error(err);
+    process.exit(1);
+  });

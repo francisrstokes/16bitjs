@@ -5,7 +5,7 @@ module.exports = (argv) =>
     if (!argv.p) {
       console.log('Usage: node src -p {binary executable} [--step]\n');
       console.log('step:\t[Optional] Enables debug mode');
-      process.exit(0);
+      process.exit(1);
     }
 
     fs
@@ -14,8 +14,7 @@ module.exports = (argv) =>
         if (stats.isFile()) {
           resolve();
         } else {
-          console.log(`Program file ${argv.p} is not valid. Exiting...`);
-          process.exit(1);
+          throw new Error(`Program file ${argv.p} is not valid. Exiting...`);
         }
       })
   });
