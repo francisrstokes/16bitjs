@@ -31,8 +31,8 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
 
-    case 'MOV':
-      registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
+    case 'MVR':
+      registers[REGISTERS[rd]] = ((registers[REGISTERS[rs]] << 16) >> 16) + ((high8 << 24) >> 24);
       return false;
 
     case 'LDV':

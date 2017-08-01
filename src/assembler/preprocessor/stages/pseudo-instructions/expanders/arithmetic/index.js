@@ -8,6 +8,7 @@ const DIV = require('./DIV');
 const DIVS = require('./DIVS');
 const INC = require('./INC');
 const DEC = require('./DEC');
+const MOV = require('./MOV');
 
 module.exports = {
   ADD,
@@ -19,5 +20,6 @@ module.exports = {
   DIV,
   DIVS,
   INC,
-  DEC
+  DEC,
+  MOV
 };

@@ -1,6 +1,7 @@
 const { getInstructionArguments } = require('../../../../utils');
 
 module.exports = (instruction) => {
+  const arguments = getInstructionArguments(instruction);
   const [destination] = getInstructionArguments(instruction);
-  return [`ATH ${destination}, 0, 5, 0, 0`];
+  return [`MVR ${destination}, ${destination}, 255`];
 }

@@ -5,7 +5,7 @@ const encode = require('../../../src/assembler/assembler/instruction-encoder');
 
 describe('assembler/assembler/instruction-encoder.js', () => {
   it('encodeInstruction.MOV(args)', () => {
-    const res = encode.MOV(['A', 'B']);
+    const res = encode.MVR(['A', 'B']);
     expect(res).to.equal(0b1000000)
   });
   it('encodeInstruction.LDV(args)', () => {
