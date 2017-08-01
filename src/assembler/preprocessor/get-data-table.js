@@ -67,7 +67,7 @@ module.exports = (instructions, memoryOffset) => {
         throw new Error(`Unsupported data declaraction:\n${cur}\nExiting...`);
       }
     } else {
-      throw new Error`Unsupported data declaraction:\n${cur}\nExiting...`);
+      throw new Error(`Unsupported data declaraction:\n${cur}\nExiting...`);
     }
     return acc;
   }, {});
