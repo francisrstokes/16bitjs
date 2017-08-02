@@ -13,8 +13,10 @@ describe('assembler/assembler/instruction-encoder.js', () => {
     expect(res).to.equal(0b111000001)
   });
   it('encodeInstruction.LDR(args)', () => {
-    const res = encode.LDR(['B', 'C']);
-    expect(res).to.equal(0b10010010)
+    const res1 = encode.LDR(['B', 'C']);
+    expect(res1).to.equal(0b10010010)
+    const res2 = encode.LDR(['B', 'C', 1]);
+    expect(res2).to.equal(0b110010010)
   });
   it('encodeInstruction.LDM(args)', () => {
     const res = encode.LDM(['C', 3]);
