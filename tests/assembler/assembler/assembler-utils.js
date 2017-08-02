@@ -20,6 +20,6 @@ describe('assembler/assembler/assembler-utils.js', () => {
   });
   it('validateInstruction(val)', () => {
     // Will crash if no sucess
-    utils.validateInstruction('ldv a, 1');
+    utils.validateInstruction('mvv a, 1, 0');
   });
 });

@@ -31,13 +31,28 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
 
-    case 'MOV':
-      registers[REGISTERS[rd]] = registers[REGISTERS[rs]];
+    case 'MVR':
+      registers[REGISTERS[rd]] = ((registers[REGISTERS[rs]] << 16) >> 16) + ((high8 << 24) >> 24);
       return false;
 
-    case 'LDV':
-      registers[REGISTERS[rd]] = high10;
-      return false;
+    case 'MVV':
+      switch (high10 & 3) { 
+        case 0: // MVI
+          registers[REGISTERS[rd]] = high8;
+          return false;
+        case 1: // ADI
+          registers[REGISTERS[rd]] = ((registers[REGISTERS[rd]] << 16) >> 16) + ((high8 << 24) >> 24);
+          return false;
+        case 2: // MUI
+          registers[REGISTERS[rd]] = high8 << 8;
+          return false;
+        case 3: // AUI
+          registers[REGISTERS[rd]] = registers[REGISTERS[rd]] + (high8 << 8);
+          return false;
+        default:
+          break;
+      }
+      break;
     case 'LDR':
       registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
       break;

@@ -4,8 +4,8 @@ module.exports = {
   STACK_SIZE: 0xFF,
   REGISTERS: ['A', 'B', 'C', 'D'],
   INSTRUCTION_MAP: [
-    'MOV',
-    'LDV',
+    'MVR',
+    'MVV',
     'LDR',
     'LDM',
     'ATH',

@@ -16,7 +16,7 @@ main:
 `;
 
 const expected = new Uint16Array(11);
-[65, 13, 641, 11, 0, 0, 0, 0, 0, 0, 0].forEach((x, i) => expected[i] = x);
+[257, 13, 2561, 11, 0, 0, 0, 0, 0, 0, 0].forEach((x, i) => expected[i] = x);
 
 describe('assembler/assembler (main)', () => {
   it('assembler (main step)', () => {

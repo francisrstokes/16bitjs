@@ -39,8 +39,8 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
-|`MOV`| `D, S`          | `XXXXXXXXSSDD0000` | Move value at source register to destination register|
-|`LDV`| `D, V`          | `VVVVVVVVVVDD0001` | Load a value into destination register. |
+|`MVR`| `D, S, V`       | `VVVVVVVVSSDD0000` | Add a sign-extended byte to value at source register and move it to destination register|
+|`MVV`| `D, V, O`       | `VVVVVVVVOODD0001` | Move or add an immediate value into destination register. |
 |`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register|
 |`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
 |`LDR`| `D, S`          | `XXXXXXXXSSDD0010` | Load the value from memory pointed at by the source register into the destination register|
@@ -63,7 +63,14 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 
 |Instruction|Arguments|Expanded length  |Description|
 |-----------|---------|-----------------|-----------|
-|`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|
+|`MOV`      | `D, S`    |1                | Move value at source register to destination register|
+|`INC`      | `D`       |1                | Add one to the destination register|
+|`DEC`      | `D`       |1                | Subtract one from the destination register|
+|`LDV`      | `D, S, V` |1                | Alias for `MVI` to keep retro-compatibility in assembly source|
+|`MVI`      | `D, S, V` |1                | Set a zero-extended immediate value to destination register|
+|`ADI`      | `D, S, V` |1                | Add a sign-extended immediate value to destination register|
+|`MUI`      | `D, S, V` |1                | Set a 8-bit left shifted immediate value to destination register|
+|`AUI`      | `D, S, V` |1                | Add a 8-bit left shifted immediate value to destination register|
 |`ADDS`     | `D, S`    |1                | Add destination to source and store the result in source|
 |`SUB`      | `D, S`    |1                | Subtract destination from source and store the result in destination|
 |`SUBS`     | `D, S`    |1                | Subtract destination from source and store the result in source|
@@ -71,15 +78,13 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`MULS`     | `D, S`    |1                | Multiply destination with source and store the result in source|
 |`DIV`      | `D, S`    |1                | Divide destination by source and store the result in destination|
 |`DIVS`     | `D, S`    |1                | Divide destination by source and store the result in source|
-|`INC`      | `D`       |1                | Add one to the destination register|
-|`DEC`      | `D`       |1                | Subtract one from the destination register|
 |`LSF`      | `D, A`    |1                | Binary shift left the destination register by amount A (max 7)|
 |`LSR`      | `D, A`    |1                | Binary shift right the destination register by amount A (max 7)|
 |`AND`      | `D, S`    |1                | Binary and the destination and source, and store the result in the destination|
 |`OR`       | `D, S`    |1                | Binary or the destination and source, and store the result in the destination|
 |`XOR`      | `D, S`    |1                | Binary exclusive-or the destination and source, and store the result in the destination|
 |`NOT`      | `D`       |1                | Binary not (invert) the destination|
-|`LDV16`    | `D, V`    |6                | Load a 16 bit value into destination|
+|`LDV16`    | `D, V`    |2                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
 |`JGE`      | `D, A`    |4                | Jump to address A if value in destination register is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
 |`JEQ`      | `D, A`    |11               | Jump to address A if value in destination register is equal to the A register. Can potentially mutate all registers except A and destination|
