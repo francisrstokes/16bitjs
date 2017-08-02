@@ -54,7 +54,7 @@ module.exports = (instruction, registers, memory, stack) => {
       }
       break;
     case 'LDR':
-      registers[REGISTERS[rd]] = memory[registers[REGISTERS[rs]]];
+      registers[REGISTERS[rd]] = memory[((registers[REGISTERS[rs]] << 16) + ((high8 << 24) >> 8)) >>> 16];
       break;
     case 'LDA':
       registers[REGISTERS[rd]] = memory[high10];
