@@ -5,7 +5,7 @@ module.exports = {
   REGISTERS: ['A', 'B', 'C', 'D'],
   INSTRUCTION_MAP: [
     'MVR',
-    'LDV',
+    'MVV',
     'LDR',
     'LDM',
     'ATH',

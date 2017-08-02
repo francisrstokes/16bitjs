@@ -26,7 +26,7 @@ const reg = REGISTERS
 
 module.exports = {
   MVR: (args) => opcodes.MVR | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT) | (args[2] << ADDRESS_SHIFT),
-  LDV: (args) => opcodes.LDV | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
+  MVV: (args) => opcodes.MVV | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << ADDRESS_SHIFT) | (args[2] << SOURCE_SHIFT),
   LDR: (args) => opcodes.LDR | (reg[args[0]] << DESTINATION_SHIFT) | (reg[args[1]] << SOURCE_SHIFT),
   LDM: (args) => opcodes.LDM | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
   LDA: (args) => opcodes.LDA | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),

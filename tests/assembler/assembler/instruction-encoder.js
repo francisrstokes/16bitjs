@@ -4,13 +4,13 @@ const expect = chai.expect;
 const encode = require('../../../src/assembler/assembler/instruction-encoder');
 
 describe('assembler/assembler/instruction-encoder.js', () => {
-  it('encodeInstruction.MOV(args)', () => {
+  it('encodeInstruction.MVR(args)', () => {
     const res = encode.MVR(['A', 'B']);
     expect(res).to.equal(0b1000000)
   });
-  it('encodeInstruction.LDV(args)', () => {
-    const res = encode.LDV(['A', 1]);
-    expect(res).to.equal(0b1000001)
+  it('encodeInstruction.MVV(args)', () => {
+    const res = encode.MVV(['A', 1, 3]);
+    expect(res).to.equal(0b111000001)
   });
   it('encodeInstruction.LDR(args)', () => {
     const res = encode.LDR(['B', 'C']);
