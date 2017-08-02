@@ -19,7 +19,7 @@ module.exports = {
     'JMP',
     'JMR',
     'LDA',
-    'LDP'
+    'STR'
   ],
   DESTINATION_SHIFT: 4,
   SOURCE_SHIFT: 6,

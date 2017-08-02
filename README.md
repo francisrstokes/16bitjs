@@ -44,7 +44,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register using direct address|
 |`STA`| `D, M`          | `MMMMMMMMMMDD0011` | Store the value in destination register into memory using direct address|
 |`LDR`| `D, S[, V]`     | `VVVVVVVVSSDD0010` | Load from memory into the destination register using the source register as a base address|
-|`LDP`| `D, S`          | `XXXXXXXXSSDD1111` | Load the value in source register into the memory address pointed to by destination register|
+|`STR`| `D, S[, V]`     | `XXXXXXXXSSDD1111` | Store the value in source register into the memory using the destination register as a base address|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
 |`CAL`| `D`             | `XXXXXXXXXXDD0101` | Call a function in memory pointed at by the destination register|
 |`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
@@ -67,6 +67,8 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`INC`      | `D`       |1                | Add one to the destination register|
 |`DEC`      | `D`       |1                | Subtract one from the destination register|
 |`LDV`      | `D, S, V` |1                | Alias for `MVI` to keep retro-compatibility in assembly source|
+|`LDM`      | `D, S`    |1                | Alias for `STA` to keep retro-compatibility in assembly source, obsolete|
+|`LDP`      | `D, S`    |1                | Alias for `STR` without offset to keep retro-compatibility in assembly source, obsolete|
 |`MVI`      | `D, S, V` |1                | Set a zero-extended immediate value to destination register|
 |`ADI`      | `D, S, V` |1                | Add a sign-extended immediate value to destination register|
 |`MUI`      | `D, S, V` |1                | Set a 8-bit left shifted immediate value to destination register|
