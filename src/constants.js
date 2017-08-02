@@ -7,7 +7,7 @@ module.exports = {
     'MVR',
     'MVV',
     'LDR',
-    'LDM',
+    'STA',
     'ATH',
     'CAL',
     'JLT',

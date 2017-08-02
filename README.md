@@ -41,8 +41,8 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |-----------|---------|-------------------------|-------------|
 |`MVR`| `D, S, V`       | `VVVVVVVVSSDD0000` | Add a sign-extended byte to value at source register and move it to destination register|
 |`MVV`| `D, V, O`       | `VVVVVVVVOODD0001` | Move or add an immediate value into destination register. |
-|`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register|
-|`LDM`| `D, M`          | `MMMMMMMMMMDD0011` | Load the value in destination register into memory|
+|`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register using direct address|
+|`STA`| `D, M`          | `MMMMMMMMMMDD0011` | Store the value in destination register into memory using direct address|
 |`LDR`| `D, S`          | `XXXXXXXXSSDD0010` | Load the value from memory pointed at by the source register into the destination register|
 |`LDP`| `D, S`          | `XXXXXXXXSSDD1111` | Load the value in source register into the memory address pointed to by destination register|
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|

@@ -16,8 +16,8 @@ describe('assembler/assembler/instruction-encoder.js', () => {
     const res = encode.LDR(['B', 'C']);
     expect(res).to.equal(0b10010010)
   });
-  it('encodeInstruction.LDM(args)', () => {
-    const res = encode.LDM(['C', 3]);
+  it('encodeInstruction.STA(args)', () => {
+    const res = encode.STA(['C', 3]);
     expect(res).to.equal(0b11100011)
   });
   it('encodeInstruction.ATH(args)', () => {
