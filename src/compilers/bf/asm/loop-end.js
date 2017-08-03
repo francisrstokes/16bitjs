@@ -8,6 +8,6 @@ ldr B, A            ; B = value at [memory + offset]
 mov A, B            ; A = value at [memory + offset]
 ldv B, 1            ; Set B to comparison value of 1
 ldv C, ${label}
-jge B, C     ; A(Memory value) >= B(1), then jump
+jge A, B, C     ; A(Memory value) >= B(1), then jump
 
 `;

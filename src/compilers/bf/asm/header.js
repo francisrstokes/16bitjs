@@ -46,7 +46,7 @@ input:
   mov A, B            ; swap A and B
   ldv B, 1            ; load 1 into B for comparison
   ldv C, input:       ; load the input address into C
-  jlt B, C            ; if A < 1(B), loop back to input
+  jlt A, B, C            ; if A < 1(B), loop back to input
   psh A               ; push the character into stack
   ldv16 A, .offset    ; Same procedure as inc_mem_ptr, except just set the value directly
   ldr B, A

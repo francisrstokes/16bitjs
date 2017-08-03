@@ -10,7 +10,7 @@ module.exports = {
     'STA',
     'ATH',
     'CAL',
-    'JLT',
+    'JCP',
     'RET',
     'PSH',
     'POP',
@@ -29,6 +29,22 @@ module.exports = {
   OPERATION_SHIFT: 8,
   ARITHMETIC_MODE_SHIFT: 12,
   BITWISE_SHIFT_SHIFT: 13,
+
+  JUMP: {
+    EQ: 0,
+    NEQ: 1,
+    LT: 2,
+    GT: 3,
+    LTE: 4,
+    GTE: 5,
+    ZER: 6,
+    NZE: 7,
+
+    R1: 4,
+    R2: 6,
+    AR: 8,
+    OP: 10
+  },
 
   ARITHMETIC: {
     ADD: 0,

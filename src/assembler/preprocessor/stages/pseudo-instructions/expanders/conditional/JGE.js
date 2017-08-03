@@ -1,24 +1,7 @@
-const {
-  getInstructionArguments,
-  uniqueLabel,
-  getUsableRegister
-} = require('../../../../utils');
-
+const { getInstructionArguments } = require('../../../../utils');
+const { JUMP } = require('../../../../../../constants');
 
 module.exports = (instruction) => {
-  const [source, addressRegister] = getInstructionArguments(instruction);
-  const lessThan = uniqueLabel();
-  const mutableRegister = getUsableRegister(source, addressRegister);
-
-  return [
-    `PSH ${mutableRegister}`,
-    `LDV16 ${mutableRegister}, ${lessThan}`,
-
-    `JLT ${source}, ${mutableRegister}`,
-    `POP ${mutableRegister}`,
-    `JMR ${addressRegister}`,
-
-    `${lessThan}`,
-    `POP ${mutableRegister}`
-  ];
-}
+  const [r1, r2, addressRegister] = getInstructionArguments(instruction);
+  return [`JCP ${r1}, ${r2}, ${addressRegister}, ${JUMP.GTE}`];
+};

@@ -18,7 +18,7 @@ get_name:
   ldv d, get_name:
   mov a, b
   ldv b, 1
-  jlt b, d              ; if a < 1, loop
+  jlt a, b, d              ; if a < 1, loop
 
   ;;;;; Place character into memory ;;;;
   ldv b, .name          ; get the start address of name
@@ -39,7 +39,7 @@ get_name:
 
   ;;;;; Got all the characters? ;;;;;;;;
   ldv c, final_zero:
-  jlt b, c              ; if (a < b) = (name_max < name_pointer), we are done
+  jlt a, b, c              ; if (a < b) = (name_max < name_pointer), we are done
   ldv c, get_name:      ; otherwise jump back to the beginning to get the next character
   jmr c
 
