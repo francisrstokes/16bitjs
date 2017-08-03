@@ -27,6 +27,6 @@ main:
 
   loop:
     cal D
-    jne B, C
+    jne A, B, C
 
   hlt

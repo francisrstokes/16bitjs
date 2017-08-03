@@ -30,9 +30,9 @@ describe('assembler/assembler/instruction-encoder.js', () => {
     const res = encode.CAL(['C']);
     expect(res).to.equal(0b100101);
   });
-  it('encodeInstruction.JLT(args)', () => {
-    const res = encode.JLT(['C', 'A']);
-    expect(res).to.equal(0b100110);
+  it('encodeInstruction.JCP(args)', () => {
+    const res = encode.JCP(['C', 'A', 'B', 2]);
+    expect(res).to.equal(0b100100100110);
   });
   it('encodeInstruction.RET(args)', () => {
     const res = encode.RET();

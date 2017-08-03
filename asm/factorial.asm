@@ -20,7 +20,7 @@ factorial:
     pop A
     ldv B, 3
     ldv D, done:
-    jlt B, D
+    JLT A, B, D
 
     psh a
     psh b

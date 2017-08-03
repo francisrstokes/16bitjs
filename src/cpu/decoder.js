@@ -3,12 +3,15 @@ const systemCall = require('../os');
 const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
-  REGISTERS
+  REGISTERS,
+  JUMP
 } = require('../constants');
 
 module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
+  const jumpAddress = registers[REGISTERS[high8 & 0b11]];
+
   switch (namedOpcode) {
     case 'CAL':
       stack.push(registers.IP);
@@ -18,9 +21,49 @@ module.exports = (instruction, registers, memory, stack) => {
       registers.IP = stack.pop();
       return false;
 
-    case 'JLT':
-      if (registers.A < registers[REGISTERS[rd]]) {
-        registers.IP = registers[REGISTERS[rs]];
+    case 'JCP':
+      switch (high8 >> 2) {
+        case JUMP.EQ:
+          if (registers[REGISTERS[rd]] === registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.NEQ:
+          if (registers[REGISTERS[rd]] !== registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.LT:
+          if (registers[REGISTERS[rd]] < registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.GT:
+          if (registers[REGISTERS[rd]] > registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.LTE:
+          if (registers[REGISTERS[rd]] <= registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.GTE:
+          if (registers[REGISTERS[rd]] >= registers[REGISTERS[rs]]) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.ZER:
+          if (registers[REGISTERS[rd]] === 0) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        case JUMP.NZE:
+          if (registers[REGISTERS[rd]] !== 0) {
+            registers.IP = jumpAddress;
+          }
+          break;
+        default:
       }
       return false;
     case 'JMP':
@@ -36,7 +79,7 @@ module.exports = (instruction, registers, memory, stack) => {
       return false;
 
     case 'MVV':
-      switch (high10 & 3) { 
+      switch (high10 & 3) {
         case 0: // MVI
           registers[REGISTERS[rd]] = high8;
           return false;
@@ -47,7 +90,7 @@ module.exports = (instruction, registers, memory, stack) => {
           registers[REGISTERS[rd]] = high8 << 8;
           return false;
         case 3: // AUI
-          registers[REGISTERS[rd]] = registers[REGISTERS[rd]] + (high8 << 8);
+          registers[REGISTERS[rd]] += (high8 << 8);
           return false;
         default:
           break;
