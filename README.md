@@ -67,12 +67,13 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`INC`      | `D`       |1                | Add one to the destination register|
 |`DEC`      | `D`       |1                | Subtract one from the destination register|
 |`LDV`      | `D, S, V` |1                | Alias for `MVI` to keep retro-compatibility in assembly source|
-|`LDM`      | `D, S`    |1                | Alias for `STA` to keep retro-compatibility in assembly source, obsolete|
-|`LDP`      | `D, S`    |1                | Alias for `STR` without offset to keep retro-compatibility in assembly source, obsolete|
+|`LDM`      | `D, S`    |1                | Alias for `STA` to keep retro-compatibility in assembly source|
+|`LDP`      | `D, S`    |1                | Alias for `STR` without offset to keep retro-compatibility in assembly source|
 |`MVI`      | `D, S, V` |1                | Set a zero-extended immediate value to destination register|
 |`ADI`      | `D, S, V` |1                | Add a sign-extended immediate value to destination register|
 |`MUI`      | `D, S, V` |1                | Set a 8-bit left shifted immediate value to destination register|
 |`AUI`      | `D, S, V` |1                | Add a 8-bit left shifted immediate value to destination register|
+|`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|
 |`ADDS`     | `D, S`    |1                | Add destination to source and store the result in source|
 |`SUB`      | `D, S`    |1                | Subtract destination from source and store the result in destination|
 |`SUBS`     | `D, S`    |1                | Subtract destination from source and store the result in source|
