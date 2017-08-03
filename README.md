@@ -36,7 +36,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 ### Instruction set
 
 #### Real instructions
-
+``
 |Instruction|Arguments|16 bit representation |Description|
 |-----------|---------|-------------------------|-------------|
 |`MVR`| `D, S, V`       | `VVVVVVVVSSDD0000` | Add a sign-extended byte to value at source register and move it to destination register|
@@ -48,7 +48,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
 |`CAL`| `D`             | `XXXXXXXXXXDD0101` | Call a function in memory pointed at by the destination register|
 |`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
-|`JLT`| `D, S`          | `XXXXXXXXSSDD0111` | Jump to memory address pointed at by the source register, if value in the A register is less than value in destination register|
+|`JCP`| `D, S, A, O`    | `XXXOOOAASSDD0111` | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
 |`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
 |`POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
 |`SYS`|                 | `XXXXXXXXXXXX1010` | Perform a system call. This is described below in more detail.|
@@ -89,9 +89,14 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`NOT`      | `D`       |1                | Binary not (invert) the destination|
 |`LDV16`    | `D, V`    |2                | Load a 16 bit value into destination|
 |`SWP`      | `D, S`    |3                | Swap the values in the source and destination registers|
-|`JGE`      | `D, A`    |4                | Jump to address A if value in destination register is greater than or equal to the A register. Can potentially mutate all registers except A and destination|
-|`JEQ`      | `D, A`    |11               | Jump to address A if value in destination register is equal to the A register. Can potentially mutate all registers except A and destination|
-|`JNE`      | `D, A`    |14               | Jump to address A if value in destination register is not equal to the A register. Can potentially mutate all registers except A and destination|
+|`JEQ`      | `D, S, A` |1                | Jump to address A if value in destination register is equal to the source register.|
+|`JNE`      | `D, S, A` |1                | Jump to address A if value in destination register is not equal to the source register.|
+|`JLT`      | `D, S, A` |1                | Jump to address A if value in destination register is less than the source register.|
+|`JGT`      | `D, S, A` |1                | Jump to address A if value in destination register is greater than the source register.|
+|`JLE`      | `D, S, A` |1                | Jump to address A if value in destination register is less than or equal to the source register.|
+|`JGE`      | `D, S, A` |1                | Jump to address A if value in destination register is greater than or equal to the source register.|
+|`JZE`      | `D, S, A` |1                | Jump to address A if value in destination register is zero.|
+|`JNZ`      | `D, S, A` |1                | Jump to address A if value in destination register is not zero.|
 
 
 #### Arithmetic Operation table
