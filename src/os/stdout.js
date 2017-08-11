@@ -10,24 +10,25 @@ const readStringFromMemory = (startAddress, memory) => {
 };
 
 module.exports = (value, mode, memory) => {
+  const signedValue = (value << 16) >> 16;
   let out = '';
   switch (mode) {
     case 1:
-      out = value.toString(2);
+      out = signedValue.toString(2);
       break;
     case 2:
-      out = value.toString(16);
+      out = signedValue.toString(16);
       break;
     case 3:
-      out = String.fromCharCode(value);
+      out = String.fromCharCode(signedValue);
       break;
     case 4:
-      out = readStringFromMemory(value, memory);
+      out = readStringFromMemory(signedValue, memory);
       break;
 
     case 0:
     default:
-      out = value.toString();
+      out = signedValue.toString();
   }
   process.stdout.write(out);
 };

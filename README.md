@@ -7,7 +7,7 @@ The project consists of:
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
 - A compiler for the [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) language directly to the binary executable format
 
-The virtual machine can run in two modes: run (default) and step. Run mode simply runs the entire program in sucession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the entire state of the machine.
+The virtual machine can run in two modes: run (default) and step. Run mode simply run` the entire program in sucession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the entire state of the machine.
 
 ## Running the VM
 ### Running the assembler
@@ -37,24 +37,24 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 #### Real instructions
 
-|Instruction|Arguments|16 bit representation |Description|
-|-----------|---------|-------------------------|-------------|
-|`MVR`| `D, S, V`       | `VVVVVVVVSSDD0000` | Add a sign-extended byte to value at source register and move it to destination register|
-|`MVV`| `D, V, O`       | `VVVVVVVVOODD0001` | Move or add an immediate value into destination register. |
-|`LDA`| `D, M`          | `MMMMMMMMMMDD1110` | Load a value from memory into destination register using direct address|
-|`STA`| `D, M`          | `MMMMMMMMMMDD0011` | Store the value in destination register into memory using direct address|
-|`LDR`| `D, S[, V]`     | `VVVVVVVVSSDD0010` | Load from memory into the destination register using the source register as a base address|
-|`STR`| `D, S[, V]`     | `XXXXXXXXSSDD1111` | Store the value in source register into the memory using the destination register as a base address|
-|`ATH`| `D, S, O, M, B` | `BBBMOOOOSSDD0100` | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
-|`CAL`| `D`             | `XXXXXXXXXXDD0101` | Call a function in memory pointed at by the destination register|
-|`RET`|                 | `XXXXXXXXXXXX0110` | Return from function|
-|`JCP`| `D, S, A, O`    | `XXXOOOAASSDD0111` | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
-|`PSH`| `S`             | `XXXXXXXXSSXX1000` | Push the value in source register onto the stack|
-|`POP`| `D`             | `XXXXXXXXXXDD1001` | Pop the stack into the destination register|
-|`SYS`|                 | `XXXXXXXXXXXX1010` | Perform a system call. This is described below in more detail.|
-|`HLT`|                 | `XXXXXXXXXXXX1011` | Program halt|
-|`JMP`| `M`             | `MMMMMMMMMMXX1100` | Jump to address in memory. Can only reference memory up to 0x3FF.|
-|`JMR`| `S`             | `XXXXXXXXSSXX1101` | Jump to the address pointed at by the source register|
+|Instruction            |Arguments        |16 bit representation |Description|
+|-----------------------|-----------------|----------------------|-------------|
+|`MVR`                  | `D, S, V`       | `VVVVVVVVSSDD0000`   | Add a sign-extended byte to value at source register and move it to destination register|
+|`MVV`                  | `D, V, O`       | `VVVVVVVVOODD0001`   | Move or add an immediate value into destination register, depending on `O`. |
+|`LDA`                  | `D, M`          | `MMMMMMMMMMDD1110`   | Load a value from memory into destination register using direct address|
+|`STA`                  | `D, M`          | `MMMMMMMMMMDD0011`   | Store the value in destination register into memory using direct address|
+|`LDR`                  | `D, S[, V]`     | `VVVVVVVVSSDD0010`   | Load from memory into the destination register using the source register as a base address|
+|`STR`                  | `D, S[, V]`     | `XXXXXXXXSSDD1111`   | Store the value in source register into the memory using the destination register as a base address|
+|`ATH`                  | `D, S, O, M, B` | `BBBMOOOOSSDD0100`   | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
+|`CAL`                  | `D`             | `XXXXXXXXXXDD0101`   | Call a function in memory pointed at by the destination register|
+|`RET`                  |                 | `XXXXXXXXXXXX0110`   | Return from function|
+|`JCP`                  | `D, S, A, O`    | `XXXOOOAASSDD0111`   | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
+|`PSH`                  | `S`             | `XXXXXXXXSSXX1000`   | Push the value in source register onto the stack|
+|`POP`                  | `D`             | `XXXXXXXXXXDD1001`   | Pop the stack into the destination register|
+|`SYS`                  |                 | `XXXXXXXXXXXX1010`   | Perform a system call. This is described below in more detail.|
+|`HLT`                  |                 | `XXXXXXXXXXXX1011`   | Program halt|
+|`JMP`                  | `M`             | `MMMMMMMMMMXX1100`   | Jump to address in memory. Can only reference memory up to 0x3FF.|
+|`JMR`                  | `S`             | `XXXXXXXXSSXX1101`   | Jump to the address pointed at by the source register|
 
 
 #### Pseudo Instructions
@@ -63,16 +63,16 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 
 |Instruction|Arguments|Expanded length  |Description|
 |-----------|---------|-----------------|-----------|
-|`MOV`      | `D, S`    |1                | Move value at source register to destination register|
-|`INC`      | `D`       |1                | Add one to the destination register|
-|`DEC`      | `D`       |1                | Subtract one from the destination register|
+|`MVI`      | `D, V`    |1                | Set a zero-extended immediate value to destination register|
 |`LDV`      | `D, S, V` |1                | Alias for `MVI` to keep retro-compatibility in assembly source|
+|`MUI`      | `D, V`    |1                | Set a 8-bit left shifted immediate value to destination register|
+|`ADI`      | `D, S`    |1                | Add a sign-extended immediate value to destination register|
+|`INC`      | `D`       |1                | Alias for `ADI 1`|
+|`DEC`      | `D`       |1                | Alias for `ADI -1`|
+|`AUI`      | `D, S`    |1                | Add a 8-bit left shifted immediate value to destination register|
+|`MOV`      | `D, S`    |1                | Copy value at source register to destination register|
 |`LDM`      | `D, S`    |1                | Alias for `STA` to keep retro-compatibility in assembly source|
 |`LDP`      | `D, S`    |1                | Alias for `STR` without offset to keep retro-compatibility in assembly source|
-|`MVI`      | `D, S, V` |1                | Set a zero-extended immediate value to destination register|
-|`ADI`      | `D, S, V` |1                | Add a sign-extended immediate value to destination register|
-|`MUI`      | `D, S, V` |1                | Set a 8-bit left shifted immediate value to destination register|
-|`AUI`      | `D, S, V` |1                | Add a 8-bit left shifted immediate value to destination register|
 |`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|
 |`ADDS`     | `D, S`    |1                | Add destination to source and store the result in source|
 |`SUB`      | `D, S`    |1                | Subtract destination from source and store the result in destination|
