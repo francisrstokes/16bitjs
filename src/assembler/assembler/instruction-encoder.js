@@ -40,7 +40,5 @@ module.exports = {
   POP: (args) => opcodes.POP | (reg[args[0]] << DESTINATION_SHIFT),
   JMP: (args) => opcodes.JMP | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
   JMR: (args) => opcodes.JMR | (reg[args[0]] << DESTINATION_SHIFT),
-  SYS: () => opcodes.SYS,
-  HLT: () => opcodes.HLT,
-  RET: () => opcodes.RET
+  NOA: (args) => opcodes.NOA | (args[0] << DESTINATION_SHIFT)
 };

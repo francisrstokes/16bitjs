@@ -11,15 +11,13 @@ module.exports = {
     'ATH',
     'CAL',
     'JCP',
-    'RET',
     'PSH',
     'POP',
-    'SYS',
-    'HLT',
     'JMP',
     'JMR',
     'LDA',
-    'STR'
+    'STR',
+    'NOA'
   ],
   DESTINATION_SHIFT: 4,
   SOURCE_SHIFT: 6,
@@ -29,6 +27,13 @@ module.exports = {
   OPERATION_SHIFT: 8,
   ARITHMETIC_MODE_SHIFT: 12,
   BITWISE_SHIFT_SHIFT: 13,
+
+  NOA: {
+    NOP: 0,
+    RET: 1,
+    SYS: 2,
+    HLT: 3
+  },
 
   JUMP: {
     EQ: 0,

@@ -39,22 +39,20 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 |Instruction            |Arguments        |16 bit representation |Description|
 |-----------------------|-----------------|----------------------|-------------|
-|`MVR`                  | `D, S, V`       | `VVVVVVVVSSDD0000`   | Add a sign-extended byte to value at source register and move it to destination register|
-|`MVV`                  | `D, V, O`       | `VVVVVVVVOODD0001`   | Move or add an immediate value into destination register, depending on `O`. |
-|`LDA`                  | `D, M`          | `MMMMMMMMMMDD1110`   | Load a value from memory into destination register using direct address|
-|`STA`                  | `D, M`          | `MMMMMMMMMMDD0011`   | Store the value in destination register into memory using direct address|
-|`LDR`                  | `D, S[, V]`     | `VVVVVVVVSSDD0010`   | Load from memory into the destination register using the source register as a base address|
-|`STR`                  | `D, S[, V]`     | `XXXXXXXXSSDD1111`   | Store the value in source register into the memory using the destination register as a base address|
-|`ATH`                  | `D, S, O, M, B` | `BBBMOOOOSSDD0100`   | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
-|`CAL`                  | `D`             | `XXXXXXXXXXDD0101`   | Call a function in memory pointed at by the destination register|
-|`RET`                  |                 | `XXXXXXXXXXXX0110`   | Return from function|
-|`JCP`                  | `D, S, A, O`    | `XXXOOOAASSDD0111`   | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
-|`PSH`                  | `S`             | `XXXXXXXXSSXX1000`   | Push the value in source register onto the stack|
-|`POP`                  | `D`             | `XXXXXXXXXXDD1001`   | Pop the stack into the destination register|
-|`SYS`                  |                 | `XXXXXXXXXXXX1010`   | Perform a system call. This is described below in more detail.|
-|`HLT`                  |                 | `XXXXXXXXXXXX1011`   | Program halt|
-|`JMP`                  | `M`             | `MMMMMMMMMMXX1100`   | Jump to address in memory. Can only reference memory up to 0x3FF.|
-|`JMR`                  | `S`             | `XXXXXXXXSSXX1101`   | Jump to the address pointed at by the source register|
+|`MVR`                  | `D, S, V`       | `VVVVVVVVSSDDIIII`   | Add a sign-extended byte to value at source register and move it to destination register|
+|`MVV`                  | `D, V, O`       | `VVVVVVVVOODDIIII`   | Move or add an immediate value into destination register, depending on `O`. |
+|`LDA`                  | `D, M`          | `MMMMMMMMMMDDIIII`   | Load a value from memory into destination register using direct address|
+|`STA`                  | `D, M`          | `MMMMMMMMMMDDIIII`   | Store the value in destination register into memory using direct address|
+|`LDR`                  | `D, S[, V]`     | `VVVVVVVVSSDDIIII`   | Load from memory into the destination register using the source register as a base address|
+|`STR`                  | `D, S[, V]`     | `XXXXXXXXSSDDIIII`   | Store the value in source register into the memory using the destination register as a base address|
+|`ATH`                  | `D, S, O, M, B` | `BBBMOOOOSSDDIIII`   | Perform an arithmetic operation on the source and destination registers. O specifies the operation (listed below) and M is the mode, where 0 = place result in destination register and 1 = place result in source register. If the instruction is right or left shift then B specifies the shifting value|
+|`CAL`                  | `D`             | `XXXXXXXXXXDDIIII`   | Call a function in memory pointed at by the destination register|
+|`JCP`                  | `D, S, A, O`    | `XXXOOOAASSDDIIII`   | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
+|`PSH`                  | `S`             | `XXXXXXXXSSXXIIII`   | Push the value in source register onto the stack|
+|`POP`                  | `D`             | `XXXXXXXXXXDDIIII`   | Pop the stack into the destination register|
+|`JMP`                  | `M`             | `MMMMMMMMMMXXIIII`   | Jump to address in memory. Can only reference memory up to 0x3FF.|
+|`JMR`                  | `S`             | `XXXXXXXXSSXXIIII`   | Jump to the address pointed at by the source register|
+|`NOA`                  | `O`             | `XXXXXXXXOOOOIIII`   | No Argument calls. This includes `SYS`, `HLT` and `RET`, which have pseudo instructions |
 
 
 #### Pseudo Instructions
@@ -71,6 +69,9 @@ Pseudo instructions are prepocessed by the assembler and expanded into combinati
 |`DEC`      | `D`       |1                | Alias for `ADI -1`|
 |`AUI`      | `D, S`    |1                | Add a 8-bit left shifted immediate value to destination register|
 |`MOV`      | `D, S`    |1                | Copy value at source register to destination register|
+|`RET`      |           |1                | Return from function|
+|`HLT`      |           |1                | Program halt|
+|`SYS`      |           |1                | Perform a system call. This is described below in more detail.|
 |`LDM`      | `D, S`    |1                | Alias for `STA` to keep retro-compatibility in assembly source|
 |`LDP`      | `D, S`    |1                | Alias for `STR` without offset to keep retro-compatibility in assembly source|
 |`ADD`      | `D, S`    |1                | Add destination to source and store the result in destination|

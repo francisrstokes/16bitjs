@@ -4,7 +4,8 @@ const { splitInstruction } = require('../utils');
 const {
   INSTRUCTION_MAP,
   REGISTERS,
-  JUMP
+  JUMP,
+  NOA
 } = require('../constants');
 
 module.exports = (instruction, registers, memory, stack) => {
@@ -16,9 +17,6 @@ module.exports = (instruction, registers, memory, stack) => {
     case 'CAL':
       stack.push(registers.IP);
       registers.IP = registers[REGISTERS[rd]];
-      return false;
-    case 'RET':
-      registers.IP = stack.pop();
       return false;
 
     case 'JCP':
@@ -120,12 +118,22 @@ module.exports = (instruction, registers, memory, stack) => {
       registers[REGISTERS[rd]] = stack.pop();
       return false;
 
-
-    case 'SYS':
-      systemCall(registers, memory);
-      return false;
-
-    case 'HLT': return true;
+    case 'NOA':
+      switch ((instruction & 0xF0) >> 4) {
+        case NOA.NOP:
+          return false;
+        case NOA.RET:
+          registers.IP = stack.pop();
+          return false;
+        case NOA.SYS:
+          systemCall(registers, memory);
+          return false;
+        case NOA.HLT:
+          return true;
+        default:
+          // Unsupported type
+      }
+      break;
 
     default:
       throw new Error(`Unknown opcode ${opcode}. Exiting...`);

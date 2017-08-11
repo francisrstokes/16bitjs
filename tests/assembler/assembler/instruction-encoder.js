@@ -34,42 +34,45 @@ describe('assembler/assembler/instruction-encoder.js', () => {
     const res = encode.JCP(['C', 'A', 'B', 2]);
     expect(res).to.equal(0b100100100110);
   });
-  it('encodeInstruction.RET(args)', () => {
-    const res = encode.RET();
-    expect(res).to.equal(0b111);
-  });
   it('encodeInstruction.PSH(args)', () => {
     const res = encode.PSH(['D']);
-    expect(res).to.equal(0b11001000);
+    expect(res).to.equal(0b11000111);
   });
   it('encodeInstruction.POP(args)', () => {
     const res = encode.POP(['D']);
-    expect(res).to.equal(0b111001);
-  });
-  it('encodeInstruction.SYS(args)', () => {
-    const res = encode.SYS();
-    expect(res).to.equal(0b1010);
-  });
-  it('encodeInstruction.HLT(args)', () => {
-    const res = encode.HLT();
-    expect(res).to.equal(0b1011);
+    expect(res).to.equal(0b111000);
   });
   it('encodeInstruction.JMP(args)', () => {
     const res = encode.JMP(['A', 0b1000000001]);
-    expect(res).to.equal(0b1000000001001100);
+    expect(res).to.equal(0b1000000001001001);
   });
   it('encodeInstruction.JMR(args)', () => {
     const res = encode.JMR(['C']);
-    expect(res).to.equal(0b101101);
+    expect(res).to.equal(0b101010);
   });
   it('encodeInstruction.LDA(args)', () => {
     const res = encode.LDA(['C', 0b10000001]);
-    expect(res).to.equal(0b10000001101110);
+    expect(res).to.equal(0b10000001101011);
   });
   it('encodeInstruction.STR(args)', () => {
     const res1 = encode.STR(['C', 'D']);
-    expect(res1).to.equal(0b11101111);
+    expect(res1).to.equal(0b11101100);
+
     const res2 = encode.STR(['C', 'D', 1]);
-    expect(res2).to.equal(0b111101111);
+    expect(res2).to.equal(0b111101100);
+  });
+
+  it('encodeInstruction.NOA(args)', () => {
+    const res1 = encode.NOA([0]);
+    expect(res1).to.equal(0b1101);
+
+    const res2 = encode.NOA([1]);
+    expect(res2).to.equal(0b11101);
+
+    const res3 = encode.NOA([2]);
+    expect(res3).to.equal(0b101101);
+
+    const res4 = encode.NOA([3]);
+    expect(res4).to.equal(0b111101);
   });
 });

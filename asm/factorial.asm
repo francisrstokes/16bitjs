@@ -1,7 +1,7 @@
 .data
   .equals string ' * 1 = '
-  .counter 8
-  .result 8
+  .counter 7
+  .result 7
   .times string ' * '
 .text
   .global main:
