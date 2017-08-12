@@ -15,12 +15,8 @@ module.exports = (_memory) => {
   };
 
   const run = () => {
-    if (!step()) {
-      setImmediate(run);
-    }
-    else {
-      process.exit(0);
-    }
+    if (!step()) setImmediate(run);
+    else process.exit(0);
   };
 
   return {

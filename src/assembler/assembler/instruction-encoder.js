@@ -38,7 +38,7 @@ module.exports = {
   JCP: (args) => opcodes.JCP | (reg[args[0]] << JUMP.R1) | (reg[args[1]] << JUMP.R2) | (reg[args[2]] << JUMP.AR) | (args[3] << JUMP.OP),
   PSH: (args) => opcodes.PSH | (reg[args[0]] << SOURCE_SHIFT),
   POP: (args) => opcodes.POP | (reg[args[0]] << DESTINATION_SHIFT),
-  JMP: (args) => opcodes.JMP | (reg[args[0]] << DESTINATION_SHIFT) | (args[1] << LONG_ADDRESS_SHIFT),
   JMR: (args) => opcodes.JMR | (reg[args[0]] << DESTINATION_SHIFT),
+  JMP: (args) => opcodes.JMP | (args[0] << DESTINATION_SHIFT),
   NOA: (args) => opcodes.NOA | (args[0] << DESTINATION_SHIFT)
 };

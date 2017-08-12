@@ -50,7 +50,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 |`JCP`                  | `D, S, A, O`    | `XXXOOOAASSDDIIII`   | Jump to memory address pointed at by the address register, depending on the comparison specified by the O operation of the destination register and the source register. Operation table specified below.|
 |`PSH`                  | `S`             | `XXXXXXXXSSXXIIII`   | Push the value in source register onto the stack|
 |`POP`                  | `D`             | `XXXXXXXXXXDDIIII`   | Pop the stack into the destination register|
-|`JMP`                  | `M`             | `MMMMMMMMMMXXIIII`   | Jump to address in memory. Can only reference memory up to 0x3FF.|
+|`JMP`                  | `M`             | `VVVVVVVVVVVVIIII`   | Add a signed 12-bit offset to the program counter.|
 |`JMR`                  | `S`             | `XXXXXXXXSSXXIIII`   | Jump to the address pointed at by the source register|
 |`NOA`                  | `O`             | `XXXXXXXXOOOOIIII`   | No Argument calls. This includes `SYS`, `HLT` and `RET`, which have pseudo instructions |
 

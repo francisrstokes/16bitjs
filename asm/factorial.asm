@@ -13,22 +13,22 @@ factorial:
 
     ; Print counter
     mov B, A
-    ldv A, 0
-    ldv C, 0
+    mvi A, 0
+    mvi C, 0
     sys
 
     pop A
-    ldv B, 3
-    ldv D, done:
-    JLT A, B, D
+    mvi B, 3
+    mvi D, done:
+    jlt A, B, D
 
     psh a
     psh b
     psh c
 
-    ldv a, 0
-    ldv b, .times
-    ldv c, 4
+    mvi a, 0
+    mvi b, .times
+    mvi c, 4
     sys
 
     pop c
@@ -44,16 +44,16 @@ factorial:
     ldm C, .result
     ldm B, .counter
 
-    ldv A, factorial:
+    mvi A, factorial:
     jmr A
 
     done:
       psh a
       psh b
       psh c
-      ldv a, 0
-      ldv b, .equals
-      ldv c, 4
+      mvi a, 0
+      mvi b, .equals
+      mvi c, 4
       sys
       pop c
       pop b
@@ -61,18 +61,18 @@ factorial:
       ret
 
 main:
-  ldv A, factorial:
+  mvi A, factorial:
   cal A
 
   ; Print result
-  ldv A, 0
-  ldv D, .result
+  mvi A, 0
+  mvi D, .result
   ldr B, D
-  ldv C, 0
+  mvi C, 0
   sys
 
   ; Print newline
-  ldv B, 10
-  ldv C, 3
+  mvi B, 10
+  mvi C, 3
   sys
   hlt
