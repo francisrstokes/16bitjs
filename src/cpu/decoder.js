@@ -12,6 +12,7 @@ module.exports = (instruction, registers, memory, stack) => {
   const [opcode, rd, rs, high8, high10] = splitInstruction(instruction);
   const namedOpcode = INSTRUCTION_MAP[opcode];
   const jumpAddress = registers[REGISTERS[high8 & 0b11]];
+  const jumpOffset = (instruction >> 4);
 
   switch (namedOpcode) {
     case 'CAL':
@@ -65,7 +66,7 @@ module.exports = (instruction, registers, memory, stack) => {
       }
       return false;
     case 'JMP':
-      registers.IP = high10;
+      registers.IP += -(jumpOffset & 0x800) | (jumpOffset & ~0x800);
       return false;
     case 'JMR':
       registers.IP = registers[REGISTERS[rd]];

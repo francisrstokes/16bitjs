@@ -1,3 +1,4 @@
+/* global describe it:true */
 const chai = require('chai');
 const expect = chai.expect;
 
@@ -43,8 +44,8 @@ describe('assembler/assembler/instruction-encoder.js', () => {
     expect(res).to.equal(0b111000);
   });
   it('encodeInstruction.JMP(args)', () => {
-    const res = encode.JMP(['A', 0b1000000001]);
-    expect(res).to.equal(0b1000000001001001);
+    const res = encode.JMP([0b1000000001]);
+    expect(res).to.equal(0b10000000011001);
   });
   it('encodeInstruction.JMR(args)', () => {
     const res = encode.JMR(['C']);
