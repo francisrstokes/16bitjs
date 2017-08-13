@@ -148,7 +148,7 @@ A system call in the VM allows the program to ask resources outside of it's cont
 |1   | Output register in binary                             |Destination|Mode||
 |2   | Output register in hex                                |Destination|Mode||
 |3   | Output register as a character                        |Destination|Mode||
-|4   | Output string in memory address pointed to by register|Start address|||
+|4   | Output string in memory address pointed to by register|Start address|Mode||
 
 ###### Input
 |Mode|Description                                         |B          |C  |D  |
