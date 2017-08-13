@@ -3,8 +3,8 @@ const { getInstructionArguments } = require('../../../../utils');
 module.exports = (instruction) => {
   const [source, destination] = getInstructionArguments(instruction);
   return [
-    `PSH ${source}`,
-    `MOV ${source}, ${destination}`,
-    `POP ${destination}`
+    `ATH ${destination}, ${source}, 10, 0, 0`,
+    `ATH ${destination}, ${source}, 10, 1, 0`,
+    `ATH ${destination}, ${source}, 10, 0, 0`
   ];
 }
