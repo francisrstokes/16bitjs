@@ -1,18 +1,19 @@
 const fs = require('../../utils').fs;
 
-module.exports = (argv) =>
-  new Promise((resolve) => {
-    if (!argv.i || !argv.o) {
-      console.log('Usage: node src/assembler -i {infile} -o {outfile}');
-      process.exit(1);
-    }
+module.exports = (argv) => {
+  if (!argv.i || !argv.o) {
+    console.log('Usage: node src/assembler -i {infile} -o {outfile}');
+    process.exit(1);
+  }
 
-    fs.statAsync(argv.i)
-      .then(stats => {
-        if (stats.isFile()) {
-          resolve();
-        } else {
-          throw new Error(`ASM file ${argv.i} is not valid. Exiting...`);
-        }
-      });
-  });
+  return fs.statAsync(argv.i)
+    .then(stats => {
+      if (!stats.isFile()) {
+        throw new Error(`ASM file ${argv.i} is not valid. Exiting...`);
+      }
+    })
+    .catch(err => {
+      console.error(err.message);
+      process.exit(1);
+    });
+}
