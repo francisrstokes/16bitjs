@@ -9,5 +9,5 @@ module.exports = (argv, memory) =>
     .then(program => {
       program.forEach((v, i) => {
         memory.memory[i] = v;
-      })
-    })
+      });
+    });
