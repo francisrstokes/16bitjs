@@ -13,5 +13,9 @@ module.exports = (argv) => {
       if (!stats.isFile()) {
         throw new Error(`Program file ${argv.p} is not valid. Exiting...`);
       }
+    })
+    .catch(err => {
+      console.error(err.message);
+      process.exit(1);
     });
 }
