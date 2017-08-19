@@ -10,5 +10,6 @@ module.exports = (registers, memory) => {
     case OS.STDIN:
       registers.B = stdin();
       break;
+    default:
   }
 };
