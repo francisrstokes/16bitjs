@@ -6,33 +6,6 @@ const { decode } = require('./snapshot');
 
 const methods = ['step', 'next', 'previous'];
 
-class Client {
-  constructor (ws, rpc, plex) {
-    this.plex = plex;
-    this.ws = ws;
-    this.rpc = rpc;
-  }
-
-  close () {
-    this.ws.end();
-  }
-
-  step () {
-    const { plex } = this;
-    return new Promise((resolve, reject) => {
-      plex.step((er, res) => {
-        if (er) {
-          return reject(er);
-        }
-        if (typeof res === 'object' && res !== null && res.type === 'Buffer' && Array.isArray(res.data)) {
-          return resolve(decode(new Buffer(res.data)));
-        }
-        return resolve();
-      })
-    })
-  }
-}
-
 module.exports = (server) => {
   let whref = server;
   if (whref instanceof http.Server) {
@@ -53,5 +26,22 @@ module.exports = (server) => {
     rpc.destroy();
   })
 
-  return new Client(ws, rpc, plex);
+  return {
+    close: () => {
+      ws.end();
+    },
+    step: () => {
+      return new Promise((resolve, reject) => {
+        plex.step((er, res) => {
+          if (er) {
+            return reject(er);
+          }
+          if (typeof res === 'object' && res !== null && res.type === 'Buffer' && Array.isArray(res.data)) {
+            return resolve(decode(new Buffer(res.data)));
+          }
+          return resolve();
+        })
+      })
+    }
+  }
 }
