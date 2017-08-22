@@ -21,6 +21,8 @@
     "yargs": "^8.0.2"
   },
   "devDependencies": {
+    "brfs": "^1.4.3",
+    "browserify": "^14.4.0",
     "eslint": "^4.1.1",
     "pre-commit": "^1.2.2"
   }
