@@ -32,7 +32,7 @@ const encode = (memoryPage) => {
 const decode = (buffer) => {
   const snapshot = {
     memory: new Uint8Array(PAGE_SIZE * 2),
-    stack: new Uint8Array(PAGE_SIZE * 2),
+    stack: new Uint8Array(STACK_SIZE * 2),
     registers: {}
   };
 
