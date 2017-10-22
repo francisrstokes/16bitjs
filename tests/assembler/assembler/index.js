@@ -19,7 +19,7 @@ const expected = new Uint16Array(11);
 [257, 10, 2561, 61, 0, 0, 0, 0, 0, 0, 0].forEach((x, i) => expected[i] = x);
 
 describe('assembler/assembler (main)', () => {
-  it('assembler (main step)', () => {
+  it.only('assembler (main step)', () => {
     const processed = preprocessor(mock);
     const assembledArray = assembler(processed);
     expect(assembledArray).to.deep.equal(expected);
