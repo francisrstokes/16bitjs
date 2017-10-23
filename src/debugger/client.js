@@ -4,7 +4,7 @@ const wsock = require('websocket-stream');
 const eos = require('end-of-stream');
 const { decode } = require('./snapshot');
 
-const methods = ['step', 'next', 'previous'];
+const methods = ['step', 'next', 'previous', 'reset'];
 
 module.exports = (server) => {
   let whref = server;
@@ -22,7 +22,6 @@ module.exports = (server) => {
     if (er) {
       console.error(er);
     }
-    console.log('ended')
     rpc.destroy();
   })
 
@@ -30,6 +29,7 @@ module.exports = (server) => {
     close: () => {
       ws.end();
     },
+    reset: () => new Promise(res => plex.reset(() => res())),
     step: () => {
       return new Promise((resolve, reject) => {
         plex.step((er, res) => {

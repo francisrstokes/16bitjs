@@ -3,6 +3,7 @@ const createRPC = require('multiplex-rpc');
 const eos = require('end-of-stream');
 const wsock = require('websocket-stream');
 const { DEBUG } = require('../constants');
+const reset = require('./reset');
 const { encode } = require('./snapshot');
 
 module.exports = (cpu) => {
@@ -29,8 +30,13 @@ module.exports = (cpu) => {
     cb(null, encode(memoryPage));
   }
 
+  const reset = (cb) => {
+    reset()
+    cb(null)
+  }
+
   const onwsock = (stream) => {
-    const rpc = createRPC({ step, next, previous })
+    const rpc = createRPC({ step, next, previous, reset })
     stream.pipe(rpc).pipe(stream)
 
     eos(stream, er => {
@@ -46,7 +52,6 @@ module.exports = (cpu) => {
     res.statusCode = 400;
     res.end();
   });
-
 
   wsock.createServer({ server }, onwsock)
 
