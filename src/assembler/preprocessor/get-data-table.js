@@ -12,14 +12,15 @@ const validateDataLabel = (label) => {
   }
 };
 
-let dataOffset = 0;
-const getAddress = (size, memoryOffset) => {
-  const totalOffset = memoryOffset + dataOffset;
-  dataOffset += size;
-  return totalOffset;
-}
-
 module.exports = (instructions, memoryOffset) => {
+  let dataOffset = 0;
+
+  const getAddress = (size, memoryOffset) => {
+    const totalOffset = memoryOffset + dataOffset;
+    dataOffset += size;
+    return totalOffset;
+  }
+
   const dataSection = extractDataSection(instructions);
   return dataSection.reduce((acc, cur) => {
     const parts = cur.split(' ');
