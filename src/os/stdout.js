@@ -30,5 +30,7 @@ module.exports = (value, mode, memory) => {
     default:
       out = signedValue.toString();
   }
-  process.stdout.write(out);
+  if (process && process.stdout) {
+    process.stdout.write(out);
+  }
 };
