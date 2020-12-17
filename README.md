@@ -7,7 +7,9 @@ The project consists of:
 - A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with four general-purpose registers and a fetch-decode-execute cycle
 - A compiler for the [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) language directly to the binary executable format
 
-The virtual machine can run in two modes: run (default) and step. Run mode simply run` the entire program in succession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the machine's full state.
+The virtual machine can run in two modes:
+- `Run` (default): simply go through the entire program in succession.
+- `Step`: runs the program in a debug environment, pausing before executing each instruction and displaying the machine's full state.
 
 ## Running the VM
 ### Running the assembler
