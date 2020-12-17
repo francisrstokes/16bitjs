@@ -4,10 +4,12 @@ The project consists of:
 
 - The definition of an [assembly language](https://en.wikipedia.org/wiki/Assembly_language) with 37 instructions
 - An [assembler](https://en.wikipedia.org/wiki/Assembly_language#Assembler) to transform a `*.asm` file into a binary executable format
-- A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with 4 general purpose registers and a fetch-decode-execute cycle
+- A small [virtual machine](https://en.wikipedia.org/wiki/Virtual_machine) which simulates a basic computer architecture: A memory space, stack, and CPU with four general-purpose registers and a fetch-decode-execute cycle
 - A compiler for the [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) language directly to the binary executable format
 
-The virtual machine can run in two modes: run (default) and step. Run mode simply run` the entire program in sucession. Step mode runs the program in a debug environment, pausing before executing each instruction and displaying the entire state of the machine.
+The virtual machine can run in two modes:
+- `Run` (default): simply go through the entire program in succession.
+- `Step`: runs the program in a debug environment, pausing before executing each instruction and displaying the machine's full state.
 
 ## Running the VM
 ### Running the assembler
@@ -24,14 +26,14 @@ The virtual machine can run in two modes: run (default) and step. Run mode simpl
 
 ## Assembly language
 
-The assembly language consists of 16 distinct instructions which support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, conditional/non conditional jumps, functions, system calls for reading and and writing stdio etc.
+The assembly language consists of 16 distinct instructions that support all the basic features you would expect: Arithmetic, Loading values to and from memory/registers, conditional/non-conditional jumps, functions, system calls for reading and writing stdio, etc.
 
 Comments start with a `;` character.
 Labels can be defined by `:some_label_name` on their own line and then referenced in an instruction like so: `LDV16 A, :some_label_name`.
 
 ### Examples
 
-A couple of examples illustrating the language can be found in the `asm/` folder.
+Users can find a couple of examples illustrating the language in the `asm/` folder.
 
 ### Instruction set
 
@@ -57,7 +59,7 @@ A couple of examples illustrating the language can be found in the `asm/` folder
 
 #### Pseudo Instructions
 
-Pseudo instructions are prepocessed by the assembler and expanded into combinations of the real instructions.
+Pseudo instructions are preprocessed by the assembler and expanded into combinations of the real instructions.
 
 |Instruction|Arguments|Expanded length  |Description|
 |-----------|---------|-----------------|-----------|
@@ -158,7 +160,7 @@ A system call in the VM allows the program to ask resources outside of it's cont
 
 ## Debugger
 
-Running with the step option (`node src -p {program.bin} --step`), enables the step through debugger, giving a overview of memory, stack and registers as the program executes.
+Running with the step option (`node src -p {program.bin} --step`), enables the step-through debugger, giving an overview of memory, stack, and registers as the program executes.
 
 ```
 Memory:
