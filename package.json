@@ -13,7 +13,7 @@
     "bluebird": "^3.5.0",
     "chai": "^4.1.0",
     "colors": "^1.1.2",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.3",
     "yargs": "^8.0.2"
   },
   "devDependencies": {
